@@ -7,11 +7,20 @@ public class Effect extends ClassType {
 	private Integer effectId;
 	private String gameCode;
 	private String name;
-	private RuneType runType;
+	private RuneType runeType;
 	
 	@Override
 	protected String getTypeName() {
 		return "com.riotgames.platform.catalog.Effect";
+	}
+	
+	public TypedObject getTypedObject() {
+		TypedObject res = new TypedObject(getTypeName());
+		res.put("effectId", effectId);
+		res.put("gameCode", gameCode);
+		res.put("name", name);
+		res.put("runeType", runeType.getTypedObject());
+		return res;
 	}
 	
 	public Effect(TypedObject to) {
@@ -20,7 +29,7 @@ public class Effect extends ClassType {
 		this.gameCode = to.getString("gameCode");
 		this.name = to.getString("name");
 		TypedObject tobj = to.getTO("runType");
-		this.runType = (tobj == null) ? null : new RuneType(tobj);
+		this.runeType = (tobj == null) ? null : new RuneType(tobj);
 	}
 
 	public Integer getEffectId() {
@@ -35,8 +44,8 @@ public class Effect extends ClassType {
 		return name;
 	}
 
-	public RuneType getRunType() {
-		return runType;
+	public RuneType getRuneType() {
+		return runeType;
 	}
 
 	@Override
@@ -49,7 +58,7 @@ public class Effect extends ClassType {
 		builder.append(", name=");
 		builder.append(name);
 		builder.append(", runType=");
-		builder.append(runType);
+		builder.append(runeType);
 		builder.append("]");
 		return builder.toString();
 	}

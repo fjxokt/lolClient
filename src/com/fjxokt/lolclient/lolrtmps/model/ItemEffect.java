@@ -15,6 +15,16 @@ public class ItemEffect extends ClassType {
 		return "com.riotgames.platform.catalog.ItemEffect";
 	}
 	
+	public TypedObject getTypedObject() {
+		TypedObject res = new TypedObject(getTypeName());
+		res.put("itemEffectId", itemEffectId);
+		res.put("effectId", effectId);
+		res.put("itemId", itemId);
+		res.put("value", value);
+		res.put("effect", effect.getTypedObject());
+		return res;
+	}
+	
 	public ItemEffect(TypedObject to) {
 		super();
 		this.itemEffectId = to.getInt("itemEffectId");

@@ -26,6 +26,29 @@ public class Rune extends ClassType {
 		return "com.riotgames.platform.catalog.runes.Rune";
 	}
 	
+	public TypedObject getTypedObject() {
+		TypedObject res = new TypedObject(getTypeName());
+		res.put("itemId", itemId);
+		res.put("tier", tier);
+		res.put("gameCode", gameCode);
+		res.put("baseType", baseType);
+		res.put("name", name);
+		res.put("description", description);
+		res.put("duration", duration);
+		res.put("runeType", runeType.getTypedObject());
+		Object[] objs = new Object[itemEffects.size()];
+		for (int i=0; i<itemEffects.size(); i++) {
+			ItemEffect effect = itemEffects.get(i);
+			objs[i] = (effect == null) ? null : effect.getTypedObject();
+		}
+		res.put("itemEffects", TypedObject.makeArrayCollection(objs));
+		res.put("imagePath", imagePath);
+		res.put("displayDescription", displayDescription);
+		res.put("displayName", displayName);
+		res.put("uses", uses);
+		return res;
+	}
+	
 	public Rune(TypedObject to) {
 		super();
 		this.itemId = to.getInt("itemId");

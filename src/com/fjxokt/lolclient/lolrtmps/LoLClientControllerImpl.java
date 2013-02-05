@@ -1008,8 +1008,15 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	@Override
 	public List<RuneQuantity> useRuneCombiner(Integer runeCombinerId, List<Rune> runes) {
 		try {
-			int id = client.invoke("inventoryService", "useRuneCombiner", 
-					new Object[] { runeCombinerId, runes.toArray()});
+			
+			// change list to object[]
+			Object[] robjs = new Object[runes.size()];
+			for (int i=0; i<runes.size(); i++) {
+				Rune rune = runes.get(i);
+				robjs[i] = (rune == null) ? null : rune.getTypedObject();
+			}
+			
+			int id = client.invoke("inventoryService", "useRuneCombiner", new Object[] { runeCombinerId, robjs });
 			TypedObject result = client.getResult(id);
 			client.join(id);
 						

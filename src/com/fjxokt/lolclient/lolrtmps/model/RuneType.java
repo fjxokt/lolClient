@@ -12,6 +12,13 @@ public class RuneType extends ClassType {
 		return "com.riotgames.platform.catalog.runes.RuneType";
 	}
 	
+	public TypedObject getTypedObject() {
+		TypedObject res = new TypedObject(getTypeName());
+		res.put("runeTypeId", runeTypeId);
+		res.put("name", name);
+		return res;
+	}
+	
 	public RuneType(TypedObject to) {
 		super();
 		this.runeTypeId = to.getInt("runeTypeId");
