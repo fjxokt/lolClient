@@ -1,0 +1,311 @@
+{
+  "$type": "System.Collections.Generic.List`1[[FluorineFx.Messaging.Rtmp.Event.Notify, FluorineFx]], mscorlib",
+  "$values": [
+    {
+      "$type": "FluorineFx.Messaging.Rtmp.Event.FlexInvoke, FluorineFx",
+      "CmdData": null,
+      "Data": null,
+      "InvokeId": 46,
+      "ServiceCall": {
+        "$type": "FluorineFx.Messaging.Rtmp.Service.PendingCall, FluorineFx",
+        "Result": null,
+        "IsSuccess": false,
+        "ServiceMethodName": null,
+        "ServiceName": null,
+        "Arguments": {
+          "$type": "System.Object[], mscorlib",
+          "$values": [
+            {
+              "$type": "FluorineFx.Messaging.Messages.RemotingMessage, FluorineFx",
+              "source": null,
+              "operation": "selectBotChampion",
+              "headers": {
+                "$type": "FluorineFx.ASObject, FluorineFx",
+                "DSId": "CCB82312-D019-A624-7B0D-E0256417E266",
+                "DSEndpoint": "my-rtmps",
+                "DSRequestTimeout": 60
+              },
+              "destination": "gameService",
+              "clientId": null,
+              "timestamp": 0,
+              "body": {
+                "$type": "System.Object[], mscorlib",
+                "$values": [
+                  15,
+                  {
+                    "$type": "FluorineFx.ASObject, FluorineFx",
+                    "champion": {
+                      "$type": "FluorineFx.ASObject, FluorineFx",
+                      "freeToPlay": false,
+                      "ownedByYourTeam": true,
+                      "freeToPlayReward": false,
+                      "championData": {
+                        "$type": "FluorineFx.ASObject, FluorineFx",
+                        "abilityIcon2": "Sivir_Ricochet.dds",
+                        "skinName": "Sivir",
+                        "abilityIcon1": "Sivir_SpiralBlade.dds",
+                        "skinInfo": {
+                          "$type": "FluorineFx.ASObject, FluorineFx",
+                          "15001": {
+                            "$type": "FluorineFx.ASObject, FluorineFx",
+                            "skinId": 15001,
+                            "name": "WarriorSivir",
+                            "skinIndex": 1,
+                            "TypeName": null
+                          },
+                          "15002": {
+                            "$type": "FluorineFx.ASObject, FluorineFx",
+                            "skinId": 15002,
+                            "name": "RedSivir",
+                            "skinIndex": 2,
+                            "TypeName": null
+                          },
+                          "15003": {
+                            "$type": "FluorineFx.ASObject, FluorineFx",
+                            "skinId": 15003,
+                            "name": "AboriginalSivir",
+                            "skinIndex": 3,
+                            "TypeName": null
+                          },
+                          "15004": {
+                            "$type": "FluorineFx.ASObject, FluorineFx",
+                            "skinId": 15004,
+                            "name": "FreljordSivir",
+                            "skinIndex": 4,
+                            "TypeName": null
+                          },
+                          "15005": {
+                            "$type": "FluorineFx.ASObject, FluorineFx",
+                            "skinId": 15005,
+                            "name": "PaxSivir",
+                            "skinIndex": 5,
+                            "TypeName": null
+                          },
+                          "TypeName": null
+                        },
+                        "passiveIcon": "Sivir_Sprint.dds",
+                        "magicRank": 1,
+                        "championId": 15,
+                        "searchTags": {
+                          "$type": "System.Object[], mscorlib",
+                          "$values": [
+                            "pusher",
+                            "ranged",
+                            "recommended",
+                            "carry"
+                          ]
+                        },
+                        "defenseRank": 3,
+                        "abilityIcon4": "Sivir_Deadeye.dds",
+                        "difficultyRank": 3,
+                        "abilityIcon3": "Sivir_SpellBlock.dds",
+                        "attackRank": 9,
+                        "TypeName": null
+                      },
+                      "banned": false,
+                      "description": "the Battle Mistress",
+                      "championSkins": {
+                        "$type": "FluorineFx.AMF3.ArrayCollection, FluorineFx",
+                        "$values": [
+                          {
+                            "$type": "FluorineFx.ASObject, FluorineFx",
+                            "championId": 15,
+                            "stillObtainable": false,
+                            "owned": false,
+                            "freeToPlayReward": false,
+                            "skinId": 15005,
+                            "skinIndex": 5,
+                            "lastSelected": false,
+                            "endDate": 0,
+                            "purchaseDate": 0,
+                            "winCountRemaining": 0,
+                            "dataVersion": null,
+                            "futureData": null,
+                            "TypeName": "com.riotgames.platform.catalog.champion.ChampionSkinDTO"
+                          },
+                          {
+                            "$type": "FluorineFx.ASObject, FluorineFx",
+                            "championId": 15,
+                            "stillObtainable": false,
+                            "owned": false,
+                            "freeToPlayReward": false,
+                            "skinId": 15002,
+                            "skinIndex": 2,
+                            "lastSelected": false,
+                            "endDate": 0,
+                            "purchaseDate": 0,
+                            "winCountRemaining": 0,
+                            "dataVersion": null,
+                            "futureData": null,
+                            "TypeName": "com.riotgames.platform.catalog.champion.ChampionSkinDTO"
+                          },
+                          {
+                            "$type": "FluorineFx.ASObject, FluorineFx",
+                            "championId": 15,
+                            "stillObtainable": true,
+                            "owned": false,
+                            "freeToPlayReward": false,
+                            "skinId": 15001,
+                            "skinIndex": 1,
+                            "lastSelected": false,
+                            "endDate": 0,
+                            "purchaseDate": 0,
+                            "winCountRemaining": 0,
+                            "dataVersion": null,
+                            "futureData": null,
+                            "TypeName": "com.riotgames.platform.catalog.champion.ChampionSkinDTO"
+                          },
+                          {
+                            "$type": "FluorineFx.ASObject, FluorineFx",
+                            "championId": 15,
+                            "stillObtainable": true,
+                            "owned": false,
+                            "freeToPlayReward": false,
+                            "skinId": 15004,
+                            "skinIndex": 4,
+                            "lastSelected": false,
+                            "endDate": 0,
+                            "purchaseDate": 0,
+                            "winCountRemaining": 0,
+                            "dataVersion": null,
+                            "futureData": null,
+                            "TypeName": "com.riotgames.platform.catalog.champion.ChampionSkinDTO"
+                          },
+                          {
+                            "$type": "FluorineFx.ASObject, FluorineFx",
+                            "championId": 15,
+                            "stillObtainable": true,
+                            "owned": false,
+                            "freeToPlayReward": false,
+                            "skinId": 15003,
+                            "skinIndex": 3,
+                            "lastSelected": false,
+                            "endDate": 0,
+                            "purchaseDate": 0,
+                            "winCountRemaining": 0,
+                            "dataVersion": null,
+                            "futureData": null,
+                            "TypeName": "com.riotgames.platform.catalog.champion.ChampionSkinDTO"
+                          }
+                        ]
+                      },
+                      "ownedByEnemyTeam": true,
+                      "championId": 15,
+                      "displayName": "Sivir",
+                      "owned": true,
+                      "skinName": "Sivir",
+                      "searchTags": {
+                        "$type": "System.Object[], mscorlib",
+                        "$values": [
+                          "pusher",
+                          "ranged",
+                          "recommended",
+                          "carry"
+                        ]
+                      },
+                      "botEnabled": true,
+                      "active": true,
+                      "endDate": 0,
+                      "purchaseDate": 1313465574000.0,
+                      "winCountRemaining": 0,
+                      "dataVersion": null,
+                      "futureData": null,
+                      "TypeName": "com.riotgames.platform.catalog.champion.ChampionDTO"
+                    },
+                    "teamId": "100",
+                    "botSkillLevel": 0,
+                    "botSkillLevelName": "Basic",
+                    "summonerInternalName": "bot_Sivir_100",
+                    "pickTurn": 0,
+                    "summonerName": "Sivir bot",
+                    "isMe": false,
+                    "teamName": null,
+                    "badges": 0,
+                    "isGameOwner": false,
+                    "pickMode": 0,
+                    "team": 0,
+                    "dataVersion": null,
+                    "futureData": null,
+                    "TypeName": "com.riotgames.platform.game.BotParticipant"
+                  }
+                ]
+              },
+              "timeToLive": 0,
+              "messageId": "631FF7C9-68D9-6137-F7B8-2123E1FBFD69"
+            }
+          ]
+        },
+        "Status": 1,
+        "Exception": null
+      },
+      "ConnectionParameters": null,
+      "EventType": 2,
+      "Header": {
+        "$type": "FluorineFx.Messaging.Rtmp.RtmpHeader, FluorineFx",
+        "ChannelId": 3,
+        "DataType": 17,
+        "Size": 1586,
+        "StreamId": 0,
+        "Timer": 523,
+        "IsTimerRelative": true
+      },
+      "Object": null,
+      "Timestamp": 523,
+      "ExtendedTimestamp": -1,
+      "DataType": 17,
+      "Source": null,
+      "HasSource": false
+    },
+    {
+      "$type": "FluorineFx.Messaging.Rtmp.Event.FlexInvoke, FluorineFx",
+      "CmdData": null,
+      "Data": null,
+      "InvokeId": 42,
+      "ServiceCall": {
+        "$type": "FluorineFx.Messaging.Rtmp.Service.PendingCall, FluorineFx",
+        "Result": null,
+        "IsSuccess": false,
+        "ServiceMethodName": "_result",
+        "ServiceName": null,
+        "Arguments": {
+          "$type": "System.Object[], mscorlib",
+          "$values": [
+            {
+              "$type": "DSK, LoLNotes",
+              "CorrelationId": "631FF7C9-68D9-6137-F7B8-2123E1FBFD69",
+              "CorrelationIdBytes": "c\u001f÷ÉhÙa7÷¸!#áûýi",
+              "Body": null,
+              "ClientId": "CCE89D33-000A-7A57-6992-64704CE35876",
+              "ClientIdBytes": "Ìè3\u0000\nzWi’dpLãXv",
+              "Destination": null,
+              "Headers": null,
+              "MessageId": "CCE89D3C-C40C-E603-FD9B-591636FD5A00",
+              "MessageIdBytes": "Ìè<Ä\fæ\u0003ý›Y\u00166ýZ\u0000",
+              "TimeStamp": 1357765665540,
+              "TimeToLive": 0
+            }
+          ]
+        },
+        "Status": 1,
+        "Exception": null
+      },
+      "ConnectionParameters": null,
+      "EventType": 2,
+      "Header": {
+        "$type": "FluorineFx.Messaging.Rtmp.RtmpHeader, FluorineFx",
+        "ChannelId": 3,
+        "DataType": 17,
+        "Size": 95,
+        "StreamId": 0,
+        "Timer": 0,
+        "IsTimerRelative": false
+      },
+      "Object": null,
+      "Timestamp": 0,
+      "ExtendedTimestamp": -1,
+      "DataType": 17,
+      "Source": null,
+      "HasSource": false
+    }
+  ]
+}

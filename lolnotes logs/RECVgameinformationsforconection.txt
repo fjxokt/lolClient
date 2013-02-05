@@ -1,0 +1,78 @@
+{
+  "$type": "System.Collections.Generic.List`1[[FluorineFx.Messaging.Rtmp.Event.Notify, FluorineFx]], mscorlib",
+  "$values": [
+    {
+      "$type": "FluorineFx.Messaging.Rtmp.Event.FlexInvoke, FluorineFx",
+      "CmdData": null,
+      "Data": null,
+      "InvokeId": 0,
+      "ServiceCall": {
+        "$type": "FluorineFx.Messaging.Rtmp.Service.PendingCall, FluorineFx",
+        "Result": null,
+        "IsSuccess": false,
+        "ServiceMethodName": "receive",
+        "ServiceName": null,
+        "Arguments": {
+          "$type": "System.Object[], mscorlib",
+          "$values": [
+            {
+              "$type": "DSA, LoLNotes",
+              "CorrelationId": null,
+              "CorrelationIdBytes": null,
+              "Body": {
+                "$type": "FluorineFx.ASObject, FluorineFx",
+                "encryptionKey": "bhkdBvz7H2t+vscY7UpF6g==",
+                "gameId": 660313919.0,
+                "lastSelectedSkinIndex": 0,
+                "serverIp": "216.133.234.210",
+                "observer": false,
+                "summonerId": 22371167.0,
+                "futureData": null,
+                "observerServerIp": "216.133.234.17",
+                "dataVersion": 0,
+                "handshakeToken": "PxcPyJxHXwj9twaBGWnoYgDZ",
+                "playerId": 36129488.0,
+                "serverPort": 5169,
+                "observerServerPort": 8088,
+                "summonerName": "fjxokt",
+                "observerEncryptionKey": "lPaE3cr3oM5JUFQg75AW/rD+o8lHybok",
+                "championId": 32,
+                "TypeName": "com.riotgames.platform.game.PlayerCredentialsDto"
+              },
+              "ClientId": "gn-36129488",
+              "ClientIdBytes": null,
+              "Destination": "messagingDestination",
+              "Headers": {
+                "$type": "FluorineFx.ASObject, FluorineFx",
+                "DSSubtopic": "gn-36129488"
+              },
+              "MessageId": "f6bcb348-e528-4e41-8ecf-ce7cb97bbe7f",
+              "MessageIdBytes": null,
+              "TimeStamp": 1357769597885,
+              "TimeToLive": 0
+            }
+          ]
+        },
+        "Status": 1,
+        "Exception": null
+      },
+      "ConnectionParameters": null,
+      "EventType": 2,
+      "Header": {
+        "$type": "FluorineFx.Messaging.Rtmp.RtmpHeader, FluorineFx",
+        "ChannelId": 3,
+        "DataType": 17,
+        "Size": 552,
+        "StreamId": 0,
+        "Timer": 0,
+        "IsTimerRelative": false
+      },
+      "Object": null,
+      "Timestamp": 0,
+      "ExtendedTimestamp": -1,
+      "DataType": 17,
+      "Source": null,
+      "HasSource": false
+    }
+  ]
+}

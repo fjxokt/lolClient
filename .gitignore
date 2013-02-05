@@ -1,0 +1,6 @@
+bin/
+*.DS_Store
+smack_3_2_2/documentation
+smack_3_2_2/javadoc
+JMF-2.1.1e/bin
+JMF-2.1.1e/doc
