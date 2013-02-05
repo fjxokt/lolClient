@@ -19,6 +19,7 @@ import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.RosterGroup;
 import org.jivesoftware.smack.RosterListener;
+import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.SmackConfiguration;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
@@ -35,6 +36,7 @@ import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.lolrtmps.model.utils.GameState;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.ui.chat.BuddyChatWin;
+import com.fjxokt.lolclient.ui.chat.ChatPresenceType;
 import com.fjxokt.lolclient.ui.chat.ChatWinManager;
 import com.fjxokt.lolclient.utils.SimpleSHA1;
 import com.gvaneyck.rtmp.DummySSLSocketFactory;
@@ -54,19 +56,23 @@ public class MessagingManager implements MessageListener {
 	
 	
 	// list of message listener
-	private List<MessagesListener> msgListeners = new ArrayList<MessagesListener>();
+	private List<ChatListener> msgListeners = new ArrayList<ChatListener>();
 	// add a message listener
 	// TODO: need to only listen for one channel
-	public void addMessagesListener(MessagesListener l) {
+	public void addChatListener(ChatListener l) {
 		msgListeners.add(l);
 	}
 	// notify all listener
-	public void notifyMessagesListeners(GameDTO game, String user, String message) {
-		for (MessagesListener l : msgListeners) {
-			l.messageReceived(game, user, message);
+	public void notifyGameMessageReceived(GameDTO game, String user, String message) {
+		for (ChatListener l : msgListeners) {
+			l.gameMessageReceived(game, user, message);
 		}
 	}
-	
+	public void notifyBuddyMessageReceived(String user, String message) {
+		for (ChatListener l : msgListeners) {
+			l.buddyMessageReceived(user, message);
+		}
+	}
 	private class PVPChatRoom {
 		private MultiUserChat chatRoom;
 		private ChatRoomType chatType;
@@ -100,7 +106,7 @@ public class MessagingManager implements MessageListener {
 			}
 			System.out.println("packet received: " + str);
 			System.out.println("msg: " + msg);
-			notifyMessagesListeners(null, user, unwrapMessage(msg));
+			notifyGameMessageReceived(null, user, unwrapMessage(msg));
 		}
 	}
 	
@@ -146,6 +152,7 @@ public class MessagingManager implements MessageListener {
         connection = new XMPPConnection(xmppConfig);
         try {
 			connection.connect();
+	        //SASLAuthentication.supportSASLMechanism("PLAIN", 0);
 			connection.login(username, "AIR_" + password, "xiff");
 		} catch (XMPPException e) {
 			e.printStackTrace();
@@ -428,8 +435,7 @@ public class MessagingManager implements MessageListener {
 		if (message.getType() == Message.Type.chat) {
 			System.out.println(chat.getParticipant() + " says: " + message.getBody());
 			String userId = chat.getParticipant().split("/")[0];
-			BuddyChatWin window = ChatWinManager.getInst().getWindow(userId);
-			window.getAnswer(getBuddyFromId(userId).getName(), message.getBody());
+			notifyBuddyMessageReceived(userId, message.getBody());
 		}
 		else if (message.getType() == Message.Type.groupchat) {
 			System.out.println("group: " + chat.getParticipant() + " says: " + message.getBody());
@@ -582,7 +588,6 @@ public class MessagingManager implements MessageListener {
 			}
 //			chatRoom.leave();
 		} catch (XMPPException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -634,6 +639,19 @@ public class MessagingManager implements MessageListener {
     	Roster roster = connection.getRoster();
 	    Collection<RosterEntry> entries = roster.getEntries();
 	    return entries;
+    }
+    
+    public ChatPresenceType getBuddyPresenceType(RosterEntry buddy) {
+    	if (isBuddyAvailable(buddy)) {
+    		return ChatPresenceType.AVAILABLE;
+    	}
+    	if (isBuddyAway(buddy)) {
+    		return ChatPresenceType.AWAY;
+    	}
+    	if (isBuddyBusy(buddy)) {
+    		return ChatPresenceType.BUSY;
+    	}
+    	return ChatPresenceType.OFFLINE;
     }
     
     public boolean isBuddyAvailable(RosterEntry buddy) {

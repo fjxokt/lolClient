@@ -18,12 +18,12 @@ import javax.swing.JTextField;
 
 import com.fjxokt.lolclient.audio.AudioManager;
 import com.fjxokt.lolclient.audio.Sounds;
-import com.fjxokt.lolclient.messaging.MessagesListener;
+import com.fjxokt.lolclient.messaging.ChatListener;
 import com.fjxokt.lolclient.messaging.MessagingManager;
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
 
-public class TeamChatPanel extends JPanel implements MessagesListener {
+public class TeamChatPanel extends JPanel implements ChatListener {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -82,7 +82,7 @@ public class TeamChatPanel extends JPanel implements MessagesListener {
 		add(fieldPan, BorderLayout.AFTER_LAST_LINE);
 		
 		// add messages listener
-		MessagingManager.getInst().addMessagesListener(this);
+		MessagingManager.getInst().addChatListener(this);
 	}
 	
 	public void sendMessage() {
@@ -95,13 +95,18 @@ public class TeamChatPanel extends JPanel implements MessagesListener {
 	}
 
 	@Override
-	public void messageReceived(GameDTO game, String user, String message) {
+	public void gameMessageReceived(GameDTO game, String user, String message) {
 		if (message.startsWith("<body>") && message.endsWith("</body>")) {
 			return;
 		}
 		AudioManager.getInst().playSound(Sounds.MESSAGE_RECEIVED);
 		chat.setText(chat.getText() + "[" + user + "] : " + message + "\n");
 		chat.getCaret().setDot(chat.getDocument().getLength());
+	}
+
+	@Override
+	public void buddyMessageReceived(String userId, String message) {
+		// nothing to do here
 	}
 
 }
