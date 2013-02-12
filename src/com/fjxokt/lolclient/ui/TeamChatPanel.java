@@ -16,15 +16,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+<<<<<<< HEAD
 import org.jivesoftware.smack.packet.Presence;
 
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.messaging.ChatListener;
+=======
+import com.fjxokt.lolclient.audio.AudioManager;
+import com.fjxokt.lolclient.audio.Sounds;
+import com.fjxokt.lolclient.messaging.MessagesListener;
+>>>>>>> parent of 45c7aed... Changes on the messaging part
 import com.fjxokt.lolclient.messaging.MessagingManager;
 import com.fjxokt.lolclient.ui.chat.ChatPresenceType;
 
-public class TeamChatPanel extends JPanel implements ChatListener {
+public class TeamChatPanel extends JPanel implements MessagesListener {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -83,7 +89,7 @@ public class TeamChatPanel extends JPanel implements ChatListener {
 		add(fieldPan, BorderLayout.AFTER_LAST_LINE);
 		
 		// add messages listener
-		MessagingManager.getInst().addChatListener(this);
+		MessagingManager.getInst().addMessagesListener(this);
 	}
 	
 	public void sendMessage() {
@@ -96,11 +102,20 @@ public class TeamChatPanel extends JPanel implements ChatListener {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void gameMessageReceived(GameDTO game, String user, String message) {
+=======
+	public void messageReceived(GameDTO game, String user, String message) {
+		if (message.startsWith("<body>") && message.endsWith("</body>")) {
+			return;
+		}
+		AudioManager.getInst().playSound(Sounds.MESSAGE_RECEIVED);
+>>>>>>> parent of 45c7aed... Changes on the messaging part
 		chat.setText(chat.getText() + "[" + user + "] : " + message + "\n");
 		chat.getCaret().setDot(chat.getDocument().getLength());
 	}
 
+<<<<<<< HEAD
 	@Override
 	public void buddyMessageReceived(String userId, String message) {
 		// nothing to do here
@@ -110,4 +125,6 @@ public class TeamChatPanel extends JPanel implements ChatListener {
 		// nothing to do here		
 	}
 
+=======
+>>>>>>> parent of 45c7aed... Changes on the messaging part
 }

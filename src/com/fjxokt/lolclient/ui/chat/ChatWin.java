@@ -60,21 +60,19 @@ public class ChatWin extends JFrame {
 			RosterEntry buddy = item.buddy;
 			
 			if (buddy != null) {
-				String circlePath = null;
-				switch (manager.getBuddyPresenceType(buddy)) {
-				case AVAILABLE:
-					circlePath = "circle_green.jpg";
-					break;
-				case AWAY:
-					circlePath = "circle_yellow.jpg";
-					break;
-				case BUSY:
-					circlePath = "circle_red.jpg";
-					break;
-				default:
-					circlePath = "circle_gray.jpg";
+				Icon statusIcon = null;
+				if (manager.isBuddyAvailable(buddy)) {
+					statusIcon = ResourcesManager.getInst().getIcon("images" + File.separator + "circle_green.jpg");
 				}
-				Icon statusIcon =  ResourcesManager.getInst().getIcon("images" + File.separator + circlePath);
+				else if (manager.isBuddyAway(buddy)) {
+					statusIcon = ResourcesManager.getInst().getIcon("images" + File.separator + "circle_yellow.jpg");
+				}
+				else if (manager.isBuddyBusy(buddy)) {
+					statusIcon = ResourcesManager.getInst().getIcon("images" + File.separator + "circle_red.jpg");
+				}
+				else {
+					statusIcon = ResourcesManager.getInst().getIcon("images" + File.separator + "circle_gray.jpg");
+				}
 				label.setIcon(statusIcon);
 				label.setText(buddy.getName());
 			}

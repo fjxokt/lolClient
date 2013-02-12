@@ -34,7 +34,13 @@ import org.jivesoftware.smackx.muc.MultiUserChat;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.lolrtmps.model.utils.GameState;
+<<<<<<< HEAD
 import com.fjxokt.lolclient.ui.chat.ChatPresenceType;
+=======
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.ui.chat.BuddyChatWin;
+import com.fjxokt.lolclient.ui.chat.ChatWinManager;
+>>>>>>> parent of 45c7aed... Changes on the messaging part
 import com.fjxokt.lolclient.utils.SimpleSHA1;
 import com.fjxokt.lolclient.utils.SimpleXML;
 import com.gvaneyck.rtmp.DummySSLSocketFactory;
@@ -64,6 +70,7 @@ public class MessagingManager implements MessageListener {
 		invitHandler.removeInvitationListener(invit);
 	}
 	
+<<<<<<< HEAD
 	//////////////////////////////////
 	// messages listener
 	//////////////////////////////////
@@ -88,6 +95,21 @@ public class MessagingManager implements MessageListener {
 			l.buddyPresenceChanged(userId, presence, type);
 		}
 	}
+=======
+	// list of message listener
+	private List<MessagesListener> msgListeners = new ArrayList<MessagesListener>();
+	// add a message listener
+	// TODO: need to only listen for one channel
+	public void addMessagesListener(MessagesListener l) {
+		msgListeners.add(l);
+	}
+	// notify all listener
+	public void notifyMessagesListeners(GameDTO game, String user, String message) {
+		for (MessagesListener l : msgListeners) {
+			l.messageReceived(game, user, message);
+		}
+	}
+>>>>>>> parent of 45c7aed... Changes on the messaging part
 	
 	private class PVPChatRoom {
 		private MultiUserChat chatRoom;
@@ -122,12 +144,16 @@ public class MessagingManager implements MessageListener {
 			}
 			System.out.println("packet received: " + str);
 			System.out.println("msg: " + msg);
+<<<<<<< HEAD
 			String body = unwrapMessage(msg);
 			// TODO: check if we want to fire an event in this case
 			if (body.startsWith("<body>") && body.endsWith("</body>")) {
 				return;
 			}
 			notifyGameMessageReceived(null, user, body);
+=======
+			notifyMessagesListeners(null, user, unwrapMessage(msg));
+>>>>>>> parent of 45c7aed... Changes on the messaging part
 		}
 	}
 	
@@ -175,7 +201,6 @@ public class MessagingManager implements MessageListener {
         connection = new XMPPConnection(xmppConfig);
         try {
 			connection.connect();
-	        //SASLAuthentication.supportSASLMechanism("PLAIN", 0);
 			connection.login(username, "AIR_" + password, "xiff");
 		} catch (XMPPException e) {
 			e.printStackTrace();
@@ -479,7 +504,8 @@ public class MessagingManager implements MessageListener {
 		if (message.getType() == Message.Type.chat) {
 			System.out.println(chat.getParticipant() + " says: " + message.getBody());
 			String userId = chat.getParticipant().split("/")[0];
-			notifyBuddyMessageReceived(userId, message.getBody());
+			BuddyChatWin window = ChatWinManager.getInst().getWindow(userId);
+			window.getAnswer(getBuddyFromId(userId).getName(), message.getBody());
 		}
 		else if (message.getType() == Message.Type.groupchat) {
 			System.out.println("group: " + chat.getParticipant() + " says: " + message.getBody());
@@ -620,6 +646,7 @@ public class MessagingManager implements MessageListener {
 			}
 //			chatRoom.leave();
 		} catch (XMPPException e1) {
+			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -680,19 +707,6 @@ public class MessagingManager implements MessageListener {
     	Roster roster = connection.getRoster();
 	    Collection<RosterEntry> entries = roster.getEntries();
 	    return entries;
-    }
-    
-    public ChatPresenceType getBuddyPresenceType(RosterEntry buddy) {
-    	if (isBuddyAvailable(buddy)) {
-    		return ChatPresenceType.AVAILABLE;
-    	}
-    	if (isBuddyAway(buddy)) {
-    		return ChatPresenceType.AWAY;
-    	}
-    	if (isBuddyBusy(buddy)) {
-    		return ChatPresenceType.BUSY;
-    	}
-    	return ChatPresenceType.OFFLINE;
     }
     
     public boolean isBuddyAvailable(RosterEntry buddy) {

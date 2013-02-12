@@ -3,15 +3,18 @@ package com.fjxokt.lolclient.ui.chat;
 import java.util.HashMap;
 import java.util.Map;
 
+<<<<<<< HEAD
 import org.jivesoftware.smack.packet.Presence;
 
 import com.fjxokt.lolclient.audio.AudioManager;
 import com.fjxokt.lolclient.audio.Sounds;
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.messaging.ChatListener;
+=======
+>>>>>>> parent of 45c7aed... Changes on the messaging part
 import com.fjxokt.lolclient.messaging.MessagingManager;
 
-public class ChatWinManager implements ChatListener{
+public class ChatWinManager {
 	
 	private static ChatWinManager instance;
 	
@@ -20,7 +23,6 @@ public class ChatWinManager implements ChatListener{
 	
 	private ChatWinManager() {
 		map = new HashMap<String, BuddyChatWin>();
-		MessagingManager.getInst().addChatListener(this);
 	}
 	
 	public static ChatWinManager getInst() {
@@ -47,6 +49,7 @@ public class ChatWinManager implements ChatListener{
 		return win;
 	}
 
+<<<<<<< HEAD
 	@Override
 	public void buddyMessageReceived(String userId, String message) {
 		AudioManager.getInst().playSound(Sounds.PM_RECEIVED);
@@ -64,4 +67,6 @@ public class ChatWinManager implements ChatListener{
 		getMainWin().refreshList();
 	}
 
+=======
+>>>>>>> parent of 45c7aed... Changes on the messaging part
 }

@@ -23,7 +23,6 @@ public class Sounds implements ClientListener, ChatListener {
 	public static final String BACKGROUND_SELECT_CHAMP = Constants.soundsPath + "ChmpSlct_Tutorial.mp3";
 	public static final String JOIN_TEAM_SEL = Constants.soundsPath + "join_chat.mp3";
 	public static final String MESSAGE_RECEIVED = Constants.soundsPath + "standard_msg_receive.mp3";
-	public static final String PM_RECEIVED = Constants.soundsPath + "pm_receive.mp3";
 
 	public Sounds() {
 		LoLClient.getInst().addGameListener(this);
