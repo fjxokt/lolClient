@@ -17,10 +17,15 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.jivesoftware.smack.packet.Presence;
 
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
+=======
+import com.fjxokt.lolclient.audio.AudioManager;
+import com.fjxokt.lolclient.audio.Sounds;
+>>>>>>> parent of 69cae32... Some progress in the messaging part
 import com.fjxokt.lolclient.messaging.ChatListener;
 =======
 import com.fjxokt.lolclient.audio.AudioManager;
@@ -28,7 +33,8 @@ import com.fjxokt.lolclient.audio.Sounds;
 import com.fjxokt.lolclient.messaging.MessagesListener;
 >>>>>>> parent of 45c7aed... Changes on the messaging part
 import com.fjxokt.lolclient.messaging.MessagingManager;
-import com.fjxokt.lolclient.ui.chat.ChatPresenceType;
+import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
 
 public class TeamChatPanel extends JPanel implements MessagesListener {
 
@@ -104,13 +110,19 @@ public class TeamChatPanel extends JPanel implements MessagesListener {
 	@Override
 <<<<<<< HEAD
 	public void gameMessageReceived(GameDTO game, String user, String message) {
+<<<<<<< HEAD
 =======
 	public void messageReceived(GameDTO game, String user, String message) {
+=======
+>>>>>>> parent of 69cae32... Some progress in the messaging part
 		if (message.startsWith("<body>") && message.endsWith("</body>")) {
 			return;
 		}
 		AudioManager.getInst().playSound(Sounds.MESSAGE_RECEIVED);
+<<<<<<< HEAD
 >>>>>>> parent of 45c7aed... Changes on the messaging part
+=======
+>>>>>>> parent of 69cae32... Some progress in the messaging part
 		chat.setText(chat.getText() + "[" + user + "] : " + message + "\n");
 		chat.getCaret().setDot(chat.getDocument().getLength());
 	}
@@ -119,10 +131,6 @@ public class TeamChatPanel extends JPanel implements MessagesListener {
 	@Override
 	public void buddyMessageReceived(String userId, String message) {
 		// nothing to do here
-	}
-	@Override
-	public void buddyPresenceChanged(String userId, Presence presence, ChatPresenceType type) {
-		// nothing to do here		
 	}
 
 =======

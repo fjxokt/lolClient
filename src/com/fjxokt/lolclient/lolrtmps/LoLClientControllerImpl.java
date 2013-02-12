@@ -95,27 +95,27 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		}
 	}
 	
-	protected void notifyGameUpdated(GameDTO game, ClientEventType state) {
+	public void notifyGameUpdated(GameDTO game, ClientEventType state) {
 		notifyGameUpdated(game, state, null, null, null, null);
 	}
 	
-	protected void notifyClientUpdate(ClientEventType state, SearchingForMatchNotification search) {
+	public void notifyClientUpdate(ClientEventType state, SearchingForMatchNotification search) {
 		notifyGameUpdated(game, state, null, search, null, null);
 	}
 	
-	protected void notifyClientUpdate(ClientEventType state) {
+	public void notifyClientUpdate(ClientEventType state) {
 		notifyGameUpdated(null, state, null, null, null, null);
 	}
 	
-	protected void notifyClientUpdate(ClientEventType state, StoreAccountBalanceNotification balance) {
+	public void notifyClientUpdate(ClientEventType state, StoreAccountBalanceNotification balance) {
 		notifyGameUpdated(null, state, null, null, null, balance);
 	}
 	
-	protected void notifyClientUpdate(ClientEventType state, ChampionTradeMessage msg) {
+	public void notifyClientUpdate(ClientEventType state, ChampionTradeMessage msg) {
 		notifyGameUpdated(null, state, null, null, msg, null);
 	}
 	
-	protected void notifyGameUpdated(GameDTO game, ClientEventType state, EndOfGameStats stats, 
+	public void notifyGameUpdated(GameDTO game, ClientEventType state, EndOfGameStats stats, 
 			SearchingForMatchNotification search, ChampionTradeMessage msg,
 			StoreAccountBalanceNotification balance) {
 		lastClientEventSent = state;
@@ -137,6 +137,7 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		}
 		updateListener();
 	}
+
 	
 	private void updateListener() {
 		for (ClientListener l : remQueueListeners) {

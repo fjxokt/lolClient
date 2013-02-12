@@ -19,21 +19,22 @@ import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.RosterGroup;
 import org.jivesoftware.smack.RosterListener;
+import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.SmackConfiguration;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
-import org.jivesoftware.smack.packet.Packet;
-import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Message.Body;
 import org.jivesoftware.smack.packet.Message.Type;
+import org.jivesoftware.smack.packet.Packet;
+import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Mode;
 import org.jivesoftware.smackx.muc.HostedRoom;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.lolrtmps.model.utils.GameState;
+<<<<<<< HEAD
 <<<<<<< HEAD
 import com.fjxokt.lolclient.ui.chat.ChatPresenceType;
 =======
@@ -41,8 +42,13 @@ import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.ui.chat.BuddyChatWin;
 import com.fjxokt.lolclient.ui.chat.ChatWinManager;
 >>>>>>> parent of 45c7aed... Changes on the messaging part
+=======
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.ui.chat.BuddyChatWin;
+import com.fjxokt.lolclient.ui.chat.ChatPresenceType;
+import com.fjxokt.lolclient.ui.chat.ChatWinManager;
+>>>>>>> parent of 69cae32... Some progress in the messaging part
 import com.fjxokt.lolclient.utils.SimpleSHA1;
-import com.fjxokt.lolclient.utils.SimpleXML;
 import com.gvaneyck.rtmp.DummySSLSocketFactory;
 
 public class MessagingManager implements MessageListener {
@@ -58,38 +64,33 @@ public class MessagingManager implements MessageListener {
 	// gameID, chatRoom
 	private Map<Double, PVPChatRoom> gameRooms;
 	
-	//////////////////////////////////
-	// invit handler
-	//////////////////////////////////
-	private InvitationListenerHandler invitHandler;
-	// add and remove methods
-	public void addInvitationListener(InvitationListener invit) {
-		invitHandler.addInvitationListener(invit);
-	}
-	public void removeInvitationListener(InvitationListener invit) {
-		invitHandler.removeInvitationListener(invit);
-	}
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//////////////////////////////////
 	// messages listener
 	//////////////////////////////////
+=======
+	// list of message listener
+>>>>>>> parent of 69cae32... Some progress in the messaging part
 	private List<ChatListener> msgListeners = new ArrayList<ChatListener>();
 	// add a message listener
+	// TODO: need to only listen for one channel
 	public void addChatListener(ChatListener l) {
 		msgListeners.add(l);
 	}
-	// notify methods
-	protected void notifyGameMessageReceived(GameDTO game, String user, String message) {
+	// notify all listener
+	public void notifyGameMessageReceived(GameDTO game, String user, String message) {
 		for (ChatListener l : msgListeners) {
 			l.gameMessageReceived(game, user, message);
 		}
 	}
-	protected void notifyBuddyMessageReceived(String userId, String message) {
+	public void notifyBuddyMessageReceived(String user, String message) {
 		for (ChatListener l : msgListeners) {
-			l.buddyMessageReceived(userId, message);
+			l.buddyMessageReceived(user, message);
 		}
 	}
+<<<<<<< HEAD
 	protected void notifyBuddyPresenceChanged(String userId, Presence presence, ChatPresenceType type) {
 		for (ChatListener l : msgListeners) {
 			l.buddyPresenceChanged(userId, presence, type);
@@ -111,6 +112,8 @@ public class MessagingManager implements MessageListener {
 	}
 >>>>>>> parent of 45c7aed... Changes on the messaging part
 	
+=======
+>>>>>>> parent of 69cae32... Some progress in the messaging part
 	private class PVPChatRoom {
 		private MultiUserChat chatRoom;
 		private ChatRoomType chatType;
@@ -137,13 +140,14 @@ public class MessagingManager implements MessageListener {
 			//packet received: <message id="hm_97" to="sum39299508@pvp.net/xiff" from="ap~668f0a8595801c49e2ef016cd1962e72d05b43c3@sec.pvp.net/AngryCrakBaby" type="groupchat"><body>&lt;![CDATA[&lt;body&gt;&lt;invitelist&gt;&lt;invitee name=&quot;KrakenPiraten&quot; status=&quot;PENDING&quot; /&gt;&lt;invitee name=&quot;ToothlessHooker&quot; status=&quot;PENDING&quot; /&gt;&lt;/invitelist&gt;&lt;/body&gt;]]&gt;</body></message>
 			//packet received: <message id="m_34" to="sum39299508@pvp.net/xiff" from="ap~668f0a8595801c49e2ef016cd1962e72d05b43c3@sec.pvp.net/Lordacdc" type="groupchat"><body>&lt;![CDATA[WHERE ARE MY BOOBIES?!]]&gt;</body></message>
 			String str = replaceHTML(p.toXML());
-			String msg = SimpleXML.getTagValue(str, "body");
+			String msg = getTagVal(str, "body");
 			String user = p.getFrom();
 			if (user.contains("/")) {
 				user = user.substring(user.indexOf('/') + 1);
 			}
 			System.out.println("packet received: " + str);
 			System.out.println("msg: " + msg);
+<<<<<<< HEAD
 <<<<<<< HEAD
 			String body = unwrapMessage(msg);
 			// TODO: check if we want to fire an event in this case
@@ -154,6 +158,9 @@ public class MessagingManager implements MessageListener {
 =======
 			notifyMessagesListeners(null, user, unwrapMessage(msg));
 >>>>>>> parent of 45c7aed... Changes on the messaging part
+=======
+			notifyGameMessageReceived(null, user, unwrapMessage(msg));
+>>>>>>> parent of 69cae32... Some progress in the messaging part
 		}
 	}
 	
@@ -161,8 +168,6 @@ public class MessagingManager implements MessageListener {
 		SmackConfiguration.setPacketReplyTimeout(5000);
 		mapChats = new HashMap<String, Chat>();
 		gameRooms = new HashMap<Double, MessagingManager.PVPChatRoom>();
-		// init invit handler
-		invitHandler = new InvitationListenerHandler();
 	}
 	
 	public static MessagingManager getInst() {
@@ -231,11 +236,7 @@ public class MessagingManager implements MessageListener {
 				System.out.println(presence.getFrom() + " changed presence to " + presence.getStatus() + " : " + 
 						presence.getType() + " : " + presence.getMode() + " : " + presence.getTo() + " : " + presence.getXmlns() +
 						presence.getPropertyNames());
-				String userId = presence.getFrom().split("/")[0];
-				ChatPresenceType pres = getBuddyPresenceType(getBuddyFromId(userId));
-				BuddyStatus status = new BuddyStatus(presence.getStatus());
-				System.out.println(status);
-				notifyBuddyPresenceChanged(userId, presence, pres);
+				ChatWinManager.getInst().getMainWin().refreshList();
 			}
 			@Override
 			public void entriesUpdated(Collection<String> entries) {
@@ -253,6 +254,7 @@ public class MessagingManager implements MessageListener {
     	
 	    
 	    displayBuddyList();
+//	    displayRooms();
 	    
 	    return loggedIn;
     }
@@ -373,24 +375,6 @@ public class MessagingManager implements MessageListener {
 			System.out.println("prop: " + prop + " : " + message.getProperty(prop));
 		}
 		
-		// Check if the message is related to invitation
-		if (InvitationManager.getInst().isInvitationRelated(message)) {
-			InvitationManager.getInst().processInvitation(message);
-		}
-				
-		if (message.getSubject() != null) {
-			if (message.getSubject().equals("PRACTICE_GAME_INVITE")) {
-				PracticeInvitation invit = new PracticeInvitation(msg);
-				System.out.println(invit);
-				invitHandler.notifyInvitationReceived(message.getFrom(), invit);
-			}
-			else if (message.getSubject().equals("GAME_INVITE")) {
-				MatchmakingInvitation invit = new MatchmakingInvitation(msg);
-				System.out.println(invit);
-				invitHandler.notifyInvitationReceived(message.getFrom(), invit);
-			}
-		}
-		
 		if (message.getSubject() != null && false) {
 			if (message.getSubject().equals("GAME_INVITE")) {
 				
@@ -409,7 +393,7 @@ public class MessagingManager implements MessageListener {
 			}
 			else if (message.getSubject().equals("GAME_INVITE_ACCEPT")) {
 				//String invitationId = getTagVal(msg, "inviteId");
-				String username = SimpleXML.getTagValue(msg, "userName");
+				String username = getTagVal(msg, "userName");
 				//String queueId = getTagVal(msg, "queueId");
 				
 				// answer to the invit
@@ -460,7 +444,7 @@ public class MessagingManager implements MessageListener {
 			}
 			// i have been accepted (received ater I send my GAME_INVITE_ACCEPT)
 			else if (message.getSubject().equals("GAME_INVITE_ACCEPT_ACK")) {
-				String invitationId = SimpleXML.getTagValue(msg, "inviteId");
+				String invitationId = getTagVal(msg, "inviteId");
 				LoLClient.getInst().acceptInviteForMatchmakingGame(invitationId);
 				
 				// TEST
@@ -525,6 +509,18 @@ public class MessagingManager implements MessageListener {
 	
 	private String unwrapMessage(String msg) {
 		return msg.substring(9, msg.length() - 3);
+	}
+	
+	private String getTagVal(String msg, String tag) {
+		int k = msg.indexOf("<" + tag);
+		if (k > -1) {
+			String sub = msg.substring(k + 1 + tag.length());
+			int l = sub.lastIndexOf("</" + tag);
+			if (l > -1) {
+				return msg.substring(k + 2 + tag.length(), k + 1 + l + tag.length());
+			}
+		}
+		return null;
 	}
 	
 	public String getMyName() {
@@ -683,15 +679,6 @@ public class MessagingManager implements MessageListener {
     
     public void addBuddy() {
     	//Roster roster = connection.getRoster();
-    }
-    
-    public RosterEntry getBuddyFromName(String name) {
-    	for (RosterEntry e : getBuddyList()) {
-    		if (e.getName().equals(name)) {
-    			return e;
-    		}
-    	}
-    	return null;
     }
     
     public RosterEntry getBuddyFromId(String id) {

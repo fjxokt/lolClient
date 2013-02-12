@@ -30,14 +30,10 @@ import com.fjxokt.lolclient.lolrtmps.model.dto.SpellBookDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.SpellBookPageDTO;
 import com.fjxokt.lolclient.lolrtmps.model.utils.PlayerBaseLevel;
 import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
-import com.fjxokt.lolclient.messaging.Invitation;
-import com.fjxokt.lolclient.messaging.InvitationListener;
-import com.fjxokt.lolclient.messaging.InvitationManager;
-import com.fjxokt.lolclient.messaging.MatchmakingInvitation;
 import com.fjxokt.lolclient.messaging.MessagingManager;
 
 
-public class LoLClient extends LoLClientControllerImpl implements ClientListener, InvitationListener {
+public class LoLClient extends LoLClientControllerImpl implements ClientListener {
 	
 	private static LoLClient instance;
 	
@@ -116,11 +112,6 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 		boolean loggedToChat = messageManager.login(getUser(), getPassword());
 		if (!loggedToChat) {
 			System.out.println("Could not connect to chat");
-		}
-		else {
-			// register client to get invitation messages
-			//messageManager.addInvitationListener(this);
-			InvitationManager.getInst().addInvitationListener(this);
 		}
 	}
 	
@@ -204,15 +195,10 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 	///////////////
 
 	public void invitationAccepted(String invitationId, String username, String queueId) {
-		System.out.println(" beforesum name");
-
 		PublicSummoner sum = getSummonerByName(username);
-		System.out.println("sum name: " + sum);
-
 		Double myId = getLoginDataPacketForUser().getAllSummonerData().getSummoner().getSumId();
 		MatchMakerParams params = new MatchMakerParams(new Integer[]{Integer.parseInt(queueId)},
 					invitationId, new Integer[]{sum.getSummonerId(), myId.intValue()});
-		System.out.println("mmparams: " + params);
 		System.out.println(params.getTypedObject());
 		System.out.println("ECHO: "+attachTeamToQueue(params));
 	}
@@ -432,39 +418,6 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 			break;
 		}
 		
-	}
-	
-	///////////////////////////////
-	// Invitation listeners
-	///////////////////////////////
-
-	@Override
-	public void invitationAccepted(String userId, Invitation inv) {
-		// TODO Auto-generated method stub
-		System.out.println("INVITATION ACCEPTED !");
-		if (inv instanceof MatchmakingInvitation) {
-			MatchmakingInvitation minv = (MatchmakingInvitation)inv;
-			// TODO: get the correct userId or userName.....
-			invitationAccepted(""+inv.getInviteId(), MessagingManager.getInst().getBuddyFromId(userId).getName(), ""+minv.getQueueId());
-		}
-	}
-
-	@Override
-	public void invitationReceived(String userId, Invitation invitation) {
-		// TODO Auto-generated method stub
-		System.out.println("Received invitation from " + userId + " : " + invitation);
-	}
-
-	@Override
-	public void invitationRejected(String userId, Invitation invitation) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void invitationStatus(String msg) {
-		// TODO Auto-generated method stub
-		System.out.println("STATUS°: " + msg);
 	}
 
 }
