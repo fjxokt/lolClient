@@ -1,12 +1,18 @@
 package com.fjxokt.lolclient.audio;
 
+import org.jivesoftware.smack.packet.Presence;
+
 import com.fjxokt.lolclient.Constants;
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
 import com.fjxokt.lolclient.lolrtmps.events.ClientListener;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
+import com.fjxokt.lolclient.messaging.ChatListener;
+import com.fjxokt.lolclient.messaging.MessagingManager;
+import com.fjxokt.lolclient.ui.chat.ChatPresenceType;
 
 // TODO: also implements MessageListener for the chat sounds
-public class Sounds implements ClientListener {
+public class Sounds implements ClientListener, ChatListener {
 
 	public static final String LOGIN = Constants.soundsPath + "login.mp3";
 	public static final String PLAY = Constants.soundsPath + "playbutton.mp3";
@@ -21,6 +27,7 @@ public class Sounds implements ClientListener {
 
 	public Sounds() {
 		LoLClient.getInst().addGameListener(this);
+		MessagingManager.getInst().addChatListener(this);
 	}
 	
 	public void clientStateUpdated(ClientEvent e) {
@@ -50,6 +57,18 @@ public class Sounds implements ClientListener {
 	        AudioManager.getInst().playSound(Sounds.LOCK);
 			break;
 		}
+	}
+
+	@Override
+	public void buddyMessageReceived(String userId, String message) {}
+
+	@Override
+	public void buddyPresenceChanged(String userId, Presence presence,
+			ChatPresenceType type) {}
+
+	@Override
+	public void gameMessageReceived(GameDTO game, String user, String message) {
+		AudioManager.getInst().playSound(Sounds.MESSAGE_RECEIVED);
 	}
 	
 }

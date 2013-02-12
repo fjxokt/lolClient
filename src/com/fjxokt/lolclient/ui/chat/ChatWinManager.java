@@ -3,6 +3,8 @@ package com.fjxokt.lolclient.ui.chat;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jivesoftware.smack.packet.Presence;
+
 import com.fjxokt.lolclient.audio.AudioManager;
 import com.fjxokt.lolclient.audio.Sounds;
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
@@ -55,6 +57,11 @@ public class ChatWinManager implements ChatListener{
 	@Override
 	public void gameMessageReceived(GameDTO game, String user, String message) {
 		// nothing to do here
+	}
+
+	@Override
+	public void buddyPresenceChanged(String userId, Presence presence, ChatPresenceType type) {
+		getMainWin().refreshList();
 	}
 
 }

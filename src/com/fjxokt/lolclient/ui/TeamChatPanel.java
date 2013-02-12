@@ -16,12 +16,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.fjxokt.lolclient.audio.AudioManager;
-import com.fjxokt.lolclient.audio.Sounds;
+import org.jivesoftware.smack.packet.Presence;
+
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.messaging.ChatListener;
 import com.fjxokt.lolclient.messaging.MessagingManager;
-import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.ui.chat.ChatPresenceType;
 
 public class TeamChatPanel extends JPanel implements ChatListener {
 
@@ -96,10 +97,6 @@ public class TeamChatPanel extends JPanel implements ChatListener {
 
 	@Override
 	public void gameMessageReceived(GameDTO game, String user, String message) {
-		if (message.startsWith("<body>") && message.endsWith("</body>")) {
-			return;
-		}
-		AudioManager.getInst().playSound(Sounds.MESSAGE_RECEIVED);
 		chat.setText(chat.getText() + "[" + user + "] : " + message + "\n");
 		chat.getCaret().setDot(chat.getDocument().getLength());
 	}
@@ -107,6 +104,10 @@ public class TeamChatPanel extends JPanel implements ChatListener {
 	@Override
 	public void buddyMessageReceived(String userId, String message) {
 		// nothing to do here
+	}
+	@Override
+	public void buddyPresenceChanged(String userId, Presence presence, ChatPresenceType type) {
+		// nothing to do here		
 	}
 
 }
