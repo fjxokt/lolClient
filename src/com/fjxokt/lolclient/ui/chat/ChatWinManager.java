@@ -5,10 +5,15 @@ import java.util.Map;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.jivesoftware.smack.packet.Presence;
 
 =======
 >>>>>>> parent of 69cae32... Some progress in the messaging part
+=======
+import org.jivesoftware.smack.packet.Presence;
+
+>>>>>>> 69cae32... Some progress in the messaging part
 import com.fjxokt.lolclient.audio.AudioManager;
 import com.fjxokt.lolclient.audio.Sounds;
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
@@ -66,13 +71,19 @@ public class ChatWinManager {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 69cae32... Some progress in the messaging part
 	@Override
 	public void buddyPresenceChanged(String userId, Presence presence, ChatPresenceType type) {
 		getMainWin().refreshList();
 	}
 
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 45c7aed... Changes on the messaging part
 =======
 >>>>>>> parent of 69cae32... Some progress in the messaging part
+=======
+>>>>>>> 69cae32... Some progress in the messaging part
 }

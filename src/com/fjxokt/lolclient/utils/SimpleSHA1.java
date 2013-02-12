@@ -4,7 +4,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 
-
 public class SimpleSHA1 { 
  
     private static String convertToHex(byte[] data) { 
