@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
 import com.fjxokt.lolclient.lolrtmps.events.ClientEventType;
@@ -462,9 +463,9 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 	}
 
 	@Override
-	public void invitationStatus(String msg) {
+	public void invitationStatus(Map<String,String> usersStatus) {
 		// TODO Auto-generated method stub
-		System.out.println("STATUS°: " + msg);
+		System.out.println("STATUS°: ");
 	}
 
 }

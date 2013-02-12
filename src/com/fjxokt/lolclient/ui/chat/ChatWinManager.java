@@ -3,26 +3,13 @@ package com.fjxokt.lolclient.ui.chat;
 import java.util.HashMap;
 import java.util.Map;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 import org.jivesoftware.smack.packet.Presence;
 
-=======
->>>>>>> parent of 69cae32... Some progress in the messaging part
-=======
-import org.jivesoftware.smack.packet.Presence;
-
->>>>>>> 69cae32... Some progress in the messaging part
-import com.fjxokt.lolclient.audio.AudioManager;
-import com.fjxokt.lolclient.audio.Sounds;
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.messaging.ChatListener;
-=======
->>>>>>> parent of 45c7aed... Changes on the messaging part
 import com.fjxokt.lolclient.messaging.MessagingManager;
 
-public class ChatWinManager {
+public class ChatWinManager implements ChatListener {
 	
 	private static ChatWinManager instance;
 	
@@ -57,10 +44,8 @@ public class ChatWinManager {
 		return win;
 	}
 
-<<<<<<< HEAD
 	@Override
 	public void buddyMessageReceived(String userId, String message) {
-		AudioManager.getInst().playSound(Sounds.PM_RECEIVED);
 		BuddyChatWin window = getWindow(userId);
 		window.getAnswer(MessagingManager.getInst().getBuddyFromId(userId).getName(), message);
 	}
@@ -70,20 +55,8 @@ public class ChatWinManager {
 		// nothing to do here
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 69cae32... Some progress in the messaging part
 	@Override
 	public void buddyPresenceChanged(String userId, Presence presence, ChatPresenceType type) {
 		getMainWin().refreshList();
 	}
-
-<<<<<<< HEAD
-=======
->>>>>>> parent of 45c7aed... Changes on the messaging part
-=======
->>>>>>> parent of 69cae32... Some progress in the messaging part
-=======
->>>>>>> 69cae32... Some progress in the messaging part
 }

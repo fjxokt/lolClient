@@ -16,32 +16,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 69cae32... Some progress in the messaging part
 import org.jivesoftware.smack.packet.Presence;
 
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
-<<<<<<< HEAD
-=======
-import com.fjxokt.lolclient.audio.AudioManager;
-import com.fjxokt.lolclient.audio.Sounds;
->>>>>>> parent of 69cae32... Some progress in the messaging part
-=======
->>>>>>> 69cae32... Some progress in the messaging part
 import com.fjxokt.lolclient.messaging.ChatListener;
-=======
-import com.fjxokt.lolclient.audio.AudioManager;
-import com.fjxokt.lolclient.audio.Sounds;
-import com.fjxokt.lolclient.messaging.MessagesListener;
->>>>>>> parent of 45c7aed... Changes on the messaging part
 import com.fjxokt.lolclient.messaging.MessagingManager;
 import com.fjxokt.lolclient.ui.chat.ChatPresenceType;
 
-public class TeamChatPanel extends JPanel implements MessagesListener {
+public class TeamChatPanel extends JPanel implements ChatListener {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -100,7 +83,7 @@ public class TeamChatPanel extends JPanel implements MessagesListener {
 		add(fieldPan, BorderLayout.AFTER_LAST_LINE);
 		
 		// add messages listener
-		MessagingManager.getInst().addMessagesListener(this);
+		MessagingManager.getInst().addChatListener(this);
 	}
 	
 	public void sendMessage() {
@@ -113,29 +96,11 @@ public class TeamChatPanel extends JPanel implements MessagesListener {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public void gameMessageReceived(GameDTO game, String user, String message) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-	public void messageReceived(GameDTO game, String user, String message) {
-=======
->>>>>>> parent of 69cae32... Some progress in the messaging part
-		if (message.startsWith("<body>") && message.endsWith("</body>")) {
-			return;
-		}
-		AudioManager.getInst().playSound(Sounds.MESSAGE_RECEIVED);
-<<<<<<< HEAD
->>>>>>> parent of 45c7aed... Changes on the messaging part
-=======
->>>>>>> parent of 69cae32... Some progress in the messaging part
-=======
->>>>>>> 69cae32... Some progress in the messaging part
 		chat.setText(chat.getText() + "[" + user + "] : " + message + "\n");
 		chat.getCaret().setDot(chat.getDocument().getLength());
 	}
 
-<<<<<<< HEAD
 	@Override
 	public void buddyMessageReceived(String userId, String message) {
 		// nothing to do here
@@ -145,6 +110,4 @@ public class TeamChatPanel extends JPanel implements MessagesListener {
 		// nothing to do here		
 	}
 
-=======
->>>>>>> parent of 45c7aed... Changes on the messaging part
 }

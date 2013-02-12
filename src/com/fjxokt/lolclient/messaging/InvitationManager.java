@@ -134,11 +134,7 @@ public class InvitationManager {
 			break;
 		case GAME_INVITE_LIST_STATUS:
 			// <body><invitelist><invitee name=\"" + username + "status=\"ACCEPTED\" /></invitelist></body>"
-<<<<<<< HEAD
 			// TODO: invitHandler.notifyInvitationStatus(message.getBody());
-=======
-			invitHandler.notifyInvitationStatus(message.getBody());
->>>>>>> 69cae32... Some progress in the messaging part
 			// build list of users with their status
 			break;
 		case VERIFY_INVITEE:
