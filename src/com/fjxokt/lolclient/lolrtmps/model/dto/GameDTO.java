@@ -19,24 +19,24 @@ public class GameDTO extends ClassType {
 	private String gameType;				// "PRACTICE_GAME"
 	private Integer gameTypeConfigId;		// 1
 	private String gameState; 				// "TEAM_SELECT"
-	private String gameStateString;		// "TEAM_SELECT" (same... useful?)
+	private String gameStateString;			// "TEAM_SELECT" (same... useful?)
 	private Participant ownerSummary;
 	private String statusOfParticipants;	//list of 0 and 1 and 2 (0 = waiting for answer, 1 = said ok, 2 = said no)
 	private Integer dataVersion;			// 0
 	private String name;					// "Jabe's game"
-	private Integer spectatorDelay;		// 180
+	private Integer spectatorDelay;			// 180
 	private Date creationTime;
 	private List<Participant> teamOne;
 	private List<Participant> teamTwo;
 	private List<GameObserver> observers;
-	private List<Object> bannedChampions;		// TODO: Check what it is !!!
-	private String terminatedCondition;			// "NOT_TERMINATED"
-	private String queueTypeName;				// "NONE"
+	private List<Object> bannedChampions;	// TODO: Check what it is !!!
+	private String terminatedCondition;		// cf. TerminatedCondition enum
+	private String queueTypeName;			// cf. QueueType enum
 	private Integer optimisticLock;			// 1.0
 	private Integer maxNumPlayers;
 	private Integer queuePosition;
 	private Integer expiryTime;
-	private Integer pickTurn;					// 1
+	private Integer pickTurn;					// TODO: check but I think 0 = not time to pick, 1 = pick, 2 = champion locked
 	private List<PlayerChampionSelectionDTO> playerChampionSelections;	// our team selection (why?)
 	private String roomName;
 	private String roomPassword;
