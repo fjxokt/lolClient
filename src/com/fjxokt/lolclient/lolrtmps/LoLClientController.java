@@ -75,6 +75,7 @@ public interface LoLClientController extends Callback {
 	// clientFacade Service
 	///////////////////////////////////////////////////
 	LoginDataPacket getLoginDataPacketForUser();
+	Integer[] callKudos(String commandName, Double summonerId);
 	
 	///////////////////////////////////////////////////
 	// summoner Service

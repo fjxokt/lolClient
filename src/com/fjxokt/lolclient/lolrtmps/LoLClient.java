@@ -138,7 +138,6 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 		spellBook = loginDataPacket.getAllSummonerData().getSpellBook();
 		// create player
 		player = createPlayer();
-		System.out.println(getRecentGames(loginDataPacket.getAllSummonerData().getSummoner().getAcctId().intValue()));
 	}
 
 	/////////////////////

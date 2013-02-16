@@ -61,6 +61,7 @@ import com.fjxokt.lolclient.lolrtmps.model.utils.QueueType;
 import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
 import com.fjxokt.lolclient.lolrtmps.model.utils.TerminatedCondition;
 import com.fjxokt.lolclient.messaging.MessagingManager;
+import com.gvaneyck.rtmp.JSON;
 import com.gvaneyck.rtmp.LoLRTMPSClient;
 import com.gvaneyck.rtmp.TypedObject;
 
@@ -457,6 +458,44 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 			}
 			
 			return login;
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public Integer[] callKudos(String commandName, Double summonerId) {
+		try {
+			// TODO: only has commandName = "TOTALS" ?
+			TypedObject input = new TypedObject();
+			input.put("commandName", "TOTALS");
+			input.put("summonerId", summonerId);
+			int id = client.invoke("clientFacadeService", "callKudos", new Object[] {input.toString()});
+			TypedObject result = client.getResult(id);
+			client.join(id);
+
+			if (result == null || result.get("result").equals("_error") || result.getTO("data").getTO("body") == null) {
+				return null;
+			}
+			
+			String str = result.getTO("data").getTO("body").getString("value");
+			// returned string is formatted as -> "totals":[0,0,0,0,0]}
+			TypedObject o = (TypedObject)JSON.parse(str);
+			
+			if (o == null || o.getArray("totals") == null) {
+				return null;
+			}
+			
+			Object[] os = o.getArray("totals");
+			Integer[] res = new Integer[os.length];
+			int i = 0;
+			for (Object oss : os) {
+				res[i++] = (Integer)oss;
+			}
+						
+			return res;
 			
 		} catch (IOException e) {
 			e.printStackTrace();
