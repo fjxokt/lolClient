@@ -184,15 +184,17 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 		return res;
 	}
 	
-	public MasteryBookPageDTO selectDefaultMasteryBookPage(MasteryBookPageDTO page) {
-		MasteryBookPageDTO res = super.selectDefaultMasteryBookPage(page);
-		// if the page has been correctly changed, update our list
-		if (res != null) {
+	public MasteryBookDTO selectDefaultMasteryBookPage(MasteryBookPageDTO page) {
+		if (page != null) {
 			for (MasteryBookPageDTO p : masteryBook.getBookPages()) {
+				// change state of pages
 				p.setCurrent(p.getPageId().equals(page.getPageId()));
 			}
+			// then save the book
+			super.saveMasteryBook(masteryBook);
+			return masteryBook;
 		}
-		return res;
+		return null;
 	}
 	
 	/////////////////////
@@ -215,6 +217,15 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 		System.out.println("mmparams: " + params);
 		System.out.println(params.getTypedObject());
 		System.out.println("ECHO: "+attachTeamToQueue(params));
+	}
+	
+	///////////////
+	// replays
+	///////////////
+	
+	// TODO
+	public void isReplayAvailable(Double gameId) {
+		// need to get the spectator server address from the server we're connected to
 	}
 	
 	/////////////////

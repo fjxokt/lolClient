@@ -27,7 +27,6 @@ import com.fjxokt.lolclient.lolrtmps.model.dto.ChampionDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.LeagueListDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.MasteryBookDTO;
-import com.fjxokt.lolclient.lolrtmps.model.dto.MasteryBookPageDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.PlatformGameLifecycleDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.PlayerDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.SpellBookDTO;
@@ -132,7 +131,6 @@ public interface LoLClientController extends Callback {
 	// masteryBook Service
 	///////////////////////////////////////////////////
 	MasteryBookDTO getMasteryBook(Double summonerId);
-	MasteryBookPageDTO selectDefaultMasteryBookPage(MasteryBookPageDTO page);
 	MasteryBookDTO saveMasteryBook(MasteryBookDTO book);
 	
 	///////////////////////////////////////////////////

@@ -42,7 +42,6 @@ import com.fjxokt.lolclient.lolrtmps.model.dto.ChampionDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.LeagueListDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.MasteryBookDTO;
-import com.fjxokt.lolclient.lolrtmps.model.dto.MasteryBookPageDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.PlatformGameLifecycleDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.PlayerCredentialsDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.PlayerDTO;
@@ -1146,32 +1145,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 			e.printStackTrace();
 		}
 		
-		return null;
-	}
-	
-	@Override
-	public MasteryBookPageDTO selectDefaultMasteryBookPage(MasteryBookPageDTO page) {
-		try {
-			int id = client.invoke("masteryBookService", "selectDefaultMasteryBookPage", new Object[] { page.getTypedObject() });
-			TypedObject result = client.getResult(id);
-			client.join(id);
-			
-			if (result == null || result.get("result").equals("_error") || result.getTO("data").get("body") == null) {
-				System.out.println("selectDefaultMasteryBookPage() error 1: " + result);
-				return null;
-			}
-			
-			TypedObject masteryPageRes = result.getTO("data").getTO("body");
-			if (masteryPageRes == null) {
-				System.out.println("selectDefaultMasteryBookPage() error 2: " + result);
-				return null;
-			}
-			
-			return new MasteryBookPageDTO(masteryPageRes);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		return null;
 	}
 	
