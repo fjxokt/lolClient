@@ -13,9 +13,7 @@ public class TeamId extends ClassType {
 	
 	public TypedObject getTypedObject() {
 		TypedObject res = new TypedObject(getTypeName());
-		
 		res.put("fullId", fullId);
-
 		return res;
 	}
 	

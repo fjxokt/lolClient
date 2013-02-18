@@ -51,6 +51,7 @@ import com.fjxokt.lolclient.lolrtmps.model.dto.StartChampSelectDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.SummonerActiveBoostsDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.SummonerIconInventoryDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.SummonerLeaguesDTO;
+import com.fjxokt.lolclient.lolrtmps.model.dto.TeamAggregatedStatsDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.TeamDTO;
 import com.fjxokt.lolclient.lolrtmps.model.utils.ChampionTradeMessageType;
 import com.fjxokt.lolclient.lolrtmps.model.utils.GameNotificationType;
@@ -337,6 +338,56 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 			
 			if (result == null || result.get("result").equals("_error") || result.getTO("data").get("body") == null) {
 				System.out.println("findTeamById() error: " + result);
+				return null;
+			}
+			
+			TypedObject teamTo = result.getTO("data").getTO("body");
+			if (teamTo == null) {
+				return null;
+			}
+			
+			return new TeamDTO(teamTo);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public TeamDTO findTeamByTag(String tag) {
+		try {
+			int id = client.invoke("summonerTeamService", "findTeamByTag", new Object[] { tag });
+			TypedObject result = client.getResult(id);
+			client.join(id);
+			
+			if (result == null || result.get("result").equals("_error") || result.getTO("data").get("body") == null) {
+				System.out.println("findTeamByTag() error: " + result);
+				return null;
+			}
+			
+			TypedObject teamTo = result.getTO("data").getTO("body");
+			if (teamTo == null) {
+				return null;
+			}
+			
+			return new TeamDTO(teamTo);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public TeamDTO findTeamByName(String name) {
+		try {
+			int id = client.invoke("summonerTeamService", "findTeamByName", new Object[] { name });
+			TypedObject result = client.getResult(id);
+			client.join(id);
+			
+			if (result == null || result.get("result").equals("_error") || result.getTO("data").get("body") == null) {
+				System.out.println("findTeamByName() error: " + result);
 				return null;
 			}
 			
@@ -726,6 +777,32 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	}
 	
 	@Override
+	public SummonerLeaguesDTO getLeaguesForTeam(String teamId) {
+		int id;
+		try {
+			id = client.invoke("leaguesServiceProxy", "getLeaguesForTeam", new Object[] { teamId });			
+			TypedObject result = client.getResult(id);
+			client.join(id);
+
+			if (result == null || result.get("result").equals("_error") || result.getTO("data").get("body") == null) {
+				System.out.println("getLeaguesForTeam() error: " + result);
+				return null;
+			}
+			
+			TypedObject data = result.getTO("data").getTO("body");
+			if (data == null) {
+				return null;
+			}
+			
+			return new SummonerLeaguesDTO(data);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
 	public LeagueListDTO getChallengerLeague(QueueType type) {
 		int id;
 		try {
@@ -883,6 +960,66 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 			}
 			
 			return new AggregatedStats(data);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public List<TeamAggregatedStatsDTO> getTeamAggregatedStats(String teamId) {
+		try {
+			int id = client.invoke("playerStatsService", "getTeamAggregatedStats", new Object[] { teamId });
+			TypedObject result = client.getResult(id);
+			client.join(id);
+			
+			if (result == null || result.get("result").equals("_error") || result.getTO("data").get("body") == null) {
+				System.out.println("getTeamAggregatedStats() error: " + result);
+				return null;
+			}
+			
+			Object[] objs = result.getTO("data").getArray("body");
+			if (objs == null) {
+				return null;
+			}
+			
+			List<TeamAggregatedStatsDTO> list = new ArrayList<TeamAggregatedStatsDTO>();
+			
+			for (Object o : objs) {
+				TypedObject t = (TypedObject)o;
+				if (t != null) {
+					list.add(new TeamAggregatedStatsDTO(t));
+				}
+			}
+			
+			return list;
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public EndOfGameStats getTeamEndOfGameStats(TeamId teamId, Double gameId) {
+		try {
+			int id = client.invoke("playerStatsService", "getTeamEndOfGameStats", 
+					new Object[] { teamId.getTypedObject(), gameId });
+			TypedObject result = client.getResult(id);
+			client.join(id);
+			
+			if (result == null || result.get("result").equals("_error") || result.getTO("data").get("body") == null) {
+				System.out.println("getTeamEndOfGameStats() error: " + result);
+				return null;
+			}
+			
+			TypedObject data = result.getTO("data").getTO("body");
+			if (data == null) {
+				return null;
+			}
+			
+			return new EndOfGameStats(data);
 			
 		} catch (IOException e) {
 			e.printStackTrace();

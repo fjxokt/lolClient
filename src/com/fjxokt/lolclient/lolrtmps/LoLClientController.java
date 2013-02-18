@@ -8,6 +8,7 @@ import com.fjxokt.lolclient.lolrtmps.model.AllSummonerData;
 import com.fjxokt.lolclient.lolrtmps.model.BotParticipant;
 import com.fjxokt.lolclient.lolrtmps.model.ChampionStatInfo;
 import com.fjxokt.lolclient.lolrtmps.model.ChampionTradeMessage;
+import com.fjxokt.lolclient.lolrtmps.model.EndOfGameStats;
 import com.fjxokt.lolclient.lolrtmps.model.GameMap;
 import com.fjxokt.lolclient.lolrtmps.model.GameQueueConfig;
 import com.fjxokt.lolclient.lolrtmps.model.LoginDataPacket;
@@ -35,6 +36,7 @@ import com.fjxokt.lolclient.lolrtmps.model.dto.StartChampSelectDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.SummonerActiveBoostsDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.SummonerIconInventoryDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.SummonerLeaguesDTO;
+import com.fjxokt.lolclient.lolrtmps.model.dto.TeamAggregatedStatsDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.TeamDTO;
 import com.fjxokt.lolclient.lolrtmps.model.utils.GameState;
 import com.fjxokt.lolclient.lolrtmps.model.utils.PlayerBaseLevel;
@@ -66,6 +68,8 @@ public interface LoLClientController extends Callback {
 	TeamDTO createTeam(String teamName, String teamTag);
 	TeamDTO invitePlayer(Double summonerId, TeamId teamId);
 	TeamDTO findTeamById(TeamId teamId);
+	TeamDTO findTeamByTag(String tag);
+	TeamDTO findTeamByName(String name);
 	TeamDTO disbandTeam(TeamId teamId);
 	Boolean isNameValidAndAvailable(String teamName);
 	Boolean isTagValidAndAvailable(String tagName);
@@ -93,6 +97,7 @@ public interface LoLClientController extends Callback {
 	///////////////////////////////////////////////////
 	SummonerLeaguesDTO getAllMyLeagues();
 	SummonerLeaguesDTO getAllLeaguesForPlayer(Double summonerId);
+	SummonerLeaguesDTO getLeaguesForTeam(String teamId);
 	LeagueListDTO getChallengerLeague(QueueType type);
 	
 	///////////////////////////////////////////////////
@@ -107,6 +112,8 @@ public interface LoLClientController extends Callback {
 	PlayerLifetimeStats retrievePlayerStatsByAccountId(Integer accountId);
 	List<ChampionStatInfo> retrieveTopPlayedChampions(Integer accountId, String gameType /* "CLASSIC" */);
 	AggregatedStats getAggregatedStats(Integer accountId, String gameMode /*CLASSIC*/);
+	List<TeamAggregatedStatsDTO> getTeamAggregatedStats(String teamId);
+	EndOfGameStats getTeamEndOfGameStats(TeamId teamId, Double gameId);
 	RecentGames getRecentGames(Integer accountId);
 	
 	///////////////////////////////////////////////////
