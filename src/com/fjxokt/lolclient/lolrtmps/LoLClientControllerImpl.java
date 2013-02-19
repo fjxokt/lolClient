@@ -54,6 +54,7 @@ import com.fjxokt.lolclient.lolrtmps.model.dto.SummonerLeaguesDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.TeamAggregatedStatsDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.TeamDTO;
 import com.fjxokt.lolclient.lolrtmps.model.utils.ChampionTradeMessageType;
+import com.fjxokt.lolclient.lolrtmps.model.utils.GameMode;
 import com.fjxokt.lolclient.lolrtmps.model.utils.GameNotificationType;
 import com.fjxokt.lolclient.lolrtmps.model.utils.GameState;
 import com.fjxokt.lolclient.lolrtmps.model.utils.PlayerBaseLevel;
@@ -907,10 +908,10 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	}
 	
 	@Override
-	public List<ChampionStatInfo> retrieveTopPlayedChampions(Integer accountId, String gameType /* "CLASSIC" */) {
+	public List<ChampionStatInfo> retrieveTopPlayedChampions(Integer accountId, GameMode mode) {
 		try {
 			int id = client.invoke("playerStatsService", "retrieveTopPlayedChampions",
-					new Object[] { accountId, gameType });
+					new Object[] { accountId, mode.getName() });
 			TypedObject result = client.getResult(id);
 			client.join(id);
 			
@@ -941,11 +942,11 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	}
 	
 	@Override
-	public AggregatedStats getAggregatedStats(Integer accountId, String gameMode /*CLASSIC*/) {
+	public AggregatedStats getAggregatedStats(Integer accountId, GameMode mode) {
 		try {
 			// TODO: check if it's always "CURRENT"
 			int id = client.invoke("playerStatsService", "getAggregatedStats",
-					new Object[] { accountId, gameMode, "CURRENT" });
+					new Object[] { accountId, mode.getName(), "CURRENT" });
 			TypedObject result = client.getResult(id);
 			client.join(id);
 			

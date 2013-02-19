@@ -38,6 +38,7 @@ import com.fjxokt.lolclient.lolrtmps.model.dto.SummonerIconInventoryDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.SummonerLeaguesDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.TeamAggregatedStatsDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.TeamDTO;
+import com.fjxokt.lolclient.lolrtmps.model.utils.GameMode;
 import com.fjxokt.lolclient.lolrtmps.model.utils.GameState;
 import com.fjxokt.lolclient.lolrtmps.model.utils.PlayerBaseLevel;
 import com.fjxokt.lolclient.lolrtmps.model.utils.QueueType;
@@ -110,8 +111,8 @@ public interface LoLClientController extends Callback {
 	///////////////////////////////////////////////////
 	ResultMessage processEloQuestionaire(PlayerBaseLevel level);
 	PlayerLifetimeStats retrievePlayerStatsByAccountId(Integer accountId);
-	List<ChampionStatInfo> retrieveTopPlayedChampions(Integer accountId, String gameType /* "CLASSIC" */);
-	AggregatedStats getAggregatedStats(Integer accountId, String gameMode /*CLASSIC*/);
+	List<ChampionStatInfo> retrieveTopPlayedChampions(Integer accountId, GameMode mode);
+	AggregatedStats getAggregatedStats(Integer accountId, GameMode mode);
 	List<TeamAggregatedStatsDTO> getTeamAggregatedStats(String teamId);
 	EndOfGameStats getTeamEndOfGameStats(TeamId teamId, Double gameId);
 	RecentGames getRecentGames(Integer accountId);
