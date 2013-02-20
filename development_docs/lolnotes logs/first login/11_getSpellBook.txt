@@ -1,0 +1,158 @@
+{
+  "$type": "System.Collections.Generic.List`1[[FluorineFx.Messaging.Rtmp.Event.Notify, FluorineFx]], mscorlib",
+  "$values": [
+    {
+      "$type": "FluorineFx.Messaging.Rtmp.Event.FlexInvoke, FluorineFx",
+      "CmdData": null,
+      "Data": null,
+      "InvokeId": 17,
+      "ServiceCall": {
+        "$type": "FluorineFx.Messaging.Rtmp.Service.PendingCall, FluorineFx",
+        "Result": null,
+        "IsSuccess": false,
+        "ServiceMethodName": null,
+        "ServiceName": null,
+        "Arguments": {
+          "$type": "System.Object[], mscorlib",
+          "$values": [
+            {
+              "$type": "FluorineFx.Messaging.Messages.RemotingMessage, FluorineFx",
+              "source": null,
+              "operation": "getSpellBook",
+              "headers": {
+                "$type": "FluorineFx.ASObject, FluorineFx",
+                "DSId": "E445D63C-7B28-793E-CE73-19CC774D3D51",
+                "DSEndpoint": "my-rtmps",
+                "DSRequestTimeout": 60
+              },
+              "destination": "spellBookService",
+              "timestamp": 0,
+              "body": {
+                "$type": "System.Object[], mscorlib",
+                "$values": [
+                  39299508
+                ]
+              },
+              "timeToLive": 0,
+              "clientId": null,
+              "messageId": "2B1102EE-590F-D4C2-153A-2ABCDDB0EED4"
+            }
+          ]
+        },
+        "Status": 1,
+        "Exception": null
+      },
+      "ConnectionParameters": null,
+      "EventType": 2,
+      "Header": {
+        "$type": "FluorineFx.Messaging.Rtmp.RtmpHeader, FluorineFx",
+        "ChannelId": 3,
+        "DataType": 17,
+        "Size": 309,
+        "StreamId": 0,
+        "Timer": 1,
+        "IsTimerRelative": true
+      },
+      "Object": null,
+      "Timestamp": 1,
+      "ExtendedTimestamp": -1,
+      "DataType": 17,
+      "Source": null,
+      "HasSource": false
+    },
+    {
+      "$type": "FluorineFx.Messaging.Rtmp.Event.FlexInvoke, FluorineFx",
+      "CmdData": null,
+      "Data": null,
+      "InvokeId": 17,
+      "ServiceCall": {
+        "$type": "FluorineFx.Messaging.Rtmp.Service.PendingCall, FluorineFx",
+        "Result": null,
+        "IsSuccess": false,
+        "ServiceMethodName": "_result",
+        "ServiceName": null,
+        "Arguments": {
+          "$type": "System.Object[], mscorlib",
+          "$values": [
+            {
+              "$type": "DSK, LoLNotes",
+              "CorrelationId": "2B1102EE-590F-D4C2-153A-2ABCDDB0EED4",
+              "CorrelationIdBytes": "+\u0011\u0002îY\u000fÔÂ\u0015:*¼Ý°îÔ",
+              "Body": {
+                "$type": "FluorineFx.ASObject, FluorineFx",
+                "bookPagesJson": null,
+                "dataVersion": 0,
+                "bookPages": {
+                  "$type": "FluorineFx.AMF3.ArrayCollection, FluorineFx",
+                  "$values": [
+                    {
+                      "$type": "FluorineFx.ASObject, FluorineFx",
+                      "dataVersion": 0,
+                      "pageId": 45377892.0,
+                      "name": "@@!PaG3!@@45377892",
+                      "current": false,
+                      "slotEntries": {
+                        "$type": "FluorineFx.AMF3.ArrayCollection, FluorineFx",
+                        "$values": []
+                      },
+                      "createDate": "\/Date(1357926685300)\/",
+                      "summonerId": 39299508.0,
+                      "futureData": null,
+                      "TypeName": "com.riotgames.platform.summoner.spellbook.SpellBookPageDTO"
+                    },
+                    {
+                      "$type": "FluorineFx.ASObject, FluorineFx",
+                      "dataVersion": 0,
+                      "pageId": 45377891.0,
+                      "name": "@@!PaG3!@@45377891",
+                      "current": false,
+                      "slotEntries": {
+                        "$type": "FluorineFx.AMF3.ArrayCollection, FluorineFx",
+                        "$values": []
+                      },
+                      "createDate": "\/Date(1357926685299)\/",
+                      "summonerId": 39299508.0,
+                      "futureData": null,
+                      "TypeName": "com.riotgames.platform.summoner.spellbook.SpellBookPageDTO"
+                    }
+                  ]
+                },
+                "dateString": "Fri Jan 11 09:51:25 PST 2013",
+                "summonerId": 39299508.0,
+                "futureData": null,
+                "TypeName": "com.riotgames.platform.summoner.spellbook.SpellBookDTO"
+              },
+              "ClientId": "E45717EE-A83F-5FE3-E004-BAA6E6B938A9",
+              "ClientIdBytes": "äW\u0017î¨?_ãà\u0004º¦æ¹8©",
+              "Destination": null,
+              "Headers": null,
+              "MessageId": "E45717F3-8A0E-B496-BD5A-F420624A1E0F",
+              "MessageIdBytes": "äW\u0017óŠ\u000e´–½Zô bJ\u001e\u000f",
+              "TimeStamp": 1357926685994,
+              "TimeToLive": 0
+            }
+          ]
+        },
+        "Status": 1,
+        "Exception": null
+      },
+      "ConnectionParameters": null,
+      "EventType": 2,
+      "Header": {
+        "$type": "FluorineFx.Messaging.Rtmp.RtmpHeader, FluorineFx",
+        "ChannelId": 3,
+        "DataType": 17,
+        "Size": 527,
+        "StreamId": 0,
+        "Timer": 0,
+        "IsTimerRelative": false
+      },
+      "Object": null,
+      "Timestamp": 0,
+      "ExtendedTimestamp": -1,
+      "DataType": 17,
+      "Source": null,
+      "HasSource": false
+    }
+  ]
+}
