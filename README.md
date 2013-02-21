@@ -5,9 +5,7 @@ _Copyright (C) 2013 fjxokt_
 
 ##Build Instructions/Information
 
-The project uses Maven, and follows the Maven standards regarding layout and dependencies. If you are not familiar with Maven, please check out [this helpful guide](http://maven.apache.org/guides/getting-started/index.html).
-
-If you are unfamiliar with Maven, please read [Maven in 5 minutes](http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html), which will give you a basic understanding of how to use Maven from the command line.
+The project uses Maven, and follows the Maven standards regarding layout and dependencies. If you are not familiar with Maven, please check out [this helpful guide](http://maven.apache.org/guides/getting-started/index.html) The guide to [Maven in 5 minutes](http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html) is also available; it will give you a basic understanding of how to use Maven from the command line.
 
 Special things to note:
 
@@ -26,4 +24,3 @@ How to setup Maven with common IDEs/Command Line:
 * [ItelliJ](http://www.jetbrains.com/idea/webhelp/maven-2.html)
 
 * [Maven for the command line](http://maven.apache.org/download.cgi#Installation)
-
