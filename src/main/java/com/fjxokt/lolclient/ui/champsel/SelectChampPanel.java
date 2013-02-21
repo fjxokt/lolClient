@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.fjxokt.lolclient.ResourceConstants;
-import com.fjxokt.lolclient.audio.AudioManager;
+import com.fjxokt.lolclient.audio.JSound;
 import com.fjxokt.lolclient.model.Champion;
 import com.fjxokt.lolclient.lolrtmps.model.dto.ChampionDTO;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
@@ -82,7 +82,7 @@ public class SelectChampPanel extends JPanel {
 					Champion c = ResourcesManager.getInst().getChampion(champ.getChampionId());
 					if (champ != null) {
 						client.selectChampion(c.getId());
-						AudioManager.getInst().playSound(ResourceConstants.soundsChampsPath + c.getSelectSoundPath().replaceAll(ResourceConstants.language, ""));
+						new JSound(ResourceConstants.soundsChampsPath + c.getSelectSoundPath().replaceAll(ResourceConstants.language, "")).play();
 					}
 				}
 			}
