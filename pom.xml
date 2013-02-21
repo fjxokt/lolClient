@@ -1,0 +1,204 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.fjxokt</groupId>
+  <artifactId>lolClient</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  
+  <packaging>jar</packaging>
+
+  <name>lolClient</name>
+  <url>https://github.com/fjxokt/lolClient</url>
+  
+  <!--
+  We need to add license information as soon as we are aware of what license we are using
+  <licenses>
+      <license>
+          <name></name>
+          <url></url>
+          <comments></comments>
+      </license>
+  </licenses>
+  -->
+  <developers>
+      <!-- This is a list of developers on the project, if you contribute to the project please feel free to add yourself to the list
+           but be sure that you make it obvious in your commit message
+       -->
+      
+      <developer>
+          <id>fjxokt</id>
+          <!--name></name-->
+          <email>fjxokt@gmail.com</email>
+          <roles>
+              <role>creator</role>
+              <role>copyright owner</role>
+              <role>developer</role>
+          </roles>
+      </developer>
+      
+      <developer>
+          <id>emabrey</id>
+          <name>Emily Mabrey</name>
+          <email>emilymabrey93+github@gmail.com</email>
+          <roles>
+              <role>developer</role>
+          </roles>
+      </developer>
+      
+  </developers>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <project.mainClass>com.fjxokt.lolclient.Main</project.mainClass>
+    <project.shadedArtifact.finalName>openLoLClientLauncher</project.shadedArtifact.finalName>         
+    <project.build.release.assembly.location>${project.basedir}/src/main/assembly/release.xml</project.build.release.assembly.location>
+  </properties>
+      
+  <repositories>
+      <!-- While we would prefer to avoid using a non central repository, this is temporary until
+           we find a central artifact for the smack dependency
+      -->
+      <repository>
+        <id>details-matter-maven-repository</id>
+        <name>Details Matter Maven Repository</name>
+        <url>http://details-matter-maven-repository.googlecode.com/svn/repository/</url>
+      </repository>
+
+  </repositories>
+  
+  <build>
+      <plugins>
+          
+      <!-- Forces source code to be compliant with Java 1.5 -->
+      <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.0</version>
+            <configuration>
+                <source>1.5</source>
+                <target>1.5</target>
+            </configuration>
+      </plugin>
+      
+      <!-- Attaches our dependencies to the main artifact and combines them all into one executable Uberjar -->
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <finalName>${project.shadedArtifact.finalName}</finalName>      
+                
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>${project.mainClass}</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      
+      <!-- The default Jar needs to have classpath information, even though it isn't used in release/debug-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <profiles>
+      <profile>
+          <id>release</id><!-- Use command line switch -P to activate -->
+          <build>
+                  <plugins>
+                      <!-- Assembles the complete project into a releasable assembly -->
+                      <plugin>
+                         <artifactId>maven-assembly-plugin</artifactId>
+                         <version>2.4</version>
+                         <executions>
+                           <execution>
+                             <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                             <phase>package</phase> <!-- bind to the packaging phase -->
+                             <goals>
+                               <goal>single</goal>
+                             </goals>
+                             <configuration>
+
+                                 <!-- We want to make the included Jars executable. If we should have multiple release Jars in the future, this will need
+                                      to be fine tuned 
+                                 -->
+                                 <transformers>
+                                     <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                         <mainClass>${project.mainClass}</mainClass>
+                                     </transformer>
+                                 </transformers>
+
+                                 <!-- Configuration file for the assembly-->
+                                 <descriptors>
+                                   <descriptor>${project.build.release.assembly.location}</descriptor>
+                                 </descriptors>
+                             </configuration>
+                            </execution>
+                         </executions>
+                      </plugin> 
+                  </plugins>
+          </build>
+      </profile>
+  </profiles>  
+        
+  <dependencies>
+ 
+    <!-- The Java Media Framework -->  
+    <dependency>
+	<groupId>javax.media</groupId>
+	<artifactId>jmf</artifactId>
+	<version>2.1.1e</version>
+    </dependency>
+    
+    <!--Smack XMPP Library -->
+    <dependency>
+	<groupId>jivesoftware</groupId>
+	<artifactId>smack</artifactId>
+	<version>3.2.2</version>
+    </dependency>
+    
+    <!--Smack XMPP Library Extensions -->
+    <dependency>
+	<groupId>jivesoftware</groupId>
+	<artifactId>smackx</artifactId>
+	<version>3.2.2</version>
+    </dependency>
+    
+    <!-- SQLlite Java Database Connection Driver -->
+    <dependency>
+      <groupId>org.xerial</groupId>
+      <artifactId>sqlite-jdbc</artifactId>
+      <version>3.7.2</version>
+    </dependency>
+    
+    
+    <!-- We are not currently using test classes, but this can be uncommented in the future if we do use them
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    -->
+  </dependencies>
+</project>
