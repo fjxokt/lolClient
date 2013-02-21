@@ -110,7 +110,6 @@ public class MessagingManager implements MessageListener {
 	}
 	
 	private class PVPChatRoomListener implements PacketListener {
-		@Override
 		public void processPacket(Packet p) {
 			//packet received: <message id="hm_97" to="sum39299508@pvp.net/xiff" from="ap~668f0a8595801c49e2ef016cd1962e72d05b43c3@sec.pvp.net/AngryCrakBaby" type="groupchat"><body>&lt;![CDATA[&lt;body&gt;&lt;invitelist&gt;&lt;invitee name=&quot;KrakenPiraten&quot; status=&quot;PENDING&quot; /&gt;&lt;invitee name=&quot;ToothlessHooker&quot; status=&quot;PENDING&quot; /&gt;&lt;/invitelist&gt;&lt;/body&gt;]]&gt;</body></message>
 			//packet received: <message id="m_34" to="sum39299508@pvp.net/xiff" from="ap~668f0a8595801c49e2ef016cd1962e72d05b43c3@sec.pvp.net/Lordacdc" type="groupchat"><body>&lt;![CDATA[WHERE ARE MY BOOBIES?!]]&gt;</body></message>
@@ -189,7 +188,6 @@ public class MessagingManager implements MessageListener {
 	    // create listener for people that would start to talk to me
 	    ChatManager chatManager = connection.getChatManager();
 	    chatManager.addChatListener(new ChatManagerListener() {
-			@Override
 			public void chatCreated(Chat chat, boolean createdLocally) {
 				if (!mapChats.containsKey(chat.getParticipant()) && !createdLocally) {
                     chat.addMessageListener(MessagingManager.this);
@@ -201,7 +199,6 @@ public class MessagingManager implements MessageListener {
 	    // entries listener
     	Roster roster = connection.getRoster();
     	roster.addRosterListener(new RosterListener() {
-			@Override
 			public void presenceChanged(Presence presence) {
 				System.out.println(presence.getFrom() + " changed presence to " + presence.getStatus() + " : " + 
 						presence.getType() + " : " + presence.getMode() + " : " + presence.getTo() + " : " + presence.getXmlns() +
@@ -212,15 +209,12 @@ public class MessagingManager implements MessageListener {
 				System.out.println(status);
 				notifyBuddyPresenceChanged(userId, presence, pres);
 			}
-			@Override
 			public void entriesUpdated(Collection<String> entries) {
 				System.out.println(entries.toString() + " have been updated");
 			}
-			@Override
 			public void entriesDeleted(Collection<String> entries) {
 				System.out.println(entries.toString() + " have been deleted");
 			}
-			@Override
 			public void entriesAdded(Collection<String> entries) {
 				System.out.println(entries.toString() + " have been added");
 			}
@@ -510,7 +504,6 @@ public class MessagingManager implements MessageListener {
 		if (chat == null) {
 			chat = connection.getChatManager().createChat(to, this);
 			connection.getChatManager().addChatListener(new ChatManagerListener() {
-				@Override
 				public void chatCreated(Chat chat, boolean arg1) {
 					chat.addMessageListener(MessagingManager.this);
 				}
@@ -525,7 +518,6 @@ public class MessagingManager implements MessageListener {
 		if (chat == null) {
 			chat = connection.getChatManager().createChat(to, this);
 			connection.getChatManager().addChatListener(new ChatManagerListener() {
-				@Override
 				public void chatCreated(Chat chat, boolean arg1) {
 					chat.addMessageListener(MessagingManager.this);
 				}

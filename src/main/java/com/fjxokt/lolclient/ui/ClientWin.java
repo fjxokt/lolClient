@@ -84,7 +84,6 @@ public class ClientWin extends JFrame implements ClientListener {
         }
 	}
 
-	@Override
 	public void clientStateUpdated(final ClientEvent e) {
 		System.out.println("RECEIVED EVENT of type: " + e.getType());
 		switch (e.getType()) {

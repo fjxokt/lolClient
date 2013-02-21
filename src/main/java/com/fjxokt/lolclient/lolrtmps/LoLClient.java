@@ -428,7 +428,6 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 	// Events handling
 	//////////////////////////////////
 
-	@Override
 	public void clientStateUpdated(ClientEvent e) {
 		switch (e.getType()) {
 		case JOINING_MATCHMAKING:
@@ -449,7 +448,6 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 	// Invitation listeners
 	///////////////////////////////
 
-	@Override
 	public void invitationAccepted(String userId, Invitation inv) {
 		// TODO Auto-generated method stub
 		System.out.println("INVITATION ACCEPTED !");
@@ -460,19 +458,16 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 		}
 	}
 
-	@Override
 	public void invitationReceived(String userId, Invitation invitation) {
 		// TODO Auto-generated method stub
 		System.out.println("Received invitation from " + userId + " : " + invitation);
 	}
 
-	@Override
 	public void invitationRejected(String userId, Invitation invitation) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void invitationStatus(Map<String,String> usersStatus) {
 		// TODO Auto-generated method stub
 		System.out.println("STATUS°: ");

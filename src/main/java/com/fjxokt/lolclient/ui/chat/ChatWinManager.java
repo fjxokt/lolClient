@@ -44,18 +44,15 @@ public class ChatWinManager implements ChatListener {
 		return win;
 	}
 
-	@Override
 	public void buddyMessageReceived(String userId, String message) {
 		BuddyChatWin window = getWindow(userId);
 		window.getAnswer(MessagingManager.getInst().getBuddyFromId(userId).getName(), message);
 	}
 
-	@Override
 	public void gameMessageReceived(GameDTO game, String user, String message) {
 		// nothing to do here
 	}
 
-	@Override
 	public void buddyPresenceChanged(String userId, Presence presence, ChatPresenceType type) {
 		getMainWin().refreshList();
 	}

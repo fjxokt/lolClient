@@ -48,7 +48,6 @@ public class PracticeTable extends JTable {
 	    iconLb.setAlignmentX(Component.CENTER_ALIGNMENT);
 	    iconLb.setBorder(UIManager.getBorder("TableHeader.cellBorder"));
 	    lock.setHeaderRenderer(new TableCellRenderer() {
-			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value,
 					boolean isSelected, boolean hasFocus, int row, int column) {
 				return (JComponent)value;

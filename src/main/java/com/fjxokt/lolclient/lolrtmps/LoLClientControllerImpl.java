@@ -173,18 +173,15 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		game = null;
 	}
 	
-	@Override
 	public void initUser(String region, String clientVersion, String user, String pass) {
 		client = new LoLRTMPSClient(region, clientVersion, user, pass);
 		client.setReceiveHandler(this);
 	}
 	
-	@Override
 	public String getUser() {
 		return client.getUser();
 	}
 	
-	@Override
 	public String getPassword() {
 		return client.getPassword();
 	}
@@ -193,7 +190,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	// login Service
 	///////////////////////////////////////////////////
 
-	@Override
 	public ResultMessage login() {
 		try {
 			// login
@@ -207,7 +203,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.OK;
 	}
 	
-	@Override
 	public void logout() {
 		if (client != null) {
 			client.close();			
@@ -217,22 +212,18 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		System.out.println("logout !");
 	}
 	
-	@Override
 	public boolean isLoggedIn() {
 		return client.isLoggedIn();
 	}
 
-	@Override
 	public String getRegion() {
 		return client.getRegion();
 	}
 	
-	@Override
 	public Integer getAccountId() {
 		return client.getAccountID();
 	}
 	
-	@Override
 	public String getStoreUrl() {
 		try {
 			int id = client.invoke("loginService", "getStoreUrl", new Object[]{});
@@ -252,7 +243,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	// summonerTeam Service
 	///////////////////////////////////////////////////
 	
-	@Override
 	public PlayerDTO createPlayer() {
 		try {
 			int id = client.invoke("summonerTeamService", "createPlayer", new Object[]{});
@@ -278,8 +268,7 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
-	public 	TeamDTO createTeam(String teamName, String teamTag) {
+	public TeamDTO createTeam(String teamName, String teamTag) {
 		try {
 			int id = client.invoke("summonerTeamService", "createTeam", new Object[] { teamName, teamTag });
 			TypedObject result = client.getResult(id);
@@ -305,8 +294,7 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
-	public 	TeamDTO invitePlayer(Double summonerId, TeamId teamId) {
+	public TeamDTO invitePlayer(Double summonerId, TeamId teamId) {
 		try {
 			int id = client.invoke("summonerTeamService", "invitePlayer", new Object[] { summonerId, teamId.getTypedObject() });
 			TypedObject result = client.getResult(id);
@@ -330,8 +318,7 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
-	public	TeamDTO findTeamById(TeamId teamId) {
+	public TeamDTO findTeamById(TeamId teamId) {
 		try {
 			int id = client.invoke("summonerTeamService", "findTeamById", new Object[] { teamId.getTypedObject() });
 			TypedObject result = client.getResult(id);
@@ -355,7 +342,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public TeamDTO findTeamByTag(String tag) {
 		try {
 			int id = client.invoke("summonerTeamService", "findTeamByTag", new Object[] { tag });
@@ -380,7 +366,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public TeamDTO findTeamByName(String name) {
 		try {
 			int id = client.invoke("summonerTeamService", "findTeamByName", new Object[] { name });
@@ -405,8 +390,7 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
-	public	TeamDTO disbandTeam(TeamId teamId) {
+	public TeamDTO disbandTeam(TeamId teamId) {
 		try {
 			int id = client.invoke("summonerTeamService", "disbandTeam", new Object[] { teamId.getTypedObject() });
 			TypedObject result = client.getResult(id);
@@ -430,8 +414,7 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
-	public	Boolean isNameValidAndAvailable(String teamName) {
+	public Boolean isNameValidAndAvailable(String teamName) {
 		try {
 			int id = client.invoke("summonerTeamService", "isNameValidAndAvailable", new Object[] { teamName });
 			TypedObject result = client.getResult(id);
@@ -455,7 +438,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public Boolean isTagValidAndAvailable(String tagName) {
 		try {
 			int id = client.invoke("summonerTeamService", "isTagValidAndAvailable", new Object[] { tagName });
@@ -484,7 +466,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	// clientFacade Service
 	///////////////////////////////////////////////////
 	
-	@Override
 	public LoginDataPacket getLoginDataPacketForUser() {
 		try {
 			int id = client.invoke("clientFacadeService", "getLoginDataPacketForUser", new Object[] {});
@@ -516,7 +497,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public Integer[] callKudos(String commandName, Double summonerId) {
 		try {
 			// TODO: only has commandName = "TOTALS" ?
@@ -558,7 +538,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	// summoner Service
 	///////////////////////////////////////////////////
 	
-	@Override
 	public AllSummonerData createDefaultSummoner(String summonerName) {
 		try {
 			int id = client.invoke("summonerService", "createDefaultSummoner", new Object[] { summonerName });
@@ -582,8 +561,7 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
-	public	ResultMessage saveSeenTutorialFlag() {
+	public ResultMessage saveSeenTutorialFlag() {
 		try {
 			int id = client.invoke("summonerService", "saveSeenTutorialFlag", new Object[] {});
 			TypedObject result = client.getResult(id);
@@ -601,7 +579,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 
-	@Override
 	public ResultMessage updateProfileIconId(Integer iconId) {
 		try {
 			int id = client.invoke("summonerService", "updateProfileIconId", new Object[] { iconId });
@@ -620,8 +597,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 
-	
-	@Override
 	public PublicSummoner getSummonerByName(String name) {
 		int id;
 		try {
@@ -648,7 +623,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public String getSummonerInternalNameByName(String summonerName) {
 		try {
 			int id = client.invoke("summonerService", "getSummonerInternalNameByName", new Object[] { summonerName });
@@ -668,7 +642,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public List<String> getSummonerNames(Integer[] summonerIds) {
 		try {
 			int id = client.invoke("summonerService", "getSummonerNames", new Object[] { summonerIds });
@@ -695,8 +668,7 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
-	public	AllPublicSummonerDataDTO getAllPublicSummonerDataByAccount(Integer accountId) {
+	public AllPublicSummonerDataDTO getAllPublicSummonerDataByAccount(Integer accountId) {
 		int id;
 		try {
 			id = client.invoke("summonerService", "getAllPublicSummonerDataByAccount", new Object[] { accountId });			
@@ -725,7 +697,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	// leagues Service Proxy
 	///////////////////////////////////////////////////
 	
-	@Override
 	public SummonerLeaguesDTO getAllMyLeagues() {
 		int id;
 		try {
@@ -751,7 +722,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public SummonerLeaguesDTO getAllLeaguesForPlayer(Double summonerId) {
 		int id;
 		try {
@@ -777,7 +747,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public SummonerLeaguesDTO getLeaguesForTeam(String teamId) {
 		int id;
 		try {
@@ -803,7 +772,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public LeagueListDTO getChallengerLeague(QueueType type) {
 		int id;
 		try {
@@ -833,7 +801,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	// summonerIcon Service
 	///////////////////////////////////////////////////
 	
-	@Override
 	public SummonerIconInventoryDTO getSummonerIconInventory(Double summonerId) {
 		try {
 			int id = client.invoke("summonerIconService", "getSummonerIconInventory", new Object[] { summonerId });
@@ -861,7 +828,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	// playerStats Service
 	///////////////////////////////////////////////////
 	
-	@Override
 	public ResultMessage processEloQuestionaire(PlayerBaseLevel level) {
 		try {
 			int id = client.invoke("playerStatsService", "processEloQuestionaire", new Object[] { level.getLevel() });
@@ -880,7 +846,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
 	public PlayerLifetimeStats retrievePlayerStatsByAccountId(Integer accountId) {
 		try {
 			// TODO: check if it's always "CURRENT"
@@ -907,7 +872,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public List<ChampionStatInfo> retrieveTopPlayedChampions(Integer accountId, GameMode mode) {
 		try {
 			int id = client.invoke("playerStatsService", "retrieveTopPlayedChampions",
@@ -941,7 +905,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public AggregatedStats getAggregatedStats(Integer accountId, GameMode mode) {
 		try {
 			// TODO: check if it's always "CURRENT"
@@ -968,7 +931,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public List<TeamAggregatedStatsDTO> getTeamAggregatedStats(String teamId) {
 		try {
 			int id = client.invoke("playerStatsService", "getTeamAggregatedStats", new Object[] { teamId });
@@ -1002,7 +964,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public EndOfGameStats getTeamEndOfGameStats(TeamId teamId, Double gameId) {
 		try {
 			int id = client.invoke("playerStatsService", "getTeamEndOfGameStats", 
@@ -1028,7 +989,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public RecentGames getRecentGames(Integer accountId) {
 		try {
 			// TODO: check if it's always "CURRENT"
@@ -1058,7 +1018,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	// inventory Service
 	///////////////////////////////////////////////////
 	
-	@Override
 	public SummonerActiveBoostsDTO getSumonerActiveBoosts() {
 		try {
 			int id = client.invoke("inventoryService", "getSumonerActiveBoosts", new Object[] {});
@@ -1083,7 +1042,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 
-	@Override
 	public List<ChampionDTO> getAvailableChampions() {
 
 		List<ChampionDTO> listChamps = new ArrayList<ChampionDTO>();
@@ -1119,7 +1077,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return listChamps;
 	}
 	
-	@Override
 	public List<String> retrieveInventoryTypes() {
 		try {
 			int id = client.invoke("inventoryService", "retrieveInventoryTypes", new Object[] {});
@@ -1148,7 +1105,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public List<RuneCombiner> getAllRuneCombiners() {
 		try {
 			int id = client.invoke("inventoryService", "getAllRuneCombiners", new Object[] {});
@@ -1180,7 +1136,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public List<RuneQuantity> useRuneCombiner(Integer runeCombinerId, List<Rune> runes) {
 		try {
 			
@@ -1224,7 +1179,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	// GameMap Service
 	///////////////////////////////////////////////////
 	
-	@Override
 	public List<GameMap> getGameMapList() {
 		List<GameMap> maps = new ArrayList<GameMap>();
 		
@@ -1259,7 +1213,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	// masteryBook Service
 	///////////////////////////////////////////////////
 	
-	@Override
 	public MasteryBookDTO getMasteryBook(Double summonerId) {
 		int id;
 		try {
@@ -1286,7 +1239,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public MasteryBookDTO saveMasteryBook(MasteryBookDTO book) {
 		try {
 			int id = client.invoke("masteryBookService", "saveMasteryBook", new Object[] { book.getTypedObject() });
@@ -1315,7 +1267,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	// spellBook Service
 	///////////////////////////////////////////////////
 	
-	@Override
 	public SpellBookDTO getSpellBook(Double summonerId) {
 		int id;
 		try {
@@ -1342,7 +1293,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public SpellBookPageDTO selectDefaultSpellBookPage(SpellBookPageDTO page) {
 		try {
 			int id = client.invoke("spellBookService", "selectDefaultSpellBookPage", new Object[] { page.getTypedObject() });
@@ -1368,8 +1318,7 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
-	public 	SpellBookDTO saveSpellBook(SpellBookDTO book) {
+	public SpellBookDTO saveSpellBook(SpellBookDTO book) {
 		try {
 			int id = client.invoke("spellBookService", "saveSpellBook", new Object[] { book.getTypedObject() });
 			TypedObject result = client.getResult(id);
@@ -1397,7 +1346,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	// summonerRune Service
 	///////////////////////////////////////////////////
 	
-	@Override
 	public SummonerRuneInventory getSummonerRuneInventory(Double summonerId) {
 		try {
 			int id = client.invoke("summonerRuneService", "getSummonerRuneInventory", new Object[] { summonerId });
@@ -1427,7 +1375,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	// matchmakerService Service
 	///////////////////////////////////////////////////
 
-	@Override
 	public List<GameQueueConfig> getAvailableQueues() {
 		List<GameQueueConfig> listQueues = new ArrayList<GameQueueConfig>();
 		
@@ -1459,7 +1406,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return listQueues;
 	}
 	
-	@Override
 	public SearchingForMatchNotification attachToQueue(MatchMakerParams params) {
 		try {
 			// TODO: look TextEdit with a error for DODGE QUEUE
@@ -1484,7 +1430,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public SearchingForMatchNotification attachTeamToQueue(MatchMakerParams params) {
 		try {
 			// TODO: look TextEdit with a error for DODGE QUEUE
@@ -1509,7 +1454,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public ResultMessage cancelFromQueueIfPossible(Double queueId) {
 		try {
 			int id = client.invoke("matchmakerService", "cancelFromQueueIfPossible", new Object[] { queueId });
@@ -1530,7 +1474,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
 	public ResultMessage acceptInviteForMatchmakingGame(String invitationId) {
 		try {
 			int id = client.invoke("matchmakerService", "acceptInviteForMatchmakingGame", new Object[] { invitationId });
@@ -1556,8 +1499,7 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	// game Service
 	///////////////////////////////////////////////////
 	
-	@Override
-	public 	PlatformGameLifecycleDTO retrieveInProgressSpectatorGameInfo(String summonerName) {
+	public PlatformGameLifecycleDTO retrieveInProgressSpectatorGameInfo(String summonerName) {
 		try {
 			int id = client.invoke("gameService", "retrieveInProgressSpectatorGameInfo", new Object[]{ summonerName });
 			TypedObject result = client.getResult(id);
@@ -1585,7 +1527,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public ResultMessage acceptPoppedGame(Boolean answer) {
 		try {
 			int id = client.invoke("gameService", "acceptPoppedGame", new Object[] { answer });
@@ -1607,7 +1548,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 
-	@Override
 	public List<PracticeGameSearchResult> listAllPracticeGames() {
 		List<PracticeGameSearchResult> listPractGames = new ArrayList<PracticeGameSearchResult>();
 		
@@ -1636,7 +1576,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return listPractGames;
 	}
 	
-	@Override
 	public ResultMessage joinGame(Double gameId, String pwd) {
 		try {
 			setState(GameState.WAITING);
@@ -1706,8 +1645,7 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.OK;
 	}
 	
-	@Override
-	public	ResultMessage switchPlayerToObserver(Double gameId) {
+	public ResultMessage switchPlayerToObserver(Double gameId) {
 		try {
 			int id = client.invoke("gameService", "switchPlayerToObserver", new Object[]{ gameId });
 			TypedObject result = client.getResult(id);
@@ -1731,8 +1669,7 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	}
 	
 	// whatTeam = 100 for team one and 200 for team two
-	@Override
-	public	ResultMessage switchObserverToPlayer(Double gameId, Integer whatTeam) {
+	public ResultMessage switchObserverToPlayer(Double gameId, Integer whatTeam) {
 		try {
 			// TODO: check the second param !!
 			int id = client.invoke("gameService", "switchObserverToPlayer", new Object[]{ gameId, whatTeam });
@@ -1756,7 +1693,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
 	public GameDTO observeGame(Double gameId) {
 		try {
 			int id = client.invoke("gameService", "observeGame", new Object[]{ gameId, null });
@@ -1796,7 +1732,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public ResultMessage quitGame() {
 		try {
 			int id = client.invoke("gameService", "quitGame", new Object[]{});
@@ -1824,8 +1759,7 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
-	public 	ResultMessage declineObserverReconnect() {
+	public ResultMessage declineObserverReconnect() {
 		try {
 			int id = client.invoke("gameService", "declineObserverReconnect", new Object[]{});
 			TypedObject result = client.getResult(id);
@@ -1850,7 +1784,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	
 	
 	// name = "fjxokt game", gameMode = "CLASSIC", pwd = "", allowSpectators = "ALL"
-	@Override
 	public GameDTO createPracticeGame(String name, String gameMode, GameMap map, Integer maxPlayers, Integer minPlayers, String pwd, String allowSpectators)
 				throws PlayerAlreadyInGameException {
 		try {
@@ -1898,7 +1831,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public StartChampSelectDTO startChampionSelection(Double gameId, Integer numPlayers) {
 		System.out.println("startChampionSelection() called: " + gameId + " : " + numPlayers);
 		// TODO: figure out what is this num
@@ -1930,7 +1862,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return null;
 	}
 	
-	@Override
 	public ResultMessage switchTeams(Double gameId) {
 		try {
 			int id = client.invoke("gameService", "switchTeams", new Object[] { game.getId() });
@@ -1950,7 +1881,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
 	public ResultMessage selectChampion(Integer championId) {
 		System.out.println("selectChampion() called");
 		try {
@@ -1971,8 +1901,7 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
-	public	ResultMessage selectChampionSkin(Integer championId, Integer skinId) {
+	public ResultMessage selectChampionSkin(Integer championId, Integer skinId) {
 		try {
 			int id = client.invoke("gameService", "selectChampionSkin", new Object[] { championId, skinId });
 			TypedObject result = client.getResult(id);
@@ -1990,7 +1919,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
 	public ResultMessage selectSpells(Integer spell1, Integer spell2) {
 		try {
 			int id = client.invoke("gameService", "selectSpells", new Object[] { spell1, spell2 });
@@ -2010,7 +1938,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
 	public ResultMessage selectBotChampion(Integer championId, BotParticipant bot) {
 		try {
 			// TODO: how to get a complet bot object ?!
@@ -2032,7 +1959,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
 	public ResultMessage removeBotChampion(Integer championId, BotParticipant bot) {
 		try {
 			int id = client.invoke("gameService", "removeBotChampion", new Object[] { championId, bot.getTypedObject() });
@@ -2051,7 +1977,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
 	public ResultMessage banUserFromGame(Double gameId, Integer accountId) {
 		try {
 			int id = client.invoke("gameService", "banUserFromGame", new Object[] { gameId, accountId });
@@ -2070,7 +1995,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 
-	@Override
 	public ResultMessage banObserverFromGame(Double gameId, Integer accountId) {
 		try {
 			int id = client.invoke("gameService", "banObserverFromGame", new Object[] { gameId, accountId });
@@ -2089,7 +2013,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
 	public ResultMessage sendChampionTradeMessage(ChampionTradeMessage msg) {
 		try {
 			int id = client.invoke("gameService", "sendChampionTradeMessage", new Object[] { msg.getTypedObject() });
@@ -2108,7 +2031,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override 
 	public ResultMessage tradeChampion(String playerName) {
 		try {
 			int id = client.invoke("gameService", "tradeChampion", new Object[] { playerName });
@@ -2127,7 +2049,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
 	public ResultMessage championSelectCompleted() {
 		try {
 			int id = client.invoke("gameService", "championSelectCompleted", new Object[]{});
@@ -2146,7 +2067,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
 	public ResultMessage setClientReceivedGameMessage(Double gameId, GameState state) {
 		System.out.println("setClientReceivedGameMessage() called");
 		// TODO: fix this mess
@@ -2179,7 +2099,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
 	public ResultMessage setClientReceivedMaestroMessage(Double gameId, GameState state) {
 		try {
 			System.out.println("setClientReceivedMaestroMessage() called");
@@ -2201,7 +2120,6 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 		return ResultMessage.ERROR;
 	}
 	
-	@Override
 	public ResultMessage getLatestGameTimerState(Double gameId, GameState state, Integer numPlayers) {
 		try {
 			System.out.println(gameId + " : " + state.getName() + " : " + numPlayers);

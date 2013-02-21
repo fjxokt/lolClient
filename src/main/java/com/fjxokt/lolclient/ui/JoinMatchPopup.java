@@ -103,7 +103,6 @@ public class JoinMatchPopup extends JFrame implements ClientListener {
         this.setVisible(true);
 	}
 	
-	@Override
 	public void clientStateUpdated(ClientEvent e) {
 		switch (e.getType()) {
 		case MATCHMAKING_UPDATE:

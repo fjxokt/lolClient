@@ -107,7 +107,6 @@ public class LoginWin extends JFrame implements ActionListener, ClientListener {
 		}*/
 	}
 	
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == login) {
 			login();
@@ -158,7 +157,6 @@ public class LoginWin extends JFrame implements ActionListener, ClientListener {
 		});
 	}
 
-	@Override
 	public void clientStateUpdated(ClientEvent e) {
 		if (e.getType().equals(ClientEventType.LOGIN_NEW_SUMMONER)) {
 			newSummoner = true;

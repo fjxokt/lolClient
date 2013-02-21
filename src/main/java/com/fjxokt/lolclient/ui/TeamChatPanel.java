@@ -95,17 +95,15 @@ public class TeamChatPanel extends JPanel implements ChatListener {
 		field.setText("");
 	}
 
-	@Override
 	public void gameMessageReceived(GameDTO game, String user, String message) {
 		chat.setText(chat.getText() + "[" + user + "] : " + message + "\n");
 		chat.getCaret().setDot(chat.getDocument().getLength());
 	}
 
-	@Override
 	public void buddyMessageReceived(String userId, String message) {
 		// nothing to do here
 	}
-	@Override
+	
 	public void buddyPresenceChanged(String userId, Presence presence, ChatPresenceType type) {
 		// nothing to do here		
 	}

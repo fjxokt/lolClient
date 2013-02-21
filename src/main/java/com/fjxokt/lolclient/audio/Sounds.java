@@ -58,14 +58,11 @@ public class Sounds implements ClientListener, ChatListener {
 		}
 	}
 
-	@Override
 	public void buddyMessageReceived(String userId, String message) {}
 
-	@Override
 	public void buddyPresenceChanged(String userId, Presence presence,
 			ChatPresenceType type) {}
 
-	@Override
 	public void gameMessageReceived(GameDTO game, String user, String message) {
 		AudioManager.getInst().playSound(Sounds.MESSAGE_RECEIVED);
 	}

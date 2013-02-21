@@ -213,7 +213,6 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
         client.addGameListener(this);
 	}
 	
-	@Override
 	public void clientStateUpdated(final ClientEvent e) {
 		switch (e.getType()) {
 		case SEARCHING_FOR_MATCH:
@@ -240,7 +239,6 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
 		}
 	}
 	
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == joinQueue) {
 			GameQueueConfig queue = (GameQueueConfig)queues.getSelectedItem();
@@ -337,7 +335,6 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
 		queueLabel.setText("Queues");
 	}
 	
-	@Override
 	public void updatedTick(long value) {
 		final int h = 1000*60*60, m = 1000*60;
 		String waitS = String.format("%dm %ds", (waitingTime%h)/m, ((waitingTime%h)%m)/1000);

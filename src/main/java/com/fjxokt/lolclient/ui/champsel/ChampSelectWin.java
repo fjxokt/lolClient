@@ -170,9 +170,7 @@ public class ChampSelectWin extends JFrame implements ActionListener, ClientList
         	countdownTime = 1000 * client.getGameTypeConfig(game.getGameTypeConfigId()).getMainPickTimerDuration();
         }
         countdown = new Countdown(new Countdown.CountdownUpdater() {
-			@Override
 			public void countdownOver() {}
-			@Override
 			public void tick(long duration) {
 				count.setText("" + (int)(duration/1000));
 			}
@@ -203,7 +201,6 @@ public class ChampSelectWin extends JFrame implements ActionListener, ClientList
 		this.dispose();
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == lockChampion) {
 			ResultMessage res = client.championSelectCompleted();
@@ -217,7 +214,6 @@ public class ChampSelectWin extends JFrame implements ActionListener, ClientList
 		}
 	}
 
-	@Override
 	public void clientStateUpdated(ClientEvent e) {
 		switch (e.getType()) {
 		case POST_CHAMPION_SELECT:
@@ -238,9 +234,7 @@ public class ChampSelectWin extends JFrame implements ActionListener, ClientList
 	        	countdown.stop();
 	        }
 			countdown = new Countdown(new Countdown.CountdownUpdater() {
-				@Override
 				public void countdownOver() {}
-				@Override
 				public void tick(long duration) {
 					count.setText("" + (int)(duration/1000));
 				}

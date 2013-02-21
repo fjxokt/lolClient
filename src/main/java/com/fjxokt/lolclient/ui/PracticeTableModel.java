@@ -77,17 +77,14 @@ public class PracticeTableModel extends AbstractTableModel {
 		this.fireTableDataChanged();
 	}
 
-	@Override
 	public int getColumnCount() {
 		return colNames.length;
 	}
 
-	@Override
 	public int getRowCount() {
 		return games.size();
 	}
 
-	@Override
 	public Object getValueAt(int row, int col) {
 		PracticeGameSearchResult g = games.get(row);
 		switch (col) {

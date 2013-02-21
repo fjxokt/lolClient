@@ -42,15 +42,12 @@ public class PlayerTable extends JTable implements MouseMotionListener {
 			super();
 			update(players);
 		}
-		@Override
 		public int getColumnCount() {
 			return 1;
 		}
-		@Override
 		public int getRowCount() {
 			return players.size();
 		}
-		@Override
 		public Object getValueAt(int row, int col) {
 			return players.get(row);
 		}
@@ -58,7 +55,6 @@ public class PlayerTable extends JTable implements MouseMotionListener {
 			this.players = players;	
 			fireTableDataChanged();
 		}
-		@Override
 		public boolean isCellEditable(int row, int col) {
 			return true;
 		}
@@ -81,7 +77,6 @@ public class PlayerTable extends JTable implements MouseMotionListener {
 			pan.add(playerLb, BorderLayout.CENTER);
 			JPanel p = new JPanel(new FlowLayout());
 			kick.addActionListener(new ActionListener() {
-				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					SwingUtilities.invokeLater(new Runnable() {
 						public void run() {
@@ -130,19 +125,16 @@ public class PlayerTable extends JTable implements MouseMotionListener {
 			return pan;
 		}
 		
-		@Override
 		public Component getTableCellRendererComponent(JTable arg0,
 				Object value, boolean arg2, boolean arg3, int arg4, int arg5) {
 			return prepareCell(value);
 		}
 
-		@Override
 		public Component getTableCellEditorComponent(JTable table, Object value,
 				boolean arg2, int arg3, int arg4) {
 			return prepareCell(value);
 		}
 
-		@Override
 		public Object getCellEditorValue() {
 			return null;
 		}

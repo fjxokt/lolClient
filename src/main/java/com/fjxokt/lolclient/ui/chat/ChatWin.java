@@ -190,7 +190,6 @@ public class ChatWin extends JFrame {
 			List<RosterEntry> lst = map.get(group);
 			// filter group members
 			Collections.sort(lst, new Comparator<RosterEntry>() {
-				@Override
 				public int compare(RosterEntry o1, RosterEntry o2) {
 					// connected one are on top
 					if (manager.isBuddyAvailable(o1) && (!manager.isBuddyAvailable(o2) || manager.isBuddyAway(o2))) {

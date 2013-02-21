@@ -57,7 +57,6 @@ public class SellMasteriesPanel extends JPanel {
 		});
 		runes.setSelectedItem(client.getDefaultSpellBookPage());
 		runes.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				JComboBox b = (JComboBox)e.getSource();
 				SpellBookPageDTO p = (SpellBookPageDTO)b.getSelectedItem();
@@ -91,7 +90,6 @@ public class SellMasteriesPanel extends JPanel {
 		});
 		masteries.setSelectedItem(client.getDefaultMasteryBookPage());
 		masteries.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				JComboBox b = (JComboBox)e.getSource();
 				MasteryBookPageDTO p = (MasteryBookPageDTO)b.getSelectedItem();

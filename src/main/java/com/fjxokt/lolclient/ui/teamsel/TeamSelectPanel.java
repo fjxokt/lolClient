@@ -279,7 +279,6 @@ public class TeamSelectPanel extends JPanel implements ActionListener, ClientLis
 		startChampSel.setEnabled(client.isGameOwner());
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == leave) {
 			System.out.println("leaving team select: " + client.quitGame());
@@ -291,7 +290,6 @@ public class TeamSelectPanel extends JPanel implements ActionListener, ClientLis
 		}
 	}
 
-	@Override
 	public void clientStateUpdated(final ClientEvent e) {
 		switch (e.getType()) {
 		case RETURNING_TEAM_SELECT:
