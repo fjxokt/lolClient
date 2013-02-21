@@ -14,15 +14,15 @@ import com.fjxokt.lolclient.ui.chat.ChatPresenceType;
 // TODO: also implements MessageListener for the chat sounds
 public class Sounds implements ClientListener, ChatListener {
 
-	public static final String LOGIN = ResourceConstants.soundAssetsBasePackage + "login.mp3";
-	public static final String PLAY = ResourceConstants.soundAssetsBasePackage + "playbutton.mp3";
-	public static final String MATCHMAKING_QUEUE = ResourceConstants.soundAssetsBasePackage + "matchmakingqueued.mp3";
-	public static final String LOCK = ResourceConstants.soundAssetsBasePackage + "lock2.mp3";
-	public static final String START_GAME = ResourceConstants.soundAssetsBasePackage + "exitchampionselect.mp3";
-	public static final String PHASE_CHANGED = ResourceConstants.soundAssetsBasePackage + "phasechangedrums2.mp3";
-	public static final String BACKGROUND_SELECT_CHAMP = ResourceConstants.soundAssetsBasePackage + "ChmpSlct_Tutorial.mp3";
-	public static final String JOIN_TEAM_SEL = ResourceConstants.soundAssetsBasePackage + "join_chat.mp3";
-	public static final String MESSAGE_RECEIVED = ResourceConstants.soundAssetsBasePackage + "standard_msg_receive.mp3";
+	private static final JSound LOGIN = new JSound(ResourceConstants.soundAssetsBasePackage + "login.mp3");
+	private static final JSound PLAY = new JSound(ResourceConstants.soundAssetsBasePackage + "playbutton.mp3");
+	private static final JSound MATCHMAKING_QUEUE = new JSound(ResourceConstants.soundAssetsBasePackage + "matchmakingqueued.mp3");
+	private static final JSound LOCK = new JSound(ResourceConstants.soundAssetsBasePackage + "lock2.mp3");
+	private static final JSound START_GAME = new JSound(ResourceConstants.soundAssetsBasePackage + "exitchampionselect.mp3");
+	private static final JSound PHASE_CHANGED = new JSound(ResourceConstants.soundAssetsBasePackage + "phasechangedrums2.mp3");
+	private static final JSound BACKGROUND_SELECT_CHAMP = new JSound(ResourceConstants.soundAssetsBasePackage + "ChmpSlct_Tutorial.mp3");
+	private static final JSound JOIN_TEAM_SEL = new JSound(ResourceConstants.soundAssetsBasePackage + "join_chat.mp3");
+	private static final JSound MESSAGE_RECEIVED = new JSound(ResourceConstants.soundAssetsBasePackage + "standard_msg_receive.mp3");
 
 	public Sounds() {
 		LoLClient.getInst().addGameListener(this);
@@ -32,28 +32,26 @@ public class Sounds implements ClientListener, ChatListener {
 	public void clientStateUpdated(ClientEvent e) {
 		switch (e.getType()) {
 		case LOGGED_IN:
-	        AudioManager.getInst().playSound(Sounds.LOGIN);
+                        LOGIN.play();
 			break;
 		case JOINING_MATCHMAKING:
-	        AudioManager.getInst().playSound(Sounds.MATCHMAKING_QUEUE);
+                        MATCHMAKING_QUEUE.play();
 			break;
 		case JOINING_TEAM_SELECT:
 		case TEAM_SELECT_UPDATE:
-			AudioManager.getInst().playSound(Sounds.JOIN_TEAM_SEL);
+			JOIN_TEAM_SEL.play();
 			break;
 		case JOINING_CHAMP_SELECT:
-	        AudioManager.getInst().playSound(Sounds.BACKGROUND_SELECT_CHAMP);
-			break;
 		case RETURNING_LOBBY:
 		case RETURNING_TEAM_SELECT:
 		case LEAVING_CHAMP_SELECT:
-	        AudioManager.getInst().stopSound(Sounds.BACKGROUND_SELECT_CHAMP);
+                        BACKGROUND_SELECT_CHAMP.play();
 			break;
 		case JOINING_POST_CHAMPION_SELECT:
-	        AudioManager.getInst().playSound(Sounds.PHASE_CHANGED);
+                        PHASE_CHANGED.play();
 			break;
 		case LOCK_CHAMPION:
-	        AudioManager.getInst().playSound(Sounds.LOCK);
+                        LOCK.play();
 			break;
 		}
 	}
@@ -64,7 +62,7 @@ public class Sounds implements ClientListener, ChatListener {
 			ChatPresenceType type) {}
 
 	public void gameMessageReceived(GameDTO game, String user, String message) {
-		AudioManager.getInst().playSound(Sounds.MESSAGE_RECEIVED);
+                     MESSAGE_RECEIVED.play();
 	}
 	
 }
