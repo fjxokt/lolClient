@@ -46,6 +46,12 @@ public class JSound extends PlaybackListener implements Runnable
             ex.printStackTrace();
         }
     }
+    
+    public void stop() {
+    	if (player != null) {
+    		player.stop();
+    	}
+    }
 
     // PlaybackListener members
 

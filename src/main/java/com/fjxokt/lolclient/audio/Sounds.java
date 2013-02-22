@@ -32,26 +32,31 @@ public class Sounds implements ClientListener, ChatListener {
 	public void clientStateUpdated(ClientEvent e) {
 		switch (e.getType()) {
 		case LOGGED_IN:
-                        LOGIN.play();
+			LOGIN.play();
 			break;
 		case JOINING_MATCHMAKING:
-                        MATCHMAKING_QUEUE.play();
+			MATCHMAKING_QUEUE.play();
 			break;
 		case JOINING_TEAM_SELECT:
 		case TEAM_SELECT_UPDATE:
 			JOIN_TEAM_SEL.play();
 			break;
 		case JOINING_CHAMP_SELECT:
+			BACKGROUND_SELECT_CHAMP.play();
+			break;
 		case RETURNING_LOBBY:
 		case RETURNING_TEAM_SELECT:
 		case LEAVING_CHAMP_SELECT:
-                        BACKGROUND_SELECT_CHAMP.play();
+			BACKGROUND_SELECT_CHAMP.stop();
 			break;
 		case JOINING_POST_CHAMPION_SELECT:
-                        PHASE_CHANGED.play();
+			PHASE_CHANGED.play();
 			break;
 		case LOCK_CHAMPION:
-                        LOCK.play();
+			LOCK.play();
+			break;
+		case GAME_CLIENT_CONNECTED_TO_SERVER:
+			START_GAME.play();
 			break;
 		}
 	}
@@ -62,7 +67,7 @@ public class Sounds implements ClientListener, ChatListener {
 			ChatPresenceType type) {}
 
 	public void gameMessageReceived(GameDTO game, String user, String message) {
-                     MESSAGE_RECEIVED.play();
+		MESSAGE_RECEIVED.play();
 	}
 	
 }
