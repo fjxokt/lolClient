@@ -21,6 +21,7 @@ import com.fjxokt.lolclient.audio.JSound;
 import com.fjxokt.lolclient.model.Champion;
 import com.fjxokt.lolclient.lolrtmps.model.dto.ChampionDTO;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
 import com.fjxokt.lolclient.utils.ResourcesManager;
 
 public class SelectChampPanel extends JPanel {
@@ -81,7 +82,7 @@ public class SelectChampPanel extends JPanel {
 					ChampionDTO champ = (ChampionDTO)list.getSelectedValue();
 					Champion c = ResourcesManager.getInst().getChampion(champ.getChampionId());
 					if (champ != null) {
-						client.selectChampion(c.getId());
+						GameService.selectChampion(LoLClient.getInst().getRTMPSClient(), c.getId());
 						new JSound(ResourceConstants.soundsChampsPath + c.getSelectSoundPath().replaceAll(ResourceConstants.language, "")).play();
 					}
 				}

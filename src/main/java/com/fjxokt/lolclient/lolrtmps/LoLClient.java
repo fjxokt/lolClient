@@ -31,6 +31,18 @@ import com.fjxokt.lolclient.lolrtmps.model.dto.SpellBookDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.SpellBookPageDTO;
 import com.fjxokt.lolclient.lolrtmps.model.utils.PlayerBaseLevel;
 import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
+import com.fjxokt.lolclient.lolrtmps.services.ClientFacadeService;
+import com.fjxokt.lolclient.lolrtmps.services.GameMapService;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
+import com.fjxokt.lolclient.lolrtmps.services.InventoryService;
+import com.fjxokt.lolclient.lolrtmps.services.LoginService;
+import com.fjxokt.lolclient.lolrtmps.services.MasteryBookService;
+import com.fjxokt.lolclient.lolrtmps.services.MatchmakerService;
+import com.fjxokt.lolclient.lolrtmps.services.PlayerStatsService;
+import com.fjxokt.lolclient.lolrtmps.services.SpellBookService;
+import com.fjxokt.lolclient.lolrtmps.services.SummonerRuneService;
+import com.fjxokt.lolclient.lolrtmps.services.SummonerService;
+import com.fjxokt.lolclient.lolrtmps.services.SummonerTeamService;
 import com.fjxokt.lolclient.messaging.Invitation;
 import com.fjxokt.lolclient.messaging.InvitationListener;
 import com.fjxokt.lolclient.messaging.InvitationManager;
@@ -88,9 +100,8 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 		return instance;
 	}
 	
-	@Override
 	public ResultMessage login() {
-		ResultMessage r = super.login();
+		ResultMessage r = LoginService.login(this);
 		if (r.equals(ResultMessage.OK)) {
 			initData();
 		}
@@ -99,7 +110,7 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 	
 	private void initData() {
 		// get login data infos
-		loginDataPacket = super.getLoginDataPacketForUser();
+		loginDataPacket = ClientFacadeService.getLoginDataPacketForUser(this);
 		
 		// check if new summoner
 		if (loginDataPacket.getAllSummonerData() == null) {
@@ -131,50 +142,46 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 		// get champions list
 		availableChampions = getAvailableChampions();
 		// get rune inventory
-		summonerRuneInventory = getSummonerRuneInventory(loginDataPacket.getAllSummonerData().getSummoner().getSumId());
+		summonerRuneInventory = SummonerRuneService.getSummonerRuneInventory(client, loginDataPacket.getAllSummonerData().getSummoner().getSumId());
 		// get mastery book
 		masteryBook = loginDataPacket.getAllSummonerData().getMasteryBook();
 		// get spell book
 		spellBook = loginDataPacket.getAllSummonerData().getSpellBook();
 		// create player
-		player = createPlayer();
+		player = SummonerTeamService.createPlayer(client);
 	}
 
 	/////////////////////
 	// Override
 	/////////////////////
 	
-	@Override
 	public LoginDataPacket getLoginDataPacketForUser() {
 		return loginDataPacket;
 	}
 	
-	@Override
 	public List<ChampionDTO> getAvailableChampions() {
 		if (availableChampions == null) {
-			availableChampions = super.getAvailableChampions();
+			availableChampions = InventoryService.getAvailableChampions(client);
 		}
 		return availableChampions;
 	}
 	
-	@Override
 	public List<GameQueueConfig> getAvailableQueues() {
 		if (availableQueues == null) {
-			availableQueues = super.getAvailableQueues();
+			availableQueues = MatchmakerService.getAvailableQueues(client);
 		}
 		return availableQueues;
 	}
 	
-	@Override
 	public List<GameMap> getGameMapList() {
 		if (gameMaps == null) {
-			gameMaps = super.getGameMapList();
+			gameMaps = GameMapService.getGameMapList(client);
 		}
 		return gameMaps;
 	}
 	
 	public SpellBookPageDTO selectDefaultSpellBookPage(SpellBookPageDTO page) {
-		SpellBookPageDTO res = super.selectDefaultSpellBookPage(page);
+		SpellBookPageDTO res = SpellBookService.selectDefaultSpellBookPage(client, page);
 		// if the page has been correctly changed, update our list
 		if (res != null) {
 			for (SpellBookPageDTO p : spellBook.getBookPages()) {
@@ -191,7 +198,7 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 				p.setCurrent(p.getPageId().equals(page.getPageId()));
 			}
 			// then save the book
-			super.saveMasteryBook(masteryBook);
+			MasteryBookService.saveMasteryBook(client, masteryBook);
 			return masteryBook;
 		}
 		return null;
@@ -208,7 +215,7 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 	public void invitationAccepted(String invitationId, String username, String queueId) {
 		System.out.println(" beforesum name");
 
-		PublicSummoner sum = getSummonerByName(username);
+		PublicSummoner sum = SummonerService.getSummonerByName(client, username);
 		System.out.println("sum name: " + sum);
 
 		Double myId = getLoginDataPacketForUser().getAllSummonerData().getSummoner().getSumId();
@@ -216,7 +223,7 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 					invitationId, new Integer[]{sum.getSummonerId(), myId.intValue()});
 		System.out.println("mmparams: " + params);
 		System.out.println(params.getTypedObject());
-		System.out.println("ECHO: "+attachTeamToQueue(params));
+		System.out.println("ECHO: "+ MatchmakerService.attachTeamToQueue(this, params));
 	}
 	
 	///////////////
@@ -231,7 +238,7 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 	/////////////////
 	
 	public ResultMessage createNewSummoner(String summonerName, PlayerBaseLevel lvl) {
-		AllSummonerData data = super.createDefaultSummoner(summonerName);
+		AllSummonerData data = SummonerService.createDefaultSummoner(client, summonerName);
 		// if coud not create user (name invalid or already used)
 		if (data == null) {
 			return ResultMessage.ERROR;
@@ -239,8 +246,8 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 		loginDataPacket.setAllSummonerData(data);
 		// TODO: we should set the summoner icon
 		//updateProfileIconId(2);
-		processEloQuestionaire(lvl);
-		saveSeenTutorialFlag();
+		PlayerStatsService.processEloQuestionaire(client, lvl);
+		SummonerService.saveSeenTutorialFlag(client);
 		// continue init;
 		initDataNext();
 		// everything went ok
@@ -307,7 +314,7 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 	
 	public ResultMessage switchTeams() {
 		if (game != null) {
-			return switchTeams(game.getId());
+			return GameService.switchTeams(client, game.getId());
 		}
 		return ResultMessage.ERROR;
 	}

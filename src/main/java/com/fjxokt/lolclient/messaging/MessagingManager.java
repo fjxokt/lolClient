@@ -34,6 +34,7 @@ import org.jivesoftware.smackx.muc.MultiUserChat;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.lolrtmps.model.utils.GameState;
+import com.fjxokt.lolclient.lolrtmps.services.MatchmakerService;
 import com.fjxokt.lolclient.ui.chat.ChatPresenceType;
 import com.fjxokt.lolclient.utils.SimpleSHA1;
 import com.fjxokt.lolclient.utils.SimpleXML;
@@ -430,7 +431,7 @@ public class MessagingManager implements MessageListener {
 			// i have been accepted (received ater I send my GAME_INVITE_ACCEPT)
 			else if (message.getSubject().equals("GAME_INVITE_ACCEPT_ACK")) {
 				String invitationId = SimpleXML.getTagValue(msg, "inviteId");
-				LoLClient.getInst().acceptInviteForMatchmakingGame(invitationId);
+				MatchmakerService.acceptInviteForMatchmakingGame(LoLClient.getInst().getRTMPSClient(), invitationId);
 				
 				// TEST
 				Message m = new Message("sum22371167@pvp.net");

@@ -26,6 +26,7 @@ import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.PlayerChampionSelectionDTO;
 import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
 import com.fjxokt.lolclient.ui.TeamChatPanel;
 import com.fjxokt.lolclient.utils.Countdown;
 
@@ -203,14 +204,14 @@ public class ChampSelectWin extends JFrame implements ActionListener, ClientList
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == lockChampion) {
-			ResultMessage res = client.championSelectCompleted();
+			ResultMessage res = GameService.championSelectCompleted(LoLClient.getInst().getRTMPSClient());
 			if (res.equals(ResultMessage.OK)) {
 				lockChampion.setEnabled(false);
 			}
 			System.out.println("lockChampion = " + res.getMessage());
 		}
 		else if (e.getSource() == leaveGame) {
-			System.out.println("leave game = " + client.quitGame());
+			System.out.println("leave game = " + GameService.quitGame(LoLClient.getInst()));
 		}
 	}
 

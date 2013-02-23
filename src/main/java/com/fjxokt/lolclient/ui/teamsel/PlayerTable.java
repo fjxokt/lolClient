@@ -27,6 +27,8 @@ import com.fjxokt.lolclient.lolrtmps.model.Participant;
 import com.fjxokt.lolclient.lolrtmps.model.PlayerParticipant;
 import com.fjxokt.lolclient.lolrtmps.model.PublicSummoner;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
+import com.fjxokt.lolclient.lolrtmps.services.SummonerService;
 
 public class PlayerTable extends JTable implements MouseMotionListener {
 	private static final long serialVersionUID = 1L;
@@ -83,10 +85,10 @@ public class PlayerTable extends JTable implements MouseMotionListener {
 							final LoLClient client = LoLClient.getInst();
 							if (player instanceof PlayerParticipant) {
 								// get the summoner id from his name
-								final PublicSummoner summoner = client.getSummonerByName(playerLb.getText());
+								final PublicSummoner summoner = SummonerService.getSummonerByName(client.getRTMPSClient(), playerLb.getText());
 								System.out.println("Ban user: " + playerLb.getText() + " id: " + summoner.getSummonerId());
 								// ban !
-								client.banUserFromGame(client.getCurrentGame().getId(), summoner.getAcctId());
+								GameService.banUserFromGame(LoLClient.getInst().getRTMPSClient(), client.getCurrentGame().getId(), summoner.getAcctId());
 							}
 							else {
 								BotParticipant bot = (BotParticipant)player;
@@ -94,7 +96,7 @@ public class PlayerTable extends JTable implements MouseMotionListener {
 								for (PlayerChampionSelectionDTO champ : champs) {
 									System.out.println("CHAMP: " + champ);
 									if (champ.getSummonerInternalName().equals(bot.getSummonerInternalName())) {
-										System.out.println("ban bot: " + client.removeBotChampion(champ.getChampionId(), bot));
+										System.out.println("ban bot: " + GameService.removeBotChampion(LoLClient.getInst().getRTMPSClient(), champ.getChampionId(), bot));
 										break;
 									}
 								}

@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
 
 public class GameInProgressPanel extends JPanel {
 
@@ -54,7 +55,7 @@ public class GameInProgressPanel extends JPanel {
 		decline.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (LoLClient.getInst().isObserver()) {
-					ResultMessage res = LoLClient.getInst().declineObserverReconnect();
+					ResultMessage res = GameService.declineObserverReconnect(LoLClient.getInst());
 					System.out.println("decline obs reco: " + res);
 				}
 			}

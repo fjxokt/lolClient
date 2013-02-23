@@ -22,6 +22,7 @@ import com.fjxokt.lolclient.lolrtmps.model.utils.GameModeTypeConfig;
 import com.fjxokt.lolclient.lolrtmps.model.utils.Map;
 import com.fjxokt.lolclient.lolrtmps.model.utils.SpectatorsAllowed;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
 
 public class CreateGamePanel extends JPanel {
 	
@@ -120,7 +121,7 @@ public class CreateGamePanel extends JPanel {
 					String pwd = new String(pwdTf.getPassword());
 					String specAllow = ((SpectatorsAllowed)specCb.getSelectedItem()).getName();
 					// create game (if it worked, the event will be caught by the Lobby that will then create the team select room)
-					client.createPracticeGame(gameName, selMap.getGameMode().getName(), 
+					GameService.createPracticeGame(client, gameName, selMap.getGameMode().getName(), 
 							GameMap.createDummy(selMap.getMapId(), maxPlayers, minPlayers), 
 							maxPlayers, minPlayers, pwd,specAllow);
 				} catch (PlayerAlreadyInGameException e) {

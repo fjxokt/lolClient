@@ -39,6 +39,9 @@ import com.fjxokt.lolclient.lolrtmps.model.PracticeGameSearchResult;
 import com.fjxokt.lolclient.lolrtmps.model.SearchingForMatchNotification;
 import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
 import com.fjxokt.lolclient.lolrtmps.model.utils.SpectatorsAllowed;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
+import com.fjxokt.lolclient.lolrtmps.services.LoginService;
+import com.fjxokt.lolclient.lolrtmps.services.MatchmakerService;
 import com.fjxokt.lolclient.ui.chat.ChatWinManager;
 import com.fjxokt.lolclient.utils.Timer;
 
@@ -182,7 +185,7 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
         store.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					java.awt.Desktop.getDesktop().browse(new URI(LoLClient.getInst().getStoreUrl()));
+					java.awt.Desktop.getDesktop().browse(new URI(LoginService.getStoreUrl(LoLClient.getInst().getRTMPSClient())));
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (URISyntaxException e) {
@@ -244,7 +247,7 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
 			GameQueueConfig queue = (GameQueueConfig)queues.getSelectedItem();
 			if (queue != null) {
 				if (timer.isStarted()) {
-					ResultMessage cancel = client.cancelFromQueueIfPossible(queueId.doubleValue());
+                                        ResultMessage cancel = MatchmakerService.cancelFromQueueIfPossible(client.getRTMPSClient(), queueId.doubleValue());
 					System.out.println("cancel queue: " + cancel);
 					// cancel worked
 					if (cancel.equals(ResultMessage.OK)) {
@@ -254,7 +257,8 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
 				}
 				// try to join a queue
 				else {
-					SearchingForMatchNotification infos = client.attachToQueue(new MatchMakerParams(new Integer[]{queue.getId()}));
+					SearchingForMatchNotification infos = MatchmakerService.attachToQueue(LoLClient.getInst(),
+                                                new MatchMakerParams(new Integer[]{queue.getId()}));
 					System.out.println(infos);
 					
 					if (infos.getPlayerJoinFailures().size() > 0) {
@@ -279,7 +283,7 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
 			PracticeGameSearchResult selRes = (PracticeGameSearchResult)table.getSelectedObject();
 			SpectatorsAllowed spec = SpectatorsAllowed.getStateFromString(selRes.getAllowSpectators());
 			if (!spec.equals(SpectatorsAllowed.NONE)) {				
-				client.observeGame(selRes.getId());
+				GameService.observeGame(LoLClient.getInst(),selRes.getId());
 			}
 			else {
 				JOptionPane.showMessageDialog(this, "spectators not allowed for game '" + selRes.getName() + "'",
@@ -294,7 +298,7 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
 			ChatWinManager.getInst().getMainWin().setVisible(true);
 		}		
 		else if (e.getSource() == logout) {
-			client.logout();
+			LoginService.logout(client);
 		}
 	}
 	
@@ -310,7 +314,7 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
 		}
 		
 		System.out.println("Trying to join game '" + game.getName() + "' (" + game.getId() + ")...");
-		ResultMessage joinOk = client.joinGame(game.getId(), pwd);
+		ResultMessage joinOk = GameService.joinGame(LoLClient.getInst(), game.getId(), pwd);
 		if (joinOk.equals(ResultMessage.OK)) {
 			System.out.println("join ok");
 		}
@@ -321,7 +325,7 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
 	}
 	
 	public void refreshPracticeGames() {
-		List<PracticeGameSearchResult> games = client.listAllPracticeGames();
+		List<PracticeGameSearchResult> games = GameService.listAllPracticeGames(LoLClient.getInst().getRTMPSClient());
 		System.out.println("" + games.size() + " practice games availables");
 		((PracticeTableModel)table.getModel()).updateList(games);
 	}

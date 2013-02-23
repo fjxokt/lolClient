@@ -29,6 +29,7 @@ import com.fjxokt.lolclient.lolrtmps.model.GameObserver;
 import com.fjxokt.lolclient.lolrtmps.model.Participant;
 import com.fjxokt.lolclient.lolrtmps.model.utils.SpectatorsAllowed;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
 import com.fjxokt.lolclient.ui.TeamChatPanel;
 
 public class TeamSelectPanel extends JPanel implements ActionListener, ClientListener {
@@ -75,7 +76,7 @@ public class TeamSelectPanel extends JPanel implements ActionListener, ClientLis
 			joinTeam.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if (client.isObserver()) {
-						client.switchObserverToPlayer(client.getCurrentGame().getId(), teamId);
+						GameService.switchObserverToPlayer(LoLClient.getInst().getRTMPSClient(), client.getCurrentGame().getId(), teamId);
 					}
 					else {
 						client.switchTeams();
@@ -135,7 +136,7 @@ public class TeamSelectPanel extends JPanel implements ActionListener, ClientLis
 			joinObs.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if (client.isPlayer()) {
-						client.switchPlayerToObserver(client.getCurrentGame().getId());
+						GameService.switchPlayerToObserver(LoLClient.getInst().getRTMPSClient(), client.getCurrentGame().getId());
 					}
 				}
 			});
@@ -281,11 +282,11 @@ public class TeamSelectPanel extends JPanel implements ActionListener, ClientLis
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == leave) {
-			System.out.println("leaving team select: " + client.quitGame());
+			System.out.println("leaving team select: " + GameService.quitGame(LoLClient.getInst()));
 		}
 		else if (e.getSource() == startChampSel) {
 			GameDTO game = client.getCurrentGame();
-			StartChampSelectDTO res = client.startChampionSelection(game.getId(), game.getNumPlayers());
+			StartChampSelectDTO res = GameService.startChampionSelection(LoLClient.getInst().getRTMPSClient(), game.getId(), game.getNumPlayers());
 			System.out.println("startchamselect = " + res);
 		}
 	}

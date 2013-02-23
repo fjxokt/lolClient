@@ -24,6 +24,8 @@ import javax.swing.table.TableCellRenderer;
 import com.fjxokt.lolclient.lolrtmps.model.GameObserver;
 import com.fjxokt.lolclient.lolrtmps.model.PublicSummoner;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
+import com.fjxokt.lolclient.lolrtmps.services.SummonerService;
 
 public class ObserverTable extends JTable implements MouseMotionListener {
 	private static final long serialVersionUID = 1L;
@@ -78,10 +80,10 @@ public class ObserverTable extends JTable implements MouseMotionListener {
 						public void run() {
 							final LoLClient client = LoLClient.getInst();
 							// get the summoner id from his name
-							final PublicSummoner summoner = client.getSummonerByName(playerLb.getText());
+							final PublicSummoner summoner = SummonerService.getSummonerByName(client.getRTMPSClient(), playerLb.getText());
 							System.out.println("Ban observer: " + playerLb.getText() + " id: " + summoner.getSummonerId());
 							// ban !
-							client.banObserverFromGame(client.getCurrentGame().getId(), summoner.getAcctId());							
+							GameService.banObserverFromGame(LoLClient.getInst().getRTMPSClient(), client.getCurrentGame().getId(), summoner.getAcctId());							
 						}
 					});
 				}

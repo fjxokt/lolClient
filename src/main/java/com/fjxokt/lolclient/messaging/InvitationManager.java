@@ -6,6 +6,7 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Message.Type;
 
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.services.MatchmakerService;
 import com.fjxokt.lolclient.utils.SimpleXML;
 
 public class InvitationManager {
@@ -140,7 +141,7 @@ public class InvitationManager {
 		case VERIFY_INVITEE:
 			// TODO: when to use this case ?
 			String invitationId = SimpleXML.getTagValue(message.getBody(), "inviteId");
-			LoLClient.getInst().acceptInviteForMatchmakingGame(invitationId);
+                        MatchmakerService.acceptInviteForMatchmakingGame(LoLClient.getInst().getRTMPSClient(), invitationId);
 			break;
 		default:
 			break;

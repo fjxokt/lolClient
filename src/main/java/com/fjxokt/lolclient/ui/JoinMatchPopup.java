@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
 import com.fjxokt.lolclient.lolrtmps.events.ClientListener;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
 import com.fjxokt.lolclient.utils.ResourcesManager;
 
 public class JoinMatchPopup extends JFrame implements ClientListener {
@@ -80,7 +81,7 @@ public class JoinMatchPopup extends JFrame implements ClientListener {
         JButton ok = new JButton("OK");
         ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				LoLClient.getInst().acceptPoppedGame(true);
+				GameService.acceptPoppedGame(LoLClient.getInst().getRTMPSClient(), true);
 			}
 		});
         buttons.add(ok);
@@ -88,7 +89,7 @@ public class JoinMatchPopup extends JFrame implements ClientListener {
         JButton cancel = new JButton("Cancel");
         cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				LoLClient.getInst().acceptPoppedGame(false);
+				GameService.acceptPoppedGame(LoLClient.getInst().getRTMPSClient(), false);
 			}
 		});
         buttons.add(cancel);

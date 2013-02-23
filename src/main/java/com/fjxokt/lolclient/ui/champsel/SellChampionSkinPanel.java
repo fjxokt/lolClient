@@ -14,6 +14,7 @@ import com.fjxokt.lolclient.lolrtmps.model.dto.ChampionSkinDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.PlayerChampionSelectionDTO;
 import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
 
 public class SellChampionSkinPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -34,7 +35,7 @@ public class SellChampionSkinPanel extends JPanel {
 				if (mychamp != null) {
 					ChampionSkinDTO skin = (ChampionSkinDTO)skins.getSelectedItem();
 					if (skin != null) {
-						ResultMessage res = client.selectChampionSkin(skin.getChampionId(), skin.getSkinId());
+						ResultMessage res = GameService.selectChampionSkin(LoLClient.getInst().getRTMPSClient(), skin.getChampionId(), skin.getSkinId());
 						if (res.equals(ResultMessage.ERROR)) {
 							System.out.println("Could not select skin " + skin);
 						}

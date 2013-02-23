@@ -11,6 +11,7 @@ import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
 import com.fjxokt.lolclient.lolrtmps.events.ClientEventType;
 import com.fjxokt.lolclient.lolrtmps.events.ClientListener;
+import com.fjxokt.lolclient.lolrtmps.services.LoginService;
 import com.fjxokt.lolclient.messaging.MessagingManager;
 import com.fjxokt.lolclient.ui.champsel.ChampSelectWin;
 import com.fjxokt.lolclient.ui.teamsel.TeamSelectPanel;
@@ -30,7 +31,7 @@ public class ClientWin extends JFrame implements ClientListener {
 	
 	public ClientWin(boolean newSummoner, boolean gameInProgress) {
 		super();
-		this.setTitle("NoAir pvp.net - Connected to " + client.getRegion() + " - " +
+		this.setTitle("NoAir pvp.net - Connected to " + LoginService.getRegion(client.getRTMPSClient()) + " - " +
 				client.getLoginDataPacketForUser().getIpBalance().intValue() + " IP / " + 
 				client.getLoginDataPacketForUser().getRpBalance().intValue() + " RP");
         this.setSize(750, 600);
