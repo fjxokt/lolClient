@@ -1,11 +1,10 @@
 package com.fjxokt.lolclient.lolrtmps.model.dto;
 
-import java.util.Date;
-
 import com.fjxokt.lolclient.lolrtmps.model.ClassType;
 import com.fjxokt.lolclient.lolrtmps.model.TeamId;
 import com.fjxokt.lolclient.lolrtmps.model.TeamStatSummary;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.Date;
 
 public class TeamDTO extends ClassType {
 	

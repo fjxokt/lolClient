@@ -1,9 +1,9 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Rune extends ClassType {
 
@@ -111,7 +111,7 @@ public class Rune extends ClassType {
 	}
 
 	public List<ItemEffect> getItemEffects() {
-		return itemEffects;
+		return Collections.unmodifiableList(itemEffects);
 	}
 
 	@Override

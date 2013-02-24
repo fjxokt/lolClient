@@ -20,4 +20,7 @@ public class SummonerIconService {
 
                 return new SummonerIconInventoryDTO(iconTo);
 	}
+
+    private SummonerIconService() {
+    }
 }

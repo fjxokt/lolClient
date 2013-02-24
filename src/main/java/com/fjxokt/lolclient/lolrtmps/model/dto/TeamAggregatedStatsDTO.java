@@ -1,11 +1,11 @@
 package com.fjxokt.lolclient.lolrtmps.model.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fjxokt.lolclient.lolrtmps.model.ClassType;
 import com.fjxokt.lolclient.lolrtmps.model.TeamId;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TeamAggregatedStatsDTO extends ClassType {
 	
@@ -44,7 +44,7 @@ public class TeamAggregatedStatsDTO extends ClassType {
 	}
 
 	public List<TeamPlayerAggregatedStatsDTO> getPlayerAggregatedStatsList() {
-		return playerAggregatedStatsList;
+		return Collections.unmodifiableList(playerAggregatedStatsList);
 	}
 
 	@Override

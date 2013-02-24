@@ -118,4 +118,7 @@ public class PlayerStatsService {
 
                 return new RecentGames(playerStatTo);
 	}
+
+    private PlayerStatsService() {
+    }
 }

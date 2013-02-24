@@ -23,13 +23,13 @@ public class Log {
     			// append to the file if size < 1MB
     			hand = new FileHandler(file, !tooBig);
     			hand.setFormatter(new SimpleFormatter() {
+                            @Override
     				public String format(LogRecord record) {
     		            return new java.util.Date() + " " + record.getLevel() + " " + record.getMessage() + "\r\n";
     				}
     			});
     	    	log.addHandler(hand);
     		} catch (Exception e) {
-    			e.printStackTrace();
     		}
         }
         return log;

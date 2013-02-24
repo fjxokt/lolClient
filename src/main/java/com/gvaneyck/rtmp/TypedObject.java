@@ -77,12 +77,15 @@ public class TypedObject extends HashMap<String, Object>
 	public Integer getInt(String key)
 	{
 		Object val = get(key);
-		if (val == null)
-			return null;
-		else if (val instanceof Integer)
-			return (Integer)val;
-		else 
-			return ((Double)val).intValue();
+		if (val == null) {
+                return null;
+            }
+		else if (val instanceof Integer) {
+                return (Integer)val;
+            }
+		else {
+                return ((Double)val).intValue();
+            }
 	}
 
 	/**
@@ -94,12 +97,15 @@ public class TypedObject extends HashMap<String, Object>
 	public Double getDouble(String key)
 	{
 		Object val = get(key);
-		if (val == null)
-			return null;
-		else if (val instanceof Double)
-			return (Double)val;
-		else 
-			return ((Integer)val).doubleValue();
+		if (val == null) {
+                return null;
+            }
+		else if (val instanceof Double) {
+                return (Double)val;
+            }
+		else {
+                return ((Integer)val).doubleValue();
+            }
 	}
 	
 	/**
@@ -122,10 +128,12 @@ public class TypedObject extends HashMap<String, Object>
 	 */
 	public Object[] getArray(String key)
 	{
-		if (get(key) instanceof TypedObject && getTO(key).type.equals("flex.messaging.io.ArrayCollection"))
-			return (Object[])getTO(key).get("array");
-		else
-			return (Object[])get(key);
+		if (get(key) instanceof TypedObject && getTO(key).type.equals("flex.messaging.io.ArrayCollection")) {
+                return (Object[])getTO(key).get("array");
+            }
+		else {
+                return (Object[])get(key);
+            }
 	}
 	
 	/**
@@ -139,10 +147,12 @@ public class TypedObject extends HashMap<String, Object>
 		return (Date)get(key);
 	}
 
+    @Override
 	public String toString()
 	{
-		if (type == null)
-			return super.toString();
+		if (type == null) {
+                return super.toString();
+            }
 		else if (type.equals("flex.messaging.io.ArrayCollection"))
 		{
 			StringBuilder sb = new StringBuilder();
@@ -151,13 +161,15 @@ public class TypedObject extends HashMap<String, Object>
 			for (int i = 0; i < data.length; i++)
 			{
 				sb.append(data[i]);
-				if (i < data.length - 1)
-					sb.append(", ");
+				if (i < data.length - 1) {
+                                sb.append(", ");
+                            }
 			}
 			sb.append(']');
 			return sb.toString();
 		}
-		else
-			return type + ":" + super.toString();
+		else {
+                return type + ":" + super.toString();
+            }
 	}
 }

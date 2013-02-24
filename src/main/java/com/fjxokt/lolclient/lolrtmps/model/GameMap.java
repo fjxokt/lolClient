@@ -1,11 +1,11 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fjxokt.lolclient.lolrtmps.model.utils.GameMode;
 import com.fjxokt.lolclient.lolrtmps.model.utils.Map;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class GameMap extends ClassType {
 	
@@ -115,7 +115,7 @@ public class GameMap extends ClassType {
 	}
 	
 	public List<BotComposition> getBotCompositions() {
-		return botCompositions;
+		return Collections.unmodifiableList(botCompositions);
 	}
 	
 	public TypedObject getTypedObject() {

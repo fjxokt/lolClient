@@ -1,12 +1,18 @@
 package com.fjxokt.lolclient.ui.champsel;
 
+import com.fjxokt.lolclient.ResourceConstants;
+import com.fjxokt.lolclient.audio.JSound;
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.model.dto.ChampionDTO;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
+import com.fjxokt.lolclient.model.Champion;
+import com.fjxokt.lolclient.utils.ResourcesManager;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
-
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -15,14 +21,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-
-import com.fjxokt.lolclient.ResourceConstants;
-import com.fjxokt.lolclient.audio.JSound;
-import com.fjxokt.lolclient.model.Champion;
-import com.fjxokt.lolclient.lolrtmps.model.dto.ChampionDTO;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
-import com.fjxokt.lolclient.lolrtmps.services.GameService;
-import com.fjxokt.lolclient.utils.ResourcesManager;
 
 public class SelectChampPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -34,6 +32,7 @@ public class SelectChampPanel extends JPanel {
 	private class ChampionIconListRenderer extends DefaultListCellRenderer {
 		private static final long serialVersionUID = 1L;
 		
+            @Override
 		public Component getListCellRendererComponent(JList list, Object value, int index,
 				boolean isSelected, boolean cellHasFocus) {
 			JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);

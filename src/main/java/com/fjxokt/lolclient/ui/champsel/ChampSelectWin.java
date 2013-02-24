@@ -1,5 +1,16 @@
 package com.fjxokt.lolclient.ui.champsel;
 
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
+import com.fjxokt.lolclient.lolrtmps.events.ClientEventType;
+import com.fjxokt.lolclient.lolrtmps.events.ClientListener;
+import com.fjxokt.lolclient.lolrtmps.model.dto.ChampionDTO;
+import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
+import com.fjxokt.lolclient.lolrtmps.model.dto.PlayerChampionSelectionDTO;
+import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
+import com.fjxokt.lolclient.ui.TeamChatPanel;
+import com.fjxokt.lolclient.utils.Countdown;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -8,7 +19,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -17,18 +27,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
-
-import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
-import com.fjxokt.lolclient.lolrtmps.events.ClientEventType;
-import com.fjxokt.lolclient.lolrtmps.events.ClientListener;
-import com.fjxokt.lolclient.lolrtmps.model.dto.ChampionDTO;
-import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
-import com.fjxokt.lolclient.lolrtmps.model.dto.PlayerChampionSelectionDTO;
-import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
-import com.fjxokt.lolclient.lolrtmps.services.GameService;
-import com.fjxokt.lolclient.ui.TeamChatPanel;
-import com.fjxokt.lolclient.utils.Countdown;
 
 public class ChampSelectWin extends JFrame implements ActionListener, ClientListener {
 

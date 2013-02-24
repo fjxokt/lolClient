@@ -1,11 +1,11 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameTypeConfigDTO;
 import com.fjxokt.lolclient.lolrtmps.model.dto.PlatformGameLifecycleDTO;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LoginDataPacket extends ClassType {
 
@@ -118,7 +118,7 @@ public class LoginDataPacket extends ClassType {
 	}
 
 	public List<GameTypeConfigDTO> getGameTypeConfigs() {
-		return gameTypeConfigs;
+		return Collections.unmodifiableList(gameTypeConfigs);
 	}
 	
 	public PlayerStatSummaries getPlayerStatSummaries() {
@@ -134,7 +134,7 @@ public class LoginDataPacket extends ClassType {
 	}
 	
 	public List<String> getLanguages() {
-		return languages;
+		return Collections.unmodifiableList(languages);
 	}
 
 	@Override

@@ -1,10 +1,10 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
+import com.gvaneyck.rtmp.TypedObject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
-import com.gvaneyck.rtmp.TypedObject;
 
 public class PlayerGameStats extends ClassType {
 
@@ -125,7 +125,7 @@ public class PlayerGameStats extends ClassType {
 	}
 
 	public List<FellowPlayerInfo> getFellowPlayers() {
-		return fellowPlayers;
+		return Collections.unmodifiableList(fellowPlayers);
 	}
 
 	public String getGameType() {
@@ -173,7 +173,7 @@ public class PlayerGameStats extends ClassType {
 	}
 
 	public List<RawStat> getStatistics() {
-		return statistics;
+		return Collections.unmodifiableList(statistics);
 	}
 
 	public Boolean getAfk() {

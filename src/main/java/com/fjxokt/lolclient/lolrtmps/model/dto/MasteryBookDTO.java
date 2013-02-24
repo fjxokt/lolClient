@@ -1,10 +1,10 @@
 package com.fjxokt.lolclient.lolrtmps.model.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fjxokt.lolclient.lolrtmps.model.ClassType;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MasteryBookDTO extends ClassType {
 	
@@ -96,7 +96,7 @@ public class MasteryBookDTO extends ClassType {
 	}
 
 	public List<MasteryBookPageDTO> getBookPages() {
-		return bookPages;
+		return Collections.unmodifiableList(bookPages);
 	}
 
 	public void setBookPages(List<MasteryBookPageDTO> bookPages) {

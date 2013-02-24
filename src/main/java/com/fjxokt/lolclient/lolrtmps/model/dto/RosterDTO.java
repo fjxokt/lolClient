@@ -1,10 +1,10 @@
 package com.fjxokt.lolclient.lolrtmps.model.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fjxokt.lolclient.lolrtmps.model.ClassType;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class RosterDTO extends ClassType {
 
@@ -36,7 +36,7 @@ public class RosterDTO extends ClassType {
 	}
 
 	public List<TeamMemberInfoDTO> getMemberList() {
-		return memberList;
+		return Collections.unmodifiableList(memberList);
 	}
 
 	@Override

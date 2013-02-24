@@ -1,11 +1,11 @@
 package com.fjxokt.lolclient.lolrtmps.model.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fjxokt.lolclient.lolrtmps.model.ClassType;
 import com.fjxokt.lolclient.lolrtmps.model.FailedJoinPlayer;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class StartChampSelectDTO extends ClassType {
 
@@ -31,7 +31,7 @@ public class StartChampSelectDTO extends ClassType {
 	}
 
 	public List<FailedJoinPlayer> getInvalidPlayers() {
-		return invalidPlayers;
+		return Collections.unmodifiableList(invalidPlayers);
 	}
 
 	@Override

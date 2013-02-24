@@ -1,9 +1,9 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class PlayerStats extends ClassType {
 
@@ -33,7 +33,7 @@ public class PlayerStats extends ClassType {
 	}
 
 	public List<TimeTrackedStat> getTimeTrackedStats() {
-		return timeTrackedStats;
+		return Collections.unmodifiableList(timeTrackedStats);
 	}
 
 	public Integer getPromoGamesPlayed() {

@@ -1,10 +1,10 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fjxokt.lolclient.lolrtmps.model.utils.BotRole;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class BotComposition extends ClassType {
 
@@ -42,7 +42,7 @@ public class BotComposition extends ClassType {
 	}
 
 	public List<BotRole> getRoles() {
-		return roles;
+		return Collections.unmodifiableList(roles);
 	}
 
 	@Override

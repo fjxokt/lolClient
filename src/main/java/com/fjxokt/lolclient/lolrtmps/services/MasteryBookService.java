@@ -29,4 +29,7 @@ public class MasteryBookService {
                 
                 return new MasteryBookDTO(masteryTo);
 	}
+
+    private MasteryBookService() {
+    }
 }

@@ -1,13 +1,11 @@
 package com.fjxokt.lolclient.ui.chat;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.jivesoftware.smack.packet.Presence;
-
 import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.messaging.ChatListener;
 import com.fjxokt.lolclient.messaging.MessagingManager;
+import java.util.HashMap;
+import java.util.Map;
+import org.jivesoftware.smack.packet.Presence;
 
 public class ChatWinManager implements ChatListener {
 	

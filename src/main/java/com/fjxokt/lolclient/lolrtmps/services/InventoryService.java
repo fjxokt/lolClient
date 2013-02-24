@@ -117,4 +117,7 @@ public class InventoryService {
                 
                 return runesAsQuantities;
 	}
+
+    private InventoryService() {
+    }
 }

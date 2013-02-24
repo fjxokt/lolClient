@@ -1,11 +1,17 @@
 package com.fjxokt.lolclient.ui;
 
+import com.fjxokt.lolclient.ResourceConstants;
+import com.fjxokt.lolclient.dao.QueryManager;
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
+import com.fjxokt.lolclient.lolrtmps.events.ClientEventType;
+import com.fjxokt.lolclient.lolrtmps.events.ClientListener;
+import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -13,14 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import com.fjxokt.lolclient.ResourceConstants;
-import com.fjxokt.lolclient.dao.QueryManager;
-import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
-import com.fjxokt.lolclient.lolrtmps.events.ClientEventType;
-import com.fjxokt.lolclient.lolrtmps.events.ClientListener;
-import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
 
 public class LoginWin extends JFrame implements ActionListener, ClientListener {
 	

@@ -1,5 +1,15 @@
 package com.fjxokt.lolclient.ui.teamsel;
 
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
+import com.fjxokt.lolclient.lolrtmps.events.ClientListener;
+import com.fjxokt.lolclient.lolrtmps.model.GameObserver;
+import com.fjxokt.lolclient.lolrtmps.model.Participant;
+import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
+import com.fjxokt.lolclient.lolrtmps.model.dto.StartChampSelectDTO;
+import com.fjxokt.lolclient.lolrtmps.model.utils.SpectatorsAllowed;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
+import com.fjxokt.lolclient.ui.TeamChatPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -12,7 +22,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -20,17 +29,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
-import com.fjxokt.lolclient.lolrtmps.events.ClientListener;
-import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
-import com.fjxokt.lolclient.lolrtmps.model.dto.StartChampSelectDTO;
-import com.fjxokt.lolclient.lolrtmps.model.GameObserver;
-import com.fjxokt.lolclient.lolrtmps.model.Participant;
-import com.fjxokt.lolclient.lolrtmps.model.utils.SpectatorsAllowed;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
-import com.fjxokt.lolclient.lolrtmps.services.GameService;
-import com.fjxokt.lolclient.ui.TeamChatPanel;
 
 public class TeamSelectPanel extends JPanel implements ActionListener, ClientListener {
 
@@ -51,7 +49,7 @@ public class TeamSelectPanel extends JPanel implements ActionListener, ClientLis
 		private int teamId;
 		private PlayerTable  teamTable;
 		private JButton joinTeam;
-		public TeamPanel(final int teamId, String title) {
+		TeamPanel(final int teamId, String title) {
 			super(new BorderLayout());
 			this.teamId = teamId;
 			this.teamTable = new PlayerTable();
@@ -110,7 +108,7 @@ public class TeamSelectPanel extends JPanel implements ActionListener, ClientLis
 		private JButton joinObs;
 		private int maxObs;
 		private boolean obsEnabled;
-		public ObsPanel(String title) {
+		ObsPanel(String title) {
 			super(new BorderLayout());
 			this.obsTable = new ObserverTable();
 			

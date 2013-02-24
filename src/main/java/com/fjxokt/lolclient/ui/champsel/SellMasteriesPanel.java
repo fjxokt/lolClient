@@ -1,10 +1,14 @@
 package com.fjxokt.lolclient.ui.champsel;
 
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.model.dto.MasteryBookDTO;
+import com.fjxokt.lolclient.lolrtmps.model.dto.MasteryBookPageDTO;
+import com.fjxokt.lolclient.lolrtmps.model.dto.SpellBookDTO;
+import com.fjxokt.lolclient.lolrtmps.model.dto.SpellBookPageDTO;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
@@ -12,12 +16,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-
-import com.fjxokt.lolclient.lolrtmps.model.dto.MasteryBookDTO;
-import com.fjxokt.lolclient.lolrtmps.model.dto.MasteryBookPageDTO;
-import com.fjxokt.lolclient.lolrtmps.model.dto.SpellBookDTO;
-import com.fjxokt.lolclient.lolrtmps.model.dto.SpellBookPageDTO;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
 
 public class SellMasteriesPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -44,6 +42,7 @@ public class SellMasteriesPanel extends JPanel {
 		runes = new JComboBox(model);
 		runes.setRenderer(new DefaultListCellRenderer() {
 			private static final long serialVersionUID = 1L;
+                    @Override
 			public Component getListCellRendererComponent(JList list,Object value,
                       int index,boolean isSelected,boolean cellHasFocus)
 			{
@@ -77,6 +76,7 @@ public class SellMasteriesPanel extends JPanel {
 		masteries = new JComboBox(model2);
 		masteries.setRenderer(new DefaultListCellRenderer() {
 			private static final long serialVersionUID = 1L;
+                    @Override
 			public Component getListCellRendererComponent(JList list,Object value,
                       int index,boolean isSelected,boolean cellHasFocus)
 			{

@@ -1,9 +1,9 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SummaryAggStats extends ClassType {
 
@@ -29,7 +29,7 @@ public class SummaryAggStats extends ClassType {
 	}
 	
 	public List<SummaryAggStat> getStats() {
-		return stats;
+		return Collections.unmodifiableList(stats);
 	}
 
 	@Override

@@ -103,4 +103,7 @@ public class SummonerTeamService {
 
                 return (Boolean)isValid;
 	}
+
+    private SummonerTeamService() {
+    }
 }

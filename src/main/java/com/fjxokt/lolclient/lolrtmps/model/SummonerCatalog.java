@@ -1,9 +1,9 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SummonerCatalog extends ClassType {
 
@@ -42,11 +42,11 @@ public class SummonerCatalog extends ClassType {
 	}
 
 	public List<TalentGroup> getTalentTree() {
-		return talentTree;
+		return Collections.unmodifiableList(talentTree);
 	}
 
 	public List<RuneSlot> getSpellBookConfig() {
-		return spellBookConfig;
+		return Collections.unmodifiableList(spellBookConfig);
 	}
 
 	@Override

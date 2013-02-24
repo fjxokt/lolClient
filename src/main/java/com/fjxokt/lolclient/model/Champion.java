@@ -1,5 +1,6 @@
 package com.fjxokt.lolclient.model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Champion {
@@ -238,20 +239,20 @@ public class Champion {
 		this.ratingAttack = ratingAttack;
 	}
 	public List<String> getTips() {
-		return tips;
+		return Collections.unmodifiableList(tips);
 	}
 	public void setTips(List<String> tips) {
 		this.tips = tips;
 	}
 	public List<String> getOpponentTips() {
-		return opponentTips;
+		return Collections.unmodifiableList(opponentTips);
 	}
 	public void setOpponentTips(List<String> opponentTips) {
 		this.opponentTips = opponentTips;
 	}
 
 	public List<ChampionSkin> getSkins() {
-		return skins;
+		return Collections.unmodifiableList(skins);
 	}
 
 	public void setSkins(List<ChampionSkin> skins) {
@@ -259,7 +260,7 @@ public class Champion {
 	}
 
 	public List<ChampionAbility> getAbilities() {
-		return abilities;
+		return Collections.unmodifiableList(abilities);
 	}
 
 	public void setAbilities(List<ChampionAbility> abilities) {

@@ -96,4 +96,7 @@ public class MatchmakerService {
                 
                 return ResultMessage.OK;
 	}
+
+    private MatchmakerService() {
+    }
 }

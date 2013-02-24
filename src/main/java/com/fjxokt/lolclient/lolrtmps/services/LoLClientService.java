@@ -102,5 +102,8 @@ public class LoLClientService {
             return responseContainer.getTO("data").getTO("body");
         }
     }    
+
+    private LoLClientService() {
+    }
     
 }

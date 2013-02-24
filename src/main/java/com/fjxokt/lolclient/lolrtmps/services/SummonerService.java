@@ -93,4 +93,7 @@ public class SummonerService {
 
                 return new AllPublicSummonerDataDTO(summonerTo);
 	}
+
+    private SummonerService() {
+    }
 }

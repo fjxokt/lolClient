@@ -1,5 +1,6 @@
 package com.fjxokt.lolclient.model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Item {
@@ -55,7 +56,7 @@ public class Item {
 	}
 
 	public List<ItemCategory> getCategories() {
-		return categories;
+		return Collections.unmodifiableList(categories);
 	}
 
 	public void setCategories(List<ItemCategory> categories) {

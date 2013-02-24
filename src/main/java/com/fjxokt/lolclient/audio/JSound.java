@@ -43,7 +43,6 @@ public class JSound extends PlaybackListener implements Runnable
         }
         catch (Exception ex)
         {
-            ex.printStackTrace();
         }
     }
     
@@ -55,11 +54,13 @@ public class JSound extends PlaybackListener implements Runnable
 
     // PlaybackListener members
 
+    @Override
     public void playbackStarted(PlaybackEvent playbackEvent)
     {
         System.out.println("playbackStarted()");
     }
 
+    @Override
     public void playbackFinished(PlaybackEvent playbackEvent)
     {
         System.out.println("playbackEnded()");
@@ -75,7 +76,6 @@ public class JSound extends PlaybackListener implements Runnable
         }
         catch (javazoom.jl.decoder.JavaLayerException ex)
         {
-            ex.printStackTrace();
         }
 
     }

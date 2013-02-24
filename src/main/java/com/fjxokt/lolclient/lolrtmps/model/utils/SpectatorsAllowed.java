@@ -37,6 +37,7 @@ public enum SpectatorsAllowed {
 		return text;
 	}
 	
+    @Override
 	public String toString() {
 		return text;
 	}

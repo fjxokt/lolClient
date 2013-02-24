@@ -1,17 +1,15 @@
 package com.fjxokt.lolclient.ui.champsel;
 
 import com.fjxokt.lolclient.ResourceConstants;
+import com.fjxokt.lolclient.utils.ResourcesManager;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import com.fjxokt.lolclient.utils.ResourcesManager;
 
 public class SellSpellsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;

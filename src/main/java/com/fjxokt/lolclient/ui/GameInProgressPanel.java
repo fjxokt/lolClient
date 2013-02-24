@@ -1,19 +1,17 @@
 package com.fjxokt.lolclient.ui;
 
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
-import com.fjxokt.lolclient.lolrtmps.services.GameService;
 
 public class GameInProgressPanel extends JPanel {
 

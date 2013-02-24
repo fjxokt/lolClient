@@ -17,7 +17,6 @@ public class QueryManager {
 	    try {
 			Class.forName("org.sqlite.JDBC");
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		}
 	}
 	
@@ -36,7 +35,6 @@ public class QueryManager {
 		try {
 			return connection.createStatement();
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return null;
 	}
@@ -46,7 +44,6 @@ public class QueryManager {
 			Statement st = connection.createStatement();
 			return st.executeQuery(sql);
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return null;
 	}
@@ -55,7 +52,6 @@ public class QueryManager {
 		try {
 			connection = DriverManager.getConnection("jdbc:sqlite:" + filename);
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 	}
 	
@@ -64,7 +60,6 @@ public class QueryManager {
 	          try {
 				connection.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
 			}
 		}
 	}

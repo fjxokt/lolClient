@@ -1,5 +1,6 @@
 package com.fjxokt.lolclient.ui.chat;
 
+import com.fjxokt.lolclient.messaging.MessagingManager;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -9,7 +10,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,11 +17,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.XMPPException;
-
-import com.fjxokt.lolclient.messaging.MessagingManager;
 
 public class BuddyChatWin extends JFrame {
 
@@ -85,7 +82,6 @@ public class BuddyChatWin extends JFrame {
 			addMessage(formatMessage(MessagingManager.getInst().getMyName(), field.getText()));
 			field.setText("");
 		} catch (XMPPException e) {
-			e.printStackTrace();
 		}
 	}
 	

@@ -20,4 +20,7 @@ public class SummonerRuneService {
                 
                 return new SummonerRuneInventory(runeTo);
 	}
+
+    private SummonerRuneService() {
+    }
 }

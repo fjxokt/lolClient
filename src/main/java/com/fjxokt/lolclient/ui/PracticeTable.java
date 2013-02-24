@@ -1,11 +1,11 @@
 package com.fjxokt.lolclient.ui;
 
 import com.fjxokt.lolclient.ResourceConstants;
+import com.fjxokt.lolclient.lolrtmps.model.PracticeGameSearchResult;
+import com.fjxokt.lolclient.utils.ResourcesManager;
 import java.awt.Component;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -13,9 +13,6 @@ import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-
-import com.fjxokt.lolclient.lolrtmps.model.PracticeGameSearchResult;
-import com.fjxokt.lolclient.utils.ResourcesManager;
 
 public class PracticeTable extends JTable {
 

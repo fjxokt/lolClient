@@ -1,8 +1,7 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.Arrays;
-
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.Arrays;
 
 public class MatchMakerParams extends ClassType {
 

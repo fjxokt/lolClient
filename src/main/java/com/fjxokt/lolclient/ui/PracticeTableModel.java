@@ -1,13 +1,11 @@
 package com.fjxokt.lolclient.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.table.AbstractTableModel;
-
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.lolrtmps.model.PracticeGameSearchResult;
 import com.fjxokt.lolclient.lolrtmps.model.utils.Map;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 public class PracticeTableModel extends AbstractTableModel {
 
@@ -33,6 +31,7 @@ public class PracticeTableModel extends AbstractTableModel {
 		filter(filter, showPrivate);
 	}
 	
+    @Override
 	public String getColumnName(int col) {
         return colNames[col];
     }

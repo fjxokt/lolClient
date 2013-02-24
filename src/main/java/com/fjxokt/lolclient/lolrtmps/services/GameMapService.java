@@ -33,4 +33,7 @@ public class GameMapService {
                 
                 return mapsAsGameMaps;
 	}
+
+    private GameMapService() {
+    }
 }

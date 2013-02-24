@@ -1,10 +1,10 @@
 package com.fjxokt.lolclient.lolrtmps.model.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fjxokt.lolclient.lolrtmps.model.ClassType;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SummonerLeaguesDTO extends ClassType {
 
@@ -30,7 +30,7 @@ public class SummonerLeaguesDTO extends ClassType {
 	}
 
 	public List<LeagueListDTO> getSummonerLeagues() {
-		return summonerLeagues;
+		return Collections.unmodifiableList(summonerLeagues);
 	}
 
 	@Override

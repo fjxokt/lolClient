@@ -1,9 +1,9 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SearchingForMatchNotification extends ClassType {
 	
@@ -49,7 +49,7 @@ public class SearchingForMatchNotification extends ClassType {
 	}
 
 	public List<PlayerJoinFailure> getPlayerJoinFailures() {
-		return playerJoinFailures;
+		return Collections.unmodifiableList(playerJoinFailures);
 	}
 
 	public Object getGhostGameSummoners() {
@@ -57,7 +57,7 @@ public class SearchingForMatchNotification extends ClassType {
 	}
 
 	public List<QueueInfo> getJoinedQueues() {
-		return joinedQueues;
+		return Collections.unmodifiableList(joinedQueues);
 	}
 
 	@Override

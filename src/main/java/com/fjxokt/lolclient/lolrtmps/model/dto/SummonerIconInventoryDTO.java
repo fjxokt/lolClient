@@ -1,10 +1,10 @@
 package com.fjxokt.lolclient.lolrtmps.model.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fjxokt.lolclient.lolrtmps.model.ClassType;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SummonerIconInventoryDTO extends ClassType {
 
@@ -28,7 +28,7 @@ public class SummonerIconInventoryDTO extends ClassType {
 	}
 
 	public List<Object> getSummonerIcons() {
-		return summonerIcons;
+		return Collections.unmodifiableList(summonerIcons);
 	}
 
 	@Override

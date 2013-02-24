@@ -1,5 +1,10 @@
 package com.fjxokt.lolclient.ui.teamsel;
 
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.model.GameObserver;
+import com.fjxokt.lolclient.lolrtmps.model.PublicSummoner;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
+import com.fjxokt.lolclient.lolrtmps.services.SummonerService;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -10,7 +15,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.AbstractCellEditor;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -20,12 +24,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-
-import com.fjxokt.lolclient.lolrtmps.model.GameObserver;
-import com.fjxokt.lolclient.lolrtmps.model.PublicSummoner;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
-import com.fjxokt.lolclient.lolrtmps.services.GameService;
-import com.fjxokt.lolclient.lolrtmps.services.SummonerService;
 
 public class ObserverTable extends JTable implements MouseMotionListener {
 	private static final long serialVersionUID = 1L;
@@ -54,6 +52,7 @@ public class ObserverTable extends JTable implements MouseMotionListener {
 			this.obs = players;	
 			fireTableDataChanged();
 		}
+            @Override
 		public boolean isCellEditable(int row, int col) {
 			return true;
 		}
@@ -70,7 +69,7 @@ public class ObserverTable extends JTable implements MouseMotionListener {
 		private final JButton kick = new JButton("kick");
 		private final JLabel playerLb = new JLabel("");
 		
-		public ObserverCellRenderer(final JTable table) {
+		ObserverCellRenderer(final JTable table) {
 			playerLb.setFont(getFont().deriveFont(16.0f));
 			pan.add(playerLb, BorderLayout.CENTER);
 			JPanel p = new JPanel(new FlowLayout());

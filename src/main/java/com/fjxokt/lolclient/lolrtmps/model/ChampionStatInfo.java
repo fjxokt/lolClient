@@ -1,9 +1,9 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ChampionStatInfo extends ClassType {
 
@@ -47,7 +47,7 @@ public class ChampionStatInfo extends ClassType {
 	}
 
 	public List<AggregatedStat> getStats() {
-		return stats;
+		return Collections.unmodifiableList(stats);
 	}
 
 	@Override

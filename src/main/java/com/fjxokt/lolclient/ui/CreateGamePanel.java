@@ -1,11 +1,19 @@
 package com.fjxokt.lolclient.ui;
 
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.exceptions.PlayerAlreadyInGameException;
+import com.fjxokt.lolclient.lolrtmps.model.ClientSystemStatesNotification;
+import com.fjxokt.lolclient.lolrtmps.model.GameMap;
+import com.fjxokt.lolclient.lolrtmps.model.dto.GameMapEnabledDTO;
+import com.fjxokt.lolclient.lolrtmps.model.utils.GameModeTypeConfig;
+import com.fjxokt.lolclient.lolrtmps.model.utils.Map;
+import com.fjxokt.lolclient.lolrtmps.model.utils.SpectatorsAllowed;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,16 +21,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import com.fjxokt.lolclient.lolrtmps.exceptions.PlayerAlreadyInGameException;
-import com.fjxokt.lolclient.lolrtmps.model.dto.GameMapEnabledDTO;
-import com.fjxokt.lolclient.lolrtmps.model.ClientSystemStatesNotification;
-import com.fjxokt.lolclient.lolrtmps.model.GameMap;
-import com.fjxokt.lolclient.lolrtmps.model.utils.GameModeTypeConfig;
-import com.fjxokt.lolclient.lolrtmps.model.utils.Map;
-import com.fjxokt.lolclient.lolrtmps.model.utils.SpectatorsAllowed;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
-import com.fjxokt.lolclient.lolrtmps.services.GameService;
 
 public class CreateGamePanel extends JPanel {
 	
@@ -125,7 +123,6 @@ public class CreateGamePanel extends JPanel {
 							GameMap.createDummy(selMap.getMapId(), maxPlayers, minPlayers), 
 							maxPlayers, minPlayers, pwd,specAllow);
 				} catch (PlayerAlreadyInGameException e) {
-					e.printStackTrace();
 				}
 			}
 		});

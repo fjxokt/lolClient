@@ -1,11 +1,5 @@
 package com.fjxokt.lolclient.lolrtmps;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
 import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
 import com.fjxokt.lolclient.lolrtmps.events.ClientEventType;
 import com.fjxokt.lolclient.lolrtmps.events.ClientListener;
@@ -29,10 +23,15 @@ import com.fjxokt.lolclient.lolrtmps.services.GameService;
 import com.fjxokt.lolclient.messaging.MessagingManager;
 import com.gvaneyck.rtmp.LoLRTMPSClient;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
-abstract class LoLClientControllerImpl implements LoLClientController {
+public class LoLClientControllerImpl implements LoLClientController {
 	
-	protected LoLRTMPSClient client;
+	LoLRTMPSClient client;
 	private Queue<TypedObject> queue;
 	private GameState status;
 	private List<ClientListener> gameListeners;
@@ -40,10 +39,10 @@ abstract class LoLClientControllerImpl implements LoLClientController {
 	private List<ClientListener> remQueueListeners;
 	private volatile boolean isNotifying;
 	private ClientEventType lastClientEventSent;	
-	protected GameDTO game;
+	GameDTO game;
         
         
-	public LoLClientControllerImpl() {
+	LoLClientControllerImpl() {
                 gameListeners = new ArrayList<ClientListener>();
                 addQueueListeners = new ArrayList<ClientListener>();
 	        remQueueListeners = new ArrayList<ClientListener>();

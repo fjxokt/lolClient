@@ -390,4 +390,7 @@ public class GameService {
                     return ResultMessage.ERROR;
                 }
 	}
+
+    private GameService() {
+    }
 }

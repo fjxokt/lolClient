@@ -1,8 +1,7 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.Date;
-
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.Date;
 
 public class SummonerRune extends ClassType {
 

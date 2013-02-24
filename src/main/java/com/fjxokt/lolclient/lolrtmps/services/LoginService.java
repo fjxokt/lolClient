@@ -18,7 +18,6 @@ public class LoginService {
 			// login
 			controller.getRTMPSClient().connectAndLogin();
 		} catch (IOException e) {
-			e.printStackTrace();
 			return ResultMessage.LOGIN_FAILED;
 		}
 		controller.setState(GameState.IDLE);
@@ -57,4 +56,7 @@ public class LoginService {
                 
                 return (String) urlObject;
 	}
+
+    private LoginService() {
+    }
 }

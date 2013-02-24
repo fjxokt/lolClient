@@ -21,6 +21,7 @@ public class Timer {
 	
 	private Thread createThread() {
 		Thread curThread = new Thread() {
+                    @Override
             public void run() {
             	tick(this);
             }
@@ -55,7 +56,6 @@ public class Timer {
 				Thread.sleep(tick);
 				duration += tick;
 			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
 		}
 	}

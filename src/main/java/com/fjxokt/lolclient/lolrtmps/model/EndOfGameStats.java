@@ -1,9 +1,9 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class EndOfGameStats extends ClassType {
 
@@ -158,11 +158,11 @@ public class EndOfGameStats extends ClassType {
 	}
 
 	public List<PlayerParticipantStatsSummary> getTeamPlayerParticipantStats() {
-		return teamPlayerParticipantStats;
+		return Collections.unmodifiableList(teamPlayerParticipantStats);
 	}
 
 	public List<PlayerParticipantStatsSummary> getOtherTeamPlayerParticipantStats() {
-		return otherTeamPlayerParticipantStats;
+		return Collections.unmodifiableList(otherTeamPlayerParticipantStats);
 	}
 
 	public Integer getBasePoints() {
@@ -186,7 +186,7 @@ public class EndOfGameStats extends ClassType {
 	}
 
 	public List<PointsPenalty> getPointsPenalties() {
-		return pointsPenalties;
+		return Collections.unmodifiableList(pointsPenalties);
 	}
 
 	public Double getLoyaltyBoostIpEarned() {
@@ -202,7 +202,7 @@ public class EndOfGameStats extends ClassType {
 	}
 
 	public List<Object> getNewSpells() {
-		return newSpells;
+		return Collections.unmodifiableList(newSpells);
 	}
 
 	public Double getExperienceTotal() {

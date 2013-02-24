@@ -31,4 +31,7 @@ public class SimpleXML {
 		return null;
 	}
 
+    private SimpleXML() {
+    }
+
 }

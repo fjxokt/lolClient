@@ -1,20 +1,18 @@
 package com.fjxokt.lolclient.ui.champsel;
 
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.model.dto.ChampionSkinDTO;
+import com.fjxokt.lolclient.lolrtmps.model.dto.PlayerChampionSelectionDTO;
+import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import com.fjxokt.lolclient.lolrtmps.model.dto.ChampionSkinDTO;
-import com.fjxokt.lolclient.lolrtmps.model.dto.PlayerChampionSelectionDTO;
-import com.fjxokt.lolclient.lolrtmps.model.utils.ResultMessage;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
-import com.fjxokt.lolclient.lolrtmps.services.GameService;
 
 public class SellChampionSkinPanel extends JPanel {
 	private static final long serialVersionUID = 1L;

@@ -1,9 +1,9 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class PlayerStatSummaries extends ClassType {
 
@@ -35,7 +35,7 @@ public class PlayerStatSummaries extends ClassType {
 	}
 
 	public List<PlayerStatSummary> getPlayerStatSummarySet() {
-		return playerStatSummarySet;
+		return Collections.unmodifiableList(playerStatSummarySet);
 	}
 
 	@Override

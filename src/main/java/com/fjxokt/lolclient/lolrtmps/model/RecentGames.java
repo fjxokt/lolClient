@@ -1,9 +1,9 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class RecentGames extends ClassType {
 	
@@ -37,7 +37,7 @@ public class RecentGames extends ClassType {
 	}
 
 	public List<PlayerGameStats> getGameStatistics() {
-		return gameStatistics;
+		return Collections.unmodifiableList(gameStatistics);
 	}
 
 	@Override

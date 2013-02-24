@@ -1,9 +1,9 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
+import com.gvaneyck.rtmp.TypedObject;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.gvaneyck.rtmp.TypedObject;
 
 public class SummonerDefaultSpells extends ClassType {
 	
@@ -31,7 +31,7 @@ public class SummonerDefaultSpells extends ClassType {
 	}
 
 	public Map<String, SummonerGameModeSpells> getSummonerDefaultSpellMap() {
-		return summonerDefaultSpellMap;
+		return Collections.unmodifiableMap(summonerDefaultSpellMap);
 	}
 
 	public void setSummonerDefaultSpellMap(Map<String, SummonerGameModeSpells> summonerDefaultSpellMap) {

@@ -66,4 +66,7 @@ public class ClientFacadeService {
                 
                 return Arrays.asList(kudosResults).toArray(new Integer[kudosResults.length]);
 	}
+
+    private ClientFacadeService() {
+    }
 }

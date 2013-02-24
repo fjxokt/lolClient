@@ -1,10 +1,10 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fjxokt.lolclient.lolrtmps.model.dto.RawStatDTO;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class PlayerParticipantStatsSummary extends ClassType {
 
@@ -107,7 +107,7 @@ public class PlayerParticipantStatsSummary extends ClassType {
 	}
 
 	public List<RawStatDTO> getStatistics() {
-		return statistics;
+		return Collections.unmodifiableList(statistics);
 	}
 
 	public Boolean getBotPlayer() {

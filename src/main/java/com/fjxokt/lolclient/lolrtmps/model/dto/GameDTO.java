@@ -1,13 +1,13 @@
 package com.fjxokt.lolclient.lolrtmps.model.dto;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.fjxokt.lolclient.lolrtmps.model.ClassType;
 import com.fjxokt.lolclient.lolrtmps.model.GameObserver;
 import com.fjxokt.lolclient.lolrtmps.model.Participant;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 public class GameDTO extends ClassType {
 
@@ -218,7 +218,7 @@ public class GameDTO extends ClassType {
 	}
 
 	public List<Participant> getTeamOne() {
-		return teamOne;
+		return Collections.unmodifiableList(teamOne);
 	}
 
 	public void setTeamOne(List<Participant> teamOne) {
@@ -226,7 +226,7 @@ public class GameDTO extends ClassType {
 	}
 
 	public List<Participant> getTeamTwo() {
-		return teamTwo;
+		return Collections.unmodifiableList(teamTwo);
 	}
 
 	public void setTeamTwo(List<Participant> teamTwo) {
@@ -234,7 +234,7 @@ public class GameDTO extends ClassType {
 	}
 
 	public List<GameObserver> getObservers() {
-		return observers;
+		return Collections.unmodifiableList(observers);
 	}
 
 	public void setObservers(List<GameObserver> observers) {
@@ -242,7 +242,7 @@ public class GameDTO extends ClassType {
 	}
 
 	public List<Object> getBannedChampions() {
-		return bannedChampions;
+		return Collections.unmodifiableList(bannedChampions);
 	}
 
 	public void setBannedChampions(List<Object> bannedChampions) {
@@ -298,7 +298,7 @@ public class GameDTO extends ClassType {
 	}
 
 	public List<PlayerChampionSelectionDTO> getPlayerChampionSelections() {
-		return playerChampionSelections;
+		return Collections.unmodifiableList(playerChampionSelections);
 	}
 
 	public void setPlayerChampionSelections(

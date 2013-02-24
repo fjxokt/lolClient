@@ -1,12 +1,12 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
+import com.fjxokt.lolclient.lolrtmps.model.dto.GameMapEnabledDTO;
+import com.gvaneyck.rtmp.TypedObject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.fjxokt.lolclient.lolrtmps.model.dto.GameMapEnabledDTO;
-import com.gvaneyck.rtmp.TypedObject;
 
 public class ClientSystemStatesNotification extends ClassType {
 
@@ -195,51 +195,51 @@ public class ClientSystemStatesNotification extends ClassType {
 	}
 
 	public List<String> getObservableGameModes() {
-		return observableGameModes;
+		return Collections.unmodifiableList(observableGameModes);
 	}
 
 	public List<GameMapEnabledDTO> getGameMapEnabledDTOList() {
-		return gameMapEnabledDTOList;
+		return Collections.unmodifiableList(gameMapEnabledDTOList);
 	}
 
 	public List<Integer> getInactiveOdinSpellIdList() {
-		return inactiveOdinSpellIdList;
+		return Collections.unmodifiableList(inactiveOdinSpellIdList);
 	}
 
 	public List<Integer> getInactiveTutorialSpellIdList() {
-		return inactiveTutorialSpellIdList;
+		return Collections.unmodifiableList(inactiveTutorialSpellIdList);
 	}
 
 	public List<Integer> getInactiveSpellIdList() {
-		return inactiveSpellIdList;
+		return Collections.unmodifiableList(inactiveSpellIdList);
 	}
 
 	public List<Integer> getInactiveAramSpellIdList() {
-		return inactiveAramSpellIdList;
+		return Collections.unmodifiableList(inactiveAramSpellIdList);
 	}
 
 	public List<Integer> getInactiveChampionIdList() {
-		return inactiveChampionIdList;
+		return Collections.unmodifiableList(inactiveChampionIdList);
 	}
 
 	public List<Integer> getInactiveClassicSpellIdList() {
-		return inactiveClassicSpellIdList;
+		return Collections.unmodifiableList(inactiveClassicSpellIdList);
 	}
 
 	public List<Integer> getEnabledQueueIdsList() {
-		return enabledQueueIdsList;
+		return Collections.unmodifiableList(enabledQueueIdsList);
 	}
 
 	public List<Integer> getFreeToPlayChampionIdList() {
-		return freeToPlayChampionIdList;
+		return Collections.unmodifiableList(freeToPlayChampionIdList);
 	}
 
 	public List<Integer> getUnobtainableChampionSkinIDList() {
-		return unobtainableChampionSkinIDList;
+		return Collections.unmodifiableList(unobtainableChampionSkinIDList);
 	}
 
 	public List<Integer> getPracticeGameTypeConfigIdList() {
-		return practiceGameTypeConfigIdList;
+		return Collections.unmodifiableList(practiceGameTypeConfigIdList);
 	}
 
 	@Override

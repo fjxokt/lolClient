@@ -1,5 +1,13 @@
 package com.fjxokt.lolclient.messaging;
 
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
+import com.fjxokt.lolclient.lolrtmps.model.utils.GameState;
+import com.fjxokt.lolclient.lolrtmps.services.MatchmakerService;
+import com.fjxokt.lolclient.ui.chat.ChatPresenceType;
+import com.fjxokt.lolclient.utils.SimpleSHA1;
+import com.fjxokt.lolclient.utils.SimpleXML;
+import com.gvaneyck.rtmp.DummySSLSocketFactory;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -8,7 +16,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManager;
 import org.jivesoftware.smack.ChatManagerListener;
@@ -23,22 +30,13 @@ import org.jivesoftware.smack.SmackConfiguration;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
-import org.jivesoftware.smack.packet.Packet;
-import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Message.Body;
 import org.jivesoftware.smack.packet.Message.Type;
+import org.jivesoftware.smack.packet.Packet;
+import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Mode;
 import org.jivesoftware.smackx.muc.HostedRoom;
 import org.jivesoftware.smackx.muc.MultiUserChat;
-
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
-import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
-import com.fjxokt.lolclient.lolrtmps.model.utils.GameState;
-import com.fjxokt.lolclient.lolrtmps.services.MatchmakerService;
-import com.fjxokt.lolclient.ui.chat.ChatPresenceType;
-import com.fjxokt.lolclient.utils.SimpleSHA1;
-import com.fjxokt.lolclient.utils.SimpleXML;
-import com.gvaneyck.rtmp.DummySSLSocketFactory;
 
 public class MessagingManager implements MessageListener {
 
@@ -94,7 +92,7 @@ public class MessagingManager implements MessageListener {
 		private MultiUserChat chatRoom;
 		private ChatRoomType chatType;
 		private PacketListener listener;
-		public PVPChatRoom(MultiUserChat chatRoom, ChatRoomType chatType, PacketListener listener) {
+		PVPChatRoom(MultiUserChat chatRoom, ChatRoomType chatType, PacketListener listener) {
 			this.chatRoom = chatRoom;
 			this.chatType = chatType;
 			this.listener = listener;
@@ -178,7 +176,6 @@ public class MessagingManager implements MessageListener {
 	        //SASLAuthentication.supportSASLMechanism("PLAIN", 0);
 			connection.login(username, "AIR_" + password, "xiff");
 		} catch (XMPPException e) {
-			e.printStackTrace();
 		}
 	    
 	    loggedIn = connection.isAuthenticated();
@@ -292,7 +289,6 @@ public class MessagingManager implements MessageListener {
 		try {
 			connection.connect();
 		} catch (XMPPException e) {
-			e.printStackTrace();
 			System.out.println("could not reconnect to chat!");
 		}
 		loggedIn = connection.isAuthenticated();
@@ -315,8 +311,6 @@ public class MessagingManager implements MessageListener {
 		try {
 			sendMessage(m, "sum22371167@pvp.net");
 		} catch (XMPPException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return m;
 	}
@@ -373,8 +367,6 @@ public class MessagingManager implements MessageListener {
 				try {
 					sendMessage(m, "sum22371167@pvp.net");
 				} catch (XMPPException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 			}
 			else if (message.getSubject().equals("GAME_INVITE_ACCEPT")) {
@@ -391,8 +383,6 @@ public class MessagingManager implements MessageListener {
 				try {
 					sendMessage(m, "sum22371167@pvp.net");
 				} catch (XMPPException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 				
 				// list invited ppl
@@ -405,8 +395,6 @@ public class MessagingManager implements MessageListener {
 				try {
 					sendMessage(p, "sum22371167@pvp.net");
 				} catch (XMPPException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 	
 				/*System.out.println(invitationId);
@@ -424,8 +412,6 @@ public class MessagingManager implements MessageListener {
 				try {
 					sendMessage(m, "sum22371167@pvp.net");
 				} catch (XMPPException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 			}
 			// i have been accepted (received ater I send my GAME_INVITE_ACCEPT)
@@ -442,8 +428,6 @@ public class MessagingManager implements MessageListener {
 				try {
 					sendMessage(m, "sum22371167@pvp.net");
 				} catch (XMPPException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}	
 				
 			}
@@ -461,8 +445,6 @@ public class MessagingManager implements MessageListener {
 				try {
 					sendMessage(m, "sum22371167@pvp.net");
 				} catch (XMPPException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}	
 			}
 		}
@@ -537,7 +519,6 @@ public class MessagingManager implements MessageListener {
 		try {
 			pvpChatRoom.getChatRoom().sendMessage(wrapMessage(message));
 		} catch (XMPPException e) {
-			e.printStackTrace();
 		}
 	}
  
@@ -570,9 +551,7 @@ public class MessagingManager implements MessageListener {
 		try {
 			sha1 = SimpleSHA1.SHA1(roomName.toLowerCase());
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
 		}
 		String room = type.getType() + ChatRoomType.PREFIX_DELIMITER + sha1 + "@sec.pvp.net";
 		System.out.println("room: " + room + " : pwd: " + roomPassword);
@@ -613,7 +592,6 @@ public class MessagingManager implements MessageListener {
 			}
 //			chatRoom.leave();
 		} catch (XMPPException e1) {
-			e1.printStackTrace();
 		}
 	}
 	
@@ -632,7 +610,6 @@ public class MessagingManager implements MessageListener {
 				System.out.println(r.getName());
 			}
 		} catch (XMPPException e) {
-			e.printStackTrace();
 		}
 	}
 	

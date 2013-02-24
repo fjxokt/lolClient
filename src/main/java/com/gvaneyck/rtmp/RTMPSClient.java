@@ -16,7 +16,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLException;
 import javax.net.ssl.SSLSocket;
@@ -36,43 +35,43 @@ public class RTMPSClient
 	private static char[] passphrase = "changeit".toCharArray();
 
 	/** Server information */
-	protected String server;
-	protected int port;
-	protected String app;
-	protected String swfUrl;
-	protected String pageUrl;
+	String server;
+	int port;
+	String app;
+	String swfUrl;
+	String pageUrl;
 
 	/** Connection information */
-	protected String DSId;
+	String DSId;
 
 	/** Socket and streams */
-	protected SSLSocket sslsocket;
-	protected InputStream in;
-	protected DataOutputStream out;
-	protected RTMPPacketReader pr;
+	SSLSocket sslsocket;
+	InputStream in;
+	DataOutputStream out;
+	RTMPPacketReader pr;
 
 	/** State information */
-	protected volatile boolean connected = false;
-	protected volatile boolean reconnecting = false;
-	protected int invokeID = 2;
+	volatile boolean connected = false;
+	volatile boolean reconnecting = false;
+	int invokeID = 2;
 
 	/** Used for generating handshake */
-	protected Random rand = new Random();
+	Random rand = new Random();
 
 	/** Encoder */
-	protected AMF3Encoder aec = new AMF3Encoder();
+	AMF3Encoder aec = new AMF3Encoder();
 
 	/** Pending invokes */
-	protected Set<Integer> pendingInvokes = Collections.synchronizedSet(new HashSet<Integer>());
+	Set<Integer> pendingInvokes = Collections.synchronizedSet(new HashSet<Integer>());
 
 	/** Map of decoded packets */
 	private Map<Integer, TypedObject> results = Collections.synchronizedMap(new HashMap<Integer, TypedObject>());
 
 	/** Callback list */
-	protected Map<Integer, Callback> callbacks = Collections.synchronizedMap(new HashMap<Integer, Callback>());
+	Map<Integer, Callback> callbacks = Collections.synchronizedMap(new HashMap<Integer, Callback>());
 
 	/** Receive handler */
-	protected volatile Callback receiveCallback = null;
+	volatile Callback receiveCallback = null;
 
 	/**
 	 * A simple test for doing the basic RTMPS connection to Riot
@@ -85,14 +84,15 @@ public class RTMPSClient
 		try
 		{
 			client.connect();
-			if (client.isConnected())
-				System.out.println("Success");
-			else
-				System.out.println("Failure");
+			if (client.isConnected()) {
+                        System.out.println("Success");
+                    }
+			else {
+                        System.out.println("Failure");
+                    }
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
 		}
 
 		client.close();
@@ -142,7 +142,7 @@ public class RTMPSClient
 	 * Wrapper for sleep
 	 * @param ms The time to sleep
 	 */
-	protected void sleep(long ms)
+	void sleep(long ms)
 	{
 		try
 		{
@@ -165,8 +165,9 @@ public class RTMPSClient
 
 		try
 		{
-			if (sslsocket != null)
-				sslsocket.close();
+			if (sslsocket != null) {
+                        sslsocket.close();
+                    }
 		}
 		catch (IOException e)
 		{
@@ -186,6 +187,7 @@ public class RTMPSClient
 	{
 		Thread t = new Thread()
 				{
+                                    @Override
 					public void run()
 					{
 						reconnect();
@@ -215,7 +217,6 @@ public class RTMPSClient
 			catch (IOException e)
 			{
 				System.err.println("Error when reconnecting: ");
-				e.printStackTrace(); // For debug purposes
 
 				sleep(5000);
 			}
@@ -236,8 +237,9 @@ public class RTMPSClient
 			// Load the default KeyStore or a saved one
 			KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
 			File file = new File("certs/" + server + ".cert");
-			if (!file.exists() || !file.isFile())
-				file = new File(System.getProperty("java.home") + "/lib/security/cacerts");
+			if (!file.exists() || !file.isFile()) {
+                        file = new File(System.getProperty("java.home") + "/lib/security/cacerts");
+                    }
 			
 			InputStream in = new FileInputStream(file);
 			ks.load(in, passphrase);
@@ -307,8 +309,9 @@ public class RTMPSClient
 				
 				// Add certificate
 				X509Certificate[] chain = tm.chain;
-				if (chain == null)
-					throw new Exception("Failed to obtain server certificate chain");
+				if (chain == null) {
+                                throw new Exception("Failed to obtain server certificate chain");
+                            }
 				
 				X509Certificate cert = chain[0];
 				String alias = server + "-1";
@@ -385,8 +388,9 @@ public class RTMPSClient
 		out.write(connect, 0, connect.length);
 		out.flush();
 
-		while (!results.containsKey(1))
-			sleep(10);
+		while (!results.containsKey(1)) {
+                sleep(10);
+            }
 		TypedObject result = results.get(1);
 		DSId = result.getTO("data").getString("id");
 
@@ -416,8 +420,9 @@ public class RTMPSClient
 
 		// S0
 		byte S0 = (byte)in.read();
-		if (S0 != 0x03)
-			throw new IOException("Server returned incorrect version in handshake: " + S0);
+		if (S0 != 0x03) {
+                throw new IOException("Server returned incorrect version in handshake: " + S0);
+            }
 
 		// S1
 		byte[] S1 = new byte[1536];
@@ -445,8 +450,9 @@ public class RTMPSClient
 			}
 		}
 
-		if (!valid)
-			throw new IOException("Server returned invalid handshake");
+		if (!valid) {
+                throw new IOException("Server returned invalid handshake");
+            }
 	}
 
 	/**
@@ -518,7 +524,7 @@ public class RTMPSClient
 	 * @param operation The operation
 	 * @return
 	 */
-	protected TypedObject wrapBody(Object body, String destination, Object operation)
+	TypedObject wrapBody(Object body, String destination, Object operation)
 	{
 		TypedObject headers = new TypedObject();
 		headers.put("DSRequestTimeout", 60);
@@ -544,7 +550,7 @@ public class RTMPSClient
 	 * 
 	 * @return The next invoke ID
 	 */
-	protected int nextInvokeID()
+	int nextInvokeID()
 	{
 		return invokeID++;
 	}
@@ -595,8 +601,9 @@ public class RTMPSClient
 			sleep(10);
 		}
 		
-		if (!connected)
-			return null;
+		if (!connected) {
+                return null;
+            }
 		
 		if (!results.containsKey(id)) {
 			System.out.println("LEFT LOOP, no result for id " + id + " found after 5000 ms");
@@ -641,16 +648,17 @@ public class RTMPSClient
 		pendingInvokes.remove(id);
 
 		// Check if we've already received the result
-		if (peekResult(id) != null)
-			return;
+		if (peekResult(id) != null) {
+            }
 		// Signify a cancelled invoke by giving it a null callback
 		else
 		{
 			callbacks.put(id, null);
 
 			// Check for race condition
-			if (peekResult(id) != null)
-				callbacks.remove(id);
+			if (peekResult(id) != null) {
+                        callbacks.remove(id);
+                    }
 		}
 	}
 
@@ -680,12 +688,13 @@ public class RTMPSClient
 		 * 
 		 * @param stream The stream to read packets from
 		 */
-		public RTMPPacketReader(InputStream stream)
+		RTMPPacketReader(InputStream stream)
 		{
 			this.in = new BufferedInputStream(stream, 16384);
 
 			Thread curThread = new Thread()
 					{
+                                            @Override
 						public void run()
 						{
 							parsePackets(this);
@@ -723,26 +732,32 @@ public class RTMPSClient
 					int headerType = basicHeader & 0xC0;
 
 					int headerSize = 0;
-					if (headerType == 0x00)
-						headerSize = 12;
-					else if (headerType == 0x40)
-						headerSize = 8;
-					else if (headerType == 0x80)
-						headerSize = 4;
-					else if (headerType == 0xC0)
-						headerSize = 1;
+					if (headerType == 0x00) {
+                                        headerSize = 12;
+                                    }
+					else if (headerType == 0x40) {
+                                        headerSize = 8;
+                                    }
+					else if (headerType == 0x80) {
+                                        headerSize = 4;
+                                    }
+					else if (headerType == 0xC0) {
+                                        headerSize = 1;
+                                    }
 
 					// Retrieve the packet or make a new one
-					if (!packets.containsKey(channel))
-						packets.put(channel, new Packet());
+					if (!packets.containsKey(channel)) {
+                                        packets.put(channel, new Packet());
+                                    }
 					Packet p = packets.get(channel);
 
 					// Parse the full header
 					if (headerSize > 1)
 					{
 						byte[] header = new byte[headerSize - 1];
-						for (int i = 0; i < header.length; i++)
-							header[i] = (byte)in.read();
+						for (int i = 0; i < header.length; i++) {
+                                                header[i] = (byte)in.read();
+                                            }
 						//if (debug)
 						//{
 						//	for (int i = 0; i < header.length; i++)
@@ -753,8 +768,9 @@ public class RTMPSClient
 						if (headerSize >= 8)
 						{
 							int size = 0;
-							for (int i = 3; i < 6; i++)
-								size = size * 256 + (header[i] & 0xFF);
+							for (int i = 3; i < 6; i++) {
+                                                        size = size * 256 + (header[i] & 0xFF);
+                                                    }
 							p.setSize(size);
 
 							p.setType(header[6]);
@@ -767,29 +783,34 @@ public class RTMPSClient
 						byte b = (byte)in.read();
 						p.add(b);
 
-						if (p.isComplete())
-							break;
+						if (p.isComplete()) {
+                                                break;
+                                            }
 					}
 
 					// Continue reading if we didn't complete a packet
-					if (!p.isComplete())
-						continue;
+					if (!p.isComplete()) {
+                                        continue;
+                                    }
 
 					// Remove the read packet
 					packets.remove(channel);
 
 					// Decode result
 					final TypedObject result;
-					if (p.getType() == 0x14) // Connect
-						result = adc.decodeConnect(p.getData());
-					else if (p.getType() == 0x11) // Invoke
-						result = adc.decodeInvoke(p.getData());
+					if (p.getType() == 0x14) {
+                                        result = adc.decodeConnect(p.getData());
+                                    }
+					else if (p.getType() == 0x11) {
+                                        result = adc.decodeInvoke(p.getData());
+                                    }
 					else if (p.getType() == 0x06) // Set peer bandwidth
 					{
 						byte[] data = p.getData();
 						int windowSize = 0;
-						for (int i = 0; i < 4; i++)
-							windowSize = windowSize * 256 + (data[i] & 0xFF);
+						for (int i = 0; i < 4; i++) {
+                                                windowSize = windowSize * 256 + (data[i] & 0xFF);
+                                            }
 //						int type = data[4];
 						continue;
 					}
@@ -797,8 +818,9 @@ public class RTMPSClient
 					{
 						byte[] data = p.getData();
 						int ackSize = 0;
-						for (int i = 0; i < 4; i++)
-							ackSize = ackSize * 256 + (data[i] & 0xFF);
+						for (int i = 0; i < 4; i++) {
+                                                ackSize = ackSize * 256 + (data[i] & 0xFF);
+                                            }
 						continue;
 					}
 					else
@@ -807,15 +829,17 @@ public class RTMPSClient
 						if (debug)
 						{
 							System.out.print(String.format("%02X ", p.getType()));
-							for (byte b : p.getData())
-								System.out.print(String.format("%02X", b & 0xff));
+							for (byte b : p.getData()) {
+                                                        System.out.print(String.format("%02X", b & 0xff));
+                                                    }
 							System.out.println();
 						}
 						continue;
 					}
 
-					if (debug)
-						System.out.println(result);
+					if (debug) {
+                                        System.out.println(result);
+                                    }
 
 					// Store result
 					Integer id = result.getInt("invokeId");
@@ -823,8 +847,9 @@ public class RTMPSClient
 					// Receive handler
 					if (id == null || id == 0)
 					{
-						if (receiveCallback != null)
-							receiveCallback.callback(result);
+						if (receiveCallback != null) {
+                                                receiveCallback.callback(result);
+                                            }
 					}
 					// Callback handler
 					else if (callbacks.containsKey(id))
@@ -835,6 +860,7 @@ public class RTMPSClient
 							// Thread the callback so it doesn't hang us
 							Thread t = new Thread()
 							{
+                                                            @Override
 								public void run()
 								{
 									cb.callback(result);
@@ -856,7 +882,6 @@ public class RTMPSClient
 				if (!reconnecting && connected)
 				{
 					System.out.println("Error while reading from stream");
-					e.printStackTrace();
 				}
 			}
 

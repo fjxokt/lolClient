@@ -64,6 +64,7 @@ public enum Map {
 		return mapDesc;
 	}
 	
+    @Override
 	public String toString() {
 		return mapName;
 	}

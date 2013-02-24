@@ -58,13 +58,15 @@ public class AMF3Encoder
 		for (int i = 0; i < data.length; i++)
 		{
 			result.add(data[i]);
-			if (i % 128 == 127 && i != data.length - 1)
-				result.add((byte)0xC3);
+			if (i % 128 == 127 && i != data.length - 1) {
+                        result.add((byte)0xC3);
+                    }
 		}
 
 		byte[] ret = new byte[result.size()];
-		for (int i = 0; i < ret.length; i++)
-			ret[i] = result.get(i);
+		for (int i = 0; i < ret.length; i++) {
+                ret[i] = result.get(i);
+            }
 
 		return ret;
 	}
@@ -116,8 +118,9 @@ public class AMF3Encoder
 		encode(result, cm);
 
 		byte[] ret = new byte[result.size()];
-		for (int i = 0; i < ret.length; i++)
-			ret[i] = result.get(i);
+		for (int i = 0; i < ret.length; i++) {
+                ret[i] = result.get(i);
+            }
 
 		ret = addHeaders(ret);
 		ret[7] = (byte)0x14; // Change message type
@@ -147,8 +150,9 @@ public class AMF3Encoder
 		encode(result, data);
 
 		byte[] ret = new byte[result.size()];
-		for (int i = 0; i < ret.length; i++)
-			ret[i] = result.get(i);
+		for (int i = 0; i < ret.length; i++) {
+                ret[i] = result.get(i);
+            }
 
 		ret = addHeaders(ret);
 
@@ -169,8 +173,9 @@ public class AMF3Encoder
 		encode(result, obj);
 
 		byte[] ret = new byte[result.size()];
-		for (int i = 0; i < ret.length; i++)
-			ret[i] = result.get(i);
+		for (int i = 0; i < ret.length; i++) {
+                ret[i] = result.get(i);
+            }
 
 		return ret;
 	}
@@ -193,10 +198,12 @@ public class AMF3Encoder
 		else if (obj instanceof Boolean)
 		{
 			boolean val = (Boolean)obj;
-			if (val)
-				ret.add((byte)0x03);
-			else
-				ret.add((byte)0x02);
+			if (val) {
+                        ret.add((byte)0x03);
+                    }
+			else {
+                        ret.add((byte)0x02);
+                    }
 		}
 		else if (obj instanceof Integer)
 		{
@@ -298,8 +305,9 @@ public class AMF3Encoder
 		{
 			byte[] temp = new byte[8];
 			ByteBuffer.wrap(temp).putDouble(val);
-			for (byte b : temp)
-				ret.add(b);
+			for (byte b : temp) {
+                        ret.add(b);
+                    }
 		}
 	}
 
@@ -324,8 +332,9 @@ public class AMF3Encoder
 
 		writeInt(ret, (temp.length << 1) | 1);
 
-		for (byte b : temp)
-			ret.add(b);
+		for (byte b : temp) {
+                ret.add(b);
+            }
 	}
 
 	/**
@@ -352,8 +361,9 @@ public class AMF3Encoder
 	{
 		writeInt(ret, (val.length << 1) | 1);
 		ret.add((byte)0x01);
-		for (Object obj : val)
-			encode(ret, obj);
+		for (Object obj : val) {
+                encode(ret, obj);
+            }
 	}
 
 	/**
@@ -385,7 +395,7 @@ public class AMF3Encoder
 	 */
 	private void writeObject(List<Byte> ret, TypedObject val) throws EncodingException, NotImplementedException
 	{
-		if (val.type == null || val.type.equals(""))
+		if (val.type == null || val.type.isEmpty())
 		{
 			ret.add((byte)0x0B); // Dynamic class
 
@@ -416,8 +426,9 @@ public class AMF3Encoder
 				keyOrder.add(key);
 			}
 
-			for (String key : keyOrder)
-				encode(ret, val.get(key));
+			for (String key : keyOrder) {
+                        encode(ret, val.get(key));
+                    }
 		}
 	}
 
@@ -445,8 +456,9 @@ public class AMF3Encoder
 
 		byte[] temp = new byte[8];
 		ByteBuffer.wrap(temp).putDouble((double)val);
-		for (byte b : temp)
-			ret.add(b);
+		for (byte b : temp) {
+                ret.add(b);
+            }
 	}
 
 	/**
@@ -473,8 +485,9 @@ public class AMF3Encoder
 		ret.add((byte)((temp.length & 0xFF00) >> 8));
 		ret.add((byte)(temp.length & 0x00FF));
 
-		for (byte b : temp)
-			ret.add(b);
+		for (byte b : temp) {
+                ret.add(b);
+            }
 	}
 
 	/**
@@ -490,8 +503,9 @@ public class AMF3Encoder
 		StringBuilder ret = new StringBuilder();
 		for (int i = 0; i < bytes.length; i++)
 		{
-			if (i == 4 || i == 6 || i == 8 || i == 10)
-				ret.append('-');
+			if (i == 4 || i == 6 || i == 8 || i == 10) {
+                        ret.append('-');
+                    }
 			ret.append(String.format("%02X", bytes[i]));
 		}
 

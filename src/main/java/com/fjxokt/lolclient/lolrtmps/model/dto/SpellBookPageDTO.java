@@ -1,12 +1,12 @@
 package com.fjxokt.lolclient.lolrtmps.model.dto;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.fjxokt.lolclient.lolrtmps.model.ClassType;
 import com.fjxokt.lolclient.lolrtmps.model.SlotEntry;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 public class SpellBookPageDTO extends ClassType {
 
@@ -93,7 +93,7 @@ public class SpellBookPageDTO extends ClassType {
 	}
 
 	public List<SlotEntry> getSlotEntries() {
-		return slotEntries;
+		return Collections.unmodifiableList(slotEntries);
 	}
 
 	public void setSlotEntries(List<SlotEntry> slotEntries) {

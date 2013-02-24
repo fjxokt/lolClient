@@ -1,9 +1,9 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class GameQueueConfig extends ClassType {
 	
@@ -101,7 +101,7 @@ public class GameQueueConfig extends ClassType {
 	}
 
 	public List<Integer> getSupportedMapIds() {
-		return supportedMapIds;
+		return Collections.unmodifiableList(supportedMapIds);
 	}
 
 	public String getGameMode() {

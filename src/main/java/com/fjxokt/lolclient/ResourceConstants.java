@@ -22,5 +22,8 @@ public class ResourceConstants {
 	public final static String spellIconPath = imageAssetsBasePackage + "spell_icons" + sep;    
 	
 	public final static String soundsChampsPath = soundAssetsBasePackage + language + sep + "champions" + sep;
+
+    private ResourceConstants() {
+    }
 	
 }

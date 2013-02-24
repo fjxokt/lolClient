@@ -54,4 +54,7 @@ public class LeaguesService {
 
                 return new LeagueListDTO(leagueTo);
 	}
+
+    private LeaguesService() {
+    }
 }

@@ -35,12 +35,15 @@ public abstract class Participant extends ClassType {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		if (this == obj) {
+                return true;
+            }
+		if (obj == null) {
+                return false;
+            }
+		if (getClass() != obj.getClass()) {
+                return false;
+            }
 		Participant other = (Participant) obj;
 		return summonerInternalName.equals(other.getSummonerInternalName());
 	}

@@ -1,5 +1,11 @@
 package com.fjxokt.lolclient.ui;
 
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.model.Talent;
+import com.fjxokt.lolclient.lolrtmps.model.TalentEntry;
+import com.fjxokt.lolclient.lolrtmps.model.TalentGroup;
+import com.fjxokt.lolclient.lolrtmps.model.TalentRow;
+import com.fjxokt.lolclient.lolrtmps.model.dto.MasteryBookPageDTO;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -23,7 +29,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
@@ -34,20 +39,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.fjxokt.lolclient.lolrtmps.model.dto.MasteryBookPageDTO;
-import com.fjxokt.lolclient.lolrtmps.model.Talent;
-import com.fjxokt.lolclient.lolrtmps.model.TalentEntry;
-import com.fjxokt.lolclient.lolrtmps.model.TalentGroup;
-import com.fjxokt.lolclient.lolrtmps.model.TalentRow;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
-
 public class MasteriesWin extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private class TalentRowPan extends JPanel {
 		private static final long serialVersionUID = 1L;
 		private TalentRow row;
-		public TalentRowPan(TalentRow row) {
+		TalentRowPan(TalentRow row) {
 			super(new GridLayout(1, 4));
 			this.setOpaque(false);
 			this.row = row;
@@ -61,7 +59,7 @@ public class MasteriesWin extends JFrame {
 		private static final long serialVersionUID = 1L;
 		private Talent talent;
 		private Integer rank;
-		public TalentEntryLabel(final Talent talent) {
+		TalentEntryLabel(final Talent talent) {
 			super("");
 			this.talent = talent;
 			this.rank = 0;
@@ -122,7 +120,7 @@ public class MasteriesWin extends JFrame {
 	
 	private class TalentGroupPan extends JPanel {
 		private static final long serialVersionUID = 1L;
-		public TalentGroupPan(TalentGroup group) {
+		TalentGroupPan(TalentGroup group) {
 			super();
 			this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			this.setOpaque(false);
@@ -247,7 +245,6 @@ public class MasteriesWin extends JFrame {
         try {
             img = ImageIO.read(new File("images" + File.separator + "masteries.png"));
         } catch (IOException e) {
-        	e.printStackTrace();
         }
         for (int i=0; i<ids.size(); i++) {
         	int size = 48;
@@ -280,15 +277,15 @@ public class MasteriesWin extends JFrame {
 		private static final long serialVersionUID = 1L;
 		private Image background;
 		private Image backgroundOriginal;
-		public MasteryPanel() {
+		MasteryPanel() {
 			super(new GridLayout(1, 3, 15, 0));
 	        try {
 	        	backgroundOriginal = ImageIO.read(new File("images" + File.separator + "masteries-background.jpg"));
 	        	background = backgroundOriginal;
 	        } catch (IOException e) {
-	        	e.printStackTrace();
 	        }
 	        addComponentListener(new ComponentAdapter() { 
+                    @Override
 	            public void componentResized(ComponentEvent e) { 
 	                int w = MasteryPanel.this.getWidth(); 
 	                int h = MasteryPanel.this.getHeight(); 

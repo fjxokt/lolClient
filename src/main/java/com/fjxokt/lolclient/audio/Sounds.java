@@ -1,7 +1,5 @@
 package com.fjxokt.lolclient.audio;
 
-import org.jivesoftware.smack.packet.Presence;
-
 import com.fjxokt.lolclient.ResourceConstants;
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
@@ -10,6 +8,7 @@ import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.messaging.ChatListener;
 import com.fjxokt.lolclient.messaging.MessagingManager;
 import com.fjxokt.lolclient.ui.chat.ChatPresenceType;
+import org.jivesoftware.smack.packet.Presence;
 
 // TODO: also implements MessageListener for the chat sounds
 public class Sounds implements ClientListener, ChatListener {

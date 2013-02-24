@@ -1,12 +1,12 @@
 package com.fjxokt.lolclient.lolrtmps.model.dto;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.fjxokt.lolclient.lolrtmps.model.ClassType;
 import com.fjxokt.lolclient.lolrtmps.model.TalentEntry;
 import com.gvaneyck.rtmp.TypedObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 public class MasteryBookPageDTO extends ClassType {
 	
@@ -93,7 +93,7 @@ public class MasteryBookPageDTO extends ClassType {
 	}
 
 	public List<TalentEntry> getTalentEntries() {
-		return talentEntries;
+		return Collections.unmodifiableList(talentEntries);
 	}
 
 	public void setTalentEntries(List<TalentEntry> talentEntries) {

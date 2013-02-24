@@ -12,7 +12,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
 
@@ -100,7 +99,6 @@ public class LoLRTMPSClient extends RTMPSClient
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
 		}
 
 		client.close();
@@ -237,8 +235,9 @@ public class LoLRTMPSClient extends RTMPSClient
 	 */
 	public void login() throws IOException
 	{
-		if (useGarena)
-			getGarenaToken();
+		if (useGarena) {
+                getGarenaToken();
+            }
 		
 		getIPAddress();
 		getAuthToken();
@@ -247,10 +246,12 @@ public class LoLRTMPSClient extends RTMPSClient
 
 		// Login 1
 		body = new TypedObject("com.riotgames.platform.login.AuthenticationCredentials");
-		if (useGarena)
-			body.put("username", userID);
-		else
-			body.put("username", user);
+		if (useGarena) {
+                body.put("username", userID);
+            }
+		else {
+                body.put("username", user);
+            }
 		body.put("password", pass); // Garena doesn't actually care about password here
 		body.put("authToken", authToken);
 		body.put("clientVersion", clientVersion);
@@ -260,16 +261,19 @@ public class LoLRTMPSClient extends RTMPSClient
 		body.put("operatingSystem", "LoLRTMPSClient");
 		body.put("securityAnswer", null);
 		body.put("oldPassword", null);
-		if (useGarena)
-			body.put("partnerCredentials", "8393 " + garenaToken);
-		else
-			body.put("partnerCredentials", null);
+		if (useGarena) {
+                body.put("partnerCredentials", "8393 " + garenaToken);
+            }
+		else {
+                body.put("partnerCredentials", null);
+            }
 		int id = invoke("loginService", "login", new Object[] { body });
 
 		// Read relevant data
 		result = getResult(id);
-		if (result.get("result").equals("_error"))
-			throw new IOException(getErrorMessage(result));
+		if (result.get("result").equals("_error")) {
+                throw new IOException(getErrorMessage(result));
+            }
 		
 		body = result.getTO("data").getTO("body");
 		sessionToken = body.getString("token");
@@ -277,10 +281,12 @@ public class LoLRTMPSClient extends RTMPSClient
 		
 		// Login 2
 		byte[] encbuff = null;
-		if (useGarena)
-			encbuff = (userID + ":" + sessionToken).getBytes("UTF-8");
-		else
-			encbuff = (user.toLowerCase() + ":" + sessionToken).getBytes("UTF-8");
+		if (useGarena) {
+                encbuff = (userID + ":" + sessionToken).getBytes("UTF-8");
+            }
+		else {
+                encbuff = (user.toLowerCase() + ":" + sessionToken).getBytes("UTF-8");
+            }
 
 		body = wrapBody(Base64.encodeBytes(encbuff), "auth", 8);
 		body.type = "flex.messaging.messages.CommandMessage";
@@ -348,6 +354,7 @@ public class LoLRTMPSClient extends RTMPSClient
 	/**
 	 * Additional reconnect steps for logging in after a reconnect
 	 */
+    @Override
 	public void reconnect()
 	{
 		// Socket/RTMP reconnect
@@ -363,7 +370,6 @@ public class LoLRTMPSClient extends RTMPSClient
 			catch (IOException e)
 			{
 				System.err.println("Error when reconnecting: ");
-				e.printStackTrace(); // For debug purposes
 
 				sleep(5000);
 				super.reconnect(); // Need to reconnect again here
@@ -401,8 +407,9 @@ public class LoLRTMPSClient extends RTMPSClient
 	private void getIPAddress() throws IOException
 	{
 		// Don't need to retrieve IP address on reconnect (probably)
-		if (ipAddress != null)
-			return;
+		if (ipAddress != null) {
+                return;
+            }
 		
 		String response = readURL("http://ll.leagueoflegends.com/services/connection_info");
 		
@@ -438,24 +445,29 @@ public class LoLRTMPSClient extends RTMPSClient
 			sock = new Socket("203.117.158.170", 9100);
 			out = sock.getOutputStream();
 			junk = new int[] { 0x49, 0x00, 0x00, 0x00, 0x10, 0x01, 0x00, 0x79, 0x2f };
-			for (int j : junk)
-				out.write(j);
+			for (int j : junk) {
+                        out.write(j);
+                    }
 			
 			out.write(user.getBytes());
-			for (int i = 0; i < 16 - user.length(); i++)
-				out.write(0x00);
+			for (int i = 0; i < 16 - user.length(); i++) {
+                        out.write(0x00);
+                    }
 			
-			for (byte b : md5)
-				out.write(String.format("%02x", b).getBytes());
+			for (byte b : md5) {
+                        out.write(String.format("%02x", b).getBytes());
+                    }
 			out.write(0x00);
 			
 			out.write(0x01);
 			junk = new int[] { 0xD4, 0xAE, 0x52, 0xC0, 0x2E, 0xBA, 0x72, 0x03 };
-			for (int j : junk)
-				out.write(j);
+			for (int j : junk) {
+                        out.write(j);
+                    }
 			int timestamp = (int)(System.currentTimeMillis() / 1000);
-			for (int i = 0; i < 4; i++)
-				out.write((timestamp >> (8 * i)) & 0xFF);
+			for (int i = 0; i < 4; i++) {
+                        out.write((timestamp >> (8 * i)) & 0xFF);
+                    }
 			out.write(0x00);
 			
 			out.write("intl".getBytes());
@@ -467,13 +479,15 @@ public class LoLRTMPSClient extends RTMPSClient
 			in = sock.getInputStream();
 			
 			// Skip the first 5 bytes
-			for (int i = 0; i < 5; i++)
-				in.read();
+			for (int i = 0; i < 5; i++) {
+                        in.read();
+                    }
 			
 			// Get our ID
 			int id = 0;
-			for (int i = 0; i < 4; i++)
-				id += in.read() * (1 << (8 * i));
+			for (int i = 0; i < 4; i++) {
+                        id += in.read() * (1 << (8 * i));
+                    }
 			userID = String.valueOf(id);
 
 			// Don't care about the rest
@@ -486,15 +500,17 @@ public class LoLRTMPSClient extends RTMPSClient
 			// Write our login info
 			out = sock.getOutputStream();
 			junk = new int[] { 0x32, 0x00, 0x00, 0x00, 0x01, 0x03, 0x80, 0x00, 0x00 };
-			for (int j : junk)
-				out.write(j);
+			for (int j : junk) {
+                        out.write(j);
+                    }
 
 			out.write(user.getBytes());
 			out.write(0x00);
 			
 			md5 = MessageDigest.getInstance("MD5").digest(pass.getBytes("UTF-8"));
-			for (byte b : md5)
-				out.write(String.format("%02x", b).getBytes());
+			for (byte b : md5) {
+                        out.write(String.format("%02x", b).getBytes());
+                    }
 			out.write(0x00);
 			
 			out.write(0x00);
@@ -507,12 +523,14 @@ public class LoLRTMPSClient extends RTMPSClient
 			StringBuilder buff = new StringBuilder();
 			
 			// Skip the first 5 bytes
-			for (int i = 0; i < 5; i++)
-				in.read();
+			for (int i = 0; i < 5; i++) {
+                        in.read();
+                    }
 			
 			// Read the result
-			while ((c = in.read()) != 0)
-				buff.append((char)c);
+			while ((c = in.read()) != 0) {
+                        buff.append((char)c);
+                    }
 			
 			garenaToken = buff.toString();
 
@@ -556,10 +574,12 @@ public class LoLRTMPSClient extends RTMPSClient
 
 		// Initial authToken request
 		String payload;
-		if (useGarena)
-			payload = garenaToken;
-		else
-			payload = "user=" + user + ",password=" + pass;
+		if (useGarena) {
+                payload = garenaToken;
+            }
+		else {
+                payload = "user=" + user + ",password=" + pass;
+            }
 		String query = "payload=" + URLEncoder.encode(payload, "ISO-8859-1");
 
 		URL url = new URL(loginQueue + "login-queue/rest/queue/authenticate");
@@ -602,8 +622,9 @@ public class LoLRTMPSClient extends RTMPSClient
 		
 		// Check for banned or other failures
 		//{"rate":0,"reason":"account_banned","status":"FAILED","delay":10000,"banned":7647952951000}
-		if (result.get("status").equals("FAILED"))
-			throw new IOException("Error logging in: " + result.get("reason"));
+		if (result.get("status").equals("FAILED")) {
+                throw new IOException("Error logging in: " + result.get("reason"));
+            }
 
 		// Handle login queue
 		if (!result.containsKey("token"))
@@ -623,8 +644,9 @@ public class LoLRTMPSClient extends RTMPSClient
 				
 				// Find our queue
 				int tnode = to.getInt("node");
-				if (tnode != node)
-					continue;
+				if (tnode != node) {
+                                continue;
+                            }
 				
 				id = to.getInt("id"); // Our ticket in line
 				cur = to.getInt("current"); // The current ticket being processed
@@ -640,8 +662,9 @@ public class LoLRTMPSClient extends RTMPSClient
 				sleep(delay); // Sleep until the queue updates
 				response = readURL(loginQueue + "login-queue/rest/queue/ticker/" + champ);
 				result = (TypedObject)JSON.parse(response);
-				if (result == null)
-					continue;
+				if (result == null) {
+                                continue;
+                            }
 			
 				cur = hexToInt(result.getString(nodeStr));
 				System.out.println("In login queue for " + region + ", #" + (int)Math.max(1, id - cur) + " in line");
@@ -677,8 +700,6 @@ public class LoLRTMPSClient extends RTMPSClient
 		}
 		catch (MalformedURLException e)
 		{
-			// Should never happen
-			e.printStackTrace();
 			return null;
 		}
 		catch (IOException e)
@@ -701,8 +722,9 @@ public class LoLRTMPSClient extends RTMPSClient
 
 		// Read in each character until end-of-stream is detected
 		int c;
-		while ((c = in.read()) != -1)
-			ret.append((char)c);
+		while ((c = in.read()) != -1) {
+                ret.append((char)c);
+            }
 
 		return ret.toString();
 	}
@@ -719,10 +741,12 @@ public class LoLRTMPSClient extends RTMPSClient
 		for (int i = 0; i < hex.length(); i++)
 		{
 			char c = hex.charAt(i);
-			if (c >= '0' && c <= '9')
-				total = total * 16 + c - '0';
-			else
-				total = total * 16 + c - 'a' + 10;
+			if (c >= '0' && c <= '9') {
+                        total = total * 16 + c - '0';
+                    }
+			else {
+                        total = total * 16 + c - 'a' + 10;
+                    }
 		}
 
 		return total;
@@ -737,10 +761,11 @@ public class LoLRTMPSClient extends RTMPSClient
 		private int heartbeat;
 		private SimpleDateFormat sdf = new SimpleDateFormat("ddd MMM d yyyy HH:mm:ss 'GMTZ'");
 
-		public HeartbeatThread()
+		HeartbeatThread()
 		{
 			this.heartbeat = 1;
 			curThread = new Thread() {
+                            @Override
 	            public void run() {
 	            	beatHeart(this);
 	            }
@@ -764,13 +789,15 @@ public class LoLRTMPSClient extends RTMPSClient
 					heartbeat++;
 
 					// Quick sleeps to shutdown the heartbeat quickly on a reconnect
-					while (curThread == thread && System.currentTimeMillis() - hbTime < 120000)
-						sleep(100);
+					while (curThread == thread && System.currentTimeMillis() - hbTime < 120000) {
+                                        sleep(100);
+                                    }
 				}
 				catch (Exception e)
 				{
-					if (!reconnecting)
-						doReconnect();
+					if (!reconnecting) {
+                                        doReconnect();
+                                    }
 				}
 			}
 		}

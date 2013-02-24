@@ -51,8 +51,9 @@ public class AMF3Decoder
 		result.put("serviceCall", decodeAMF0());
 		result.put("data", decodeAMF0());
 
-		if (dataPos != dataBuffer.length)
-			throw new EncodingException("Did not consume entire buffer: " + dataPos + " of " + dataBuffer.length);
+		if (dataPos != dataBuffer.length) {
+                throw new EncodingException("Did not consume entire buffer: " + dataPos + " of " + dataBuffer.length);
+            }
 
 		return result;
 	}
@@ -83,8 +84,9 @@ public class AMF3Decoder
 		result.put("serviceCall", decodeAMF0());
 		result.put("data", decodeAMF0());
 
-		if (dataPos != dataBuffer.length)
-			throw new EncodingException("Did not consume entire buffer: " + dataPos + " of " + dataBuffer.length);
+		if (dataPos != dataBuffer.length) {
+                throw new EncodingException("Did not consume entire buffer: " + dataPos + " of " + dataBuffer.length);
+            }
 
 		return result;
 	}
@@ -104,8 +106,9 @@ public class AMF3Decoder
 
 		Object result = decode();
 
-		if (dataPos != dataBuffer.length)
-			throw new EncodingException("Did not consume entire buffer: " + dataPos + " of " + dataBuffer.length);
+		if (dataPos != dataBuffer.length) {
+                throw new EncodingException("Did not consume entire buffer: " + dataPos + " of " + dataBuffer.length);
+            }
 
 		return result;
 	}
@@ -185,8 +188,9 @@ public class AMF3Decoder
 	private int readByteAsInt()
 	{
 		int ret = readByte();
-		if (ret < 0)
-			ret += 256;
+		if (ret < 0) {
+                ret += 256;
+            }
 		return ret;
 	}
 
@@ -228,7 +232,7 @@ public class AMF3Decoder
 			tmp = readByteAsInt();
 			if (tmp < 128)
 			{
-				ret = ret | tmp;
+				ret |= tmp;
 			}
 			else
 			{
@@ -236,13 +240,13 @@ public class AMF3Decoder
 				tmp = readByteAsInt();
 				if (tmp < 128)
 				{
-					ret = ret | tmp;
+					ret |= tmp;
 				}
 				else
 				{
 					ret = (ret | tmp & 0x7f) << 8;
 					tmp = readByteAsInt();
-					ret = ret | tmp;
+					ret |= tmp;
 				}
 			}
 		}
@@ -261,8 +265,9 @@ public class AMF3Decoder
 	private double readDouble()
 	{
 		long value = 0;
-		for (int i = 0; i < 8; i++)
-			value = (value << 8) + readByteAsInt();
+		for (int i = 0; i < 8; i++) {
+                value = (value << 8) + readByteAsInt();
+            }
 
 		return Double.longBitsToDouble(value);
 	}
@@ -277,12 +282,13 @@ public class AMF3Decoder
 	{
 		int handle = readInt();
 		boolean inline = ((handle & 1) != 0);
-		handle = handle >> 1;
+		handle >>= 1;
 
 		if (inline)
 		{
-			if (handle == 0)
-				return "";
+			if (handle == 0) {
+                        return "";
+                    }
 
 			byte[] data = readBytes(handle);
 
@@ -326,7 +332,7 @@ public class AMF3Decoder
 	{
 		int handle = readInt();
 		boolean inline = ((handle & 1) != 0);
-		handle = handle >> 1;
+		handle >>= 1;
 
 		if (inline)
 		{
@@ -354,19 +360,21 @@ public class AMF3Decoder
 	{
 		int handle = readInt();
 		boolean inline = ((handle & 1) != 0);
-		handle = handle >> 1;
+		handle >>= 1;
 
 		if (inline)
 		{
 			String key = readString();
-			if (key != null && !key.equals(""))
-				throw new NotImplementedException("Associative arrays are not supported");
+			if (key != null && !key.isEmpty()) {
+                        throw new NotImplementedException("Associative arrays are not supported");
+                    }
 
 			Object[] ret = new Object[handle];
 			objectReferences.add(ret);
 
-			for (int i = 0; i < handle; i++)
-				ret[i] = decode();
+			for (int i = 0; i < handle; i++) {
+                        ret[i] = decode();
+                    }
 
 			return ret;
 		}
@@ -387,12 +395,12 @@ public class AMF3Decoder
 	{
 		int handle = readInt();
 		boolean inline = ((handle & 1) != 0);
-		handle = handle >> 1;
+		handle >>= 1;
 
 		if (inline)
 		{
 			boolean inlineDefine = ((handle & 1) != 0);
-			handle = handle >> 1;
+			handle >>= 1;
 
 			ClassDefinition cd;
 			if (inlineDefine)
@@ -401,12 +409,13 @@ public class AMF3Decoder
 				cd.type = readString();
 
 				cd.externalizable = ((handle & 1) != 0);
-				handle = handle >> 1;
+				handle >>= 1;
 				cd.dynamic = ((handle & 1) != 0);
-				handle = handle >> 1;
+				handle >>= 1;
 
-				for (int i = 0; i < handle; i++)
-					cd.members.add(readString());
+				for (int i = 0; i < handle; i++) {
+                                cd.members.add(readString());
+                            }
 
 				classDefinitions.add(cd);
 			}
@@ -422,10 +431,12 @@ public class AMF3Decoder
 
 			if (cd.externalizable)
 			{
-				if (cd.type.equals("DSK"))
-					ret = readDSK();
-				else if (cd.type.equals("DSA"))
-					ret = readDSA();
+				if (cd.type.equals("DSK")) {
+                                ret = readDSK();
+                            }
+				else if (cd.type.equals("DSA")) {
+                                ret = readDSA();
+                            }
 				else if (cd.type.equals("flex.messaging.io.ArrayCollection"))
 				{
 					Object obj = decode();
@@ -434,8 +445,9 @@ public class AMF3Decoder
 				else if (cd.type.equals("com.riotgames.platform.systemstate.ClientSystemStatesNotification") || cd.type.equals("com.riotgames.platform.broadcast.BroadcastNotification"))
 				{
 					int size = 0;
-					for (int i = 0; i < 4; i++)
-						size = size * 256 + readByteAsInt();
+					for (int i = 0; i < 4; i++) {
+                                        size = size * 256 + readByteAsInt();
+                                    }
 
 					String json;
 					try { json = new String(readBytes(size), "UTF-8"); } catch (UnsupportedEncodingException e) { throw new EncodingException(e.toString()); }
@@ -444,8 +456,9 @@ public class AMF3Decoder
 				}
 				else
 				{
-					for (int i = dataPos; i < dataBuffer.length; i++)
-						System.out.print(String.format("%02X", dataBuffer[i]));
+					for (int i = dataPos; i < dataBuffer.length; i++) {
+                                        System.out.print(String.format("%02X", dataBuffer[i]));
+                                    }
 					System.out.println();
 					throw new NotImplementedException("Externalizable not handled for " + cd.type);
 				}
@@ -498,7 +511,7 @@ public class AMF3Decoder
 	{
 		int handle = readInt();
 		boolean inline = ((handle & 1) != 0);
-		handle = handle >> 1;
+		handle >>= 1;
 
 		if (inline)
 		{
@@ -531,20 +544,27 @@ public class AMF3Decoder
 			int bits = 0;
 			if (i == 0)
 			{
-				if ((flag & 0x01) != 0)
-					ret.put("body", decode());
-				if ((flag & 0x02) != 0)
-					ret.put("clientId", decode());
-				if ((flag & 0x04) != 0)
-					ret.put("destination", decode());
-				if ((flag & 0x08) != 0)
-					ret.put("headers", decode());
-				if ((flag & 0x10) != 0)
-					ret.put("messageId", decode());
-				if ((flag & 0x20) != 0)
-					ret.put("timeStamp", decode());
-				if ((flag & 0x40) != 0)
-					ret.put("timeToLive", decode());
+				if ((flag & 0x01) != 0) {
+                                ret.put("body", decode());
+                            }
+				if ((flag & 0x02) != 0) {
+                                ret.put("clientId", decode());
+                            }
+				if ((flag & 0x04) != 0) {
+                                ret.put("destination", decode());
+                            }
+				if ((flag & 0x08) != 0) {
+                                ret.put("headers", decode());
+                            }
+				if ((flag & 0x10) != 0) {
+                                ret.put("messageId", decode());
+                            }
+				if ((flag & 0x20) != 0) {
+                                ret.put("timeStamp", decode());
+                            }
+				if ((flag & 0x40) != 0) {
+                                ret.put("timeToLive", decode());
+                            }
 				bits = 7;
 			}
 			else if (i == 1)
@@ -577,8 +597,9 @@ public class AMF3Decoder
 
 			if (i == 0)
 			{
-				if ((flag & 0x01) != 0)
-					ret.put("correlationId", decode());
+				if ((flag & 0x01) != 0) {
+                                ret.put("correlationId", decode());
+                            }
 				if ((flag & 0x02) != 0)
 				{
 					readByte();
@@ -609,8 +630,9 @@ public class AMF3Decoder
 		ret.type = "DSK";
 		
 		List<Integer> flags = readFlags();
-		for (int i = 0; i < flags.size(); i++)
-			readRemaining(flags.get(i), 0);
+		for (int i = 0; i < flags.size(); i++) {
+                readRemaining(flags.get(i), 0);
+            }
 
 		return ret;
 	}
@@ -636,8 +658,9 @@ public class AMF3Decoder
 		{
 			for (int o = bits; o < 6; o++)
 			{
-				if (((flag >> o) & 1) != 0)
-					decode();
+				if (((flag >> o) & 1) != 0) {
+                                decode();
+                            }
 			}
 		}
 	}
@@ -652,8 +675,9 @@ public class AMF3Decoder
 		StringBuilder ret = new StringBuilder();
 		for (int i = 0; i < data.length; i++)
 		{
-			if (i == 4 || i == 6 || i == 8 || i == 10)
-				ret.append('-');
+			if (i == 4 || i == 6 || i == 8 || i == 10) {
+                        ret.append('-');
+                    }
 			ret.append(String.format("%02x", data[i]));
 		}
 
@@ -700,8 +724,9 @@ public class AMF3Decoder
 	private String readStringAMF0() throws EncodingException
 	{
 		int length = (readByteAsInt() << 8) + readByteAsInt();
-		if (length == 0)
-			return "";
+		if (length == 0) {
+                return "";
+            }
 
 		byte[] data = readBytes(length);
 
@@ -740,17 +765,21 @@ public class AMF3Decoder
 	{
 		TypedObject body = new TypedObject("Body");
 		String key;
-		while (!(key = readStringAMF0()).equals(""))
+		while (!(key = readStringAMF0()).isEmpty())
 		{
 			byte b = readByte();
-			if (b == 0x00)
-				body.put(key, readDouble());
-			else if (b == 0x02)
-				body.put(key, readStringAMF0());
-			else if (b == 0x05)
-				body.put(key, null);
-			else
-				throw new NotImplementedException("AMF0 type not supported: " + b);
+			if (b == 0x00) {
+                        body.put(key, readDouble());
+                    }
+			else if (b == 0x02) {
+                        body.put(key, readStringAMF0());
+                    }
+			else if (b == 0x05) {
+                        body.put(key, null);
+                    }
+			else {
+                        throw new NotImplementedException("AMF0 type not supported: " + b);
+                    }
 		}
 		readByte(); // Skip object end marker
 

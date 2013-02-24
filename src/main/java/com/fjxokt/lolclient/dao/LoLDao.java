@@ -1,15 +1,14 @@
 package com.fjxokt.lolclient.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fjxokt.lolclient.model.Champion;
 import com.fjxokt.lolclient.model.ChampionAbility;
 import com.fjxokt.lolclient.model.ChampionSkin;
 import com.fjxokt.lolclient.model.Item;
 import com.fjxokt.lolclient.model.ItemCategory;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class LoLDao {
@@ -34,7 +33,6 @@ public class LoLDao {
 				skins.add(skin);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return skins;
 	}
@@ -59,7 +57,6 @@ public class LoLDao {
 				abilities.add(ability);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return abilities;
 	}
@@ -125,7 +122,6 @@ public class LoLDao {
 			
 			champ.setAbilities(getChampionAbilities(champ.getId()));
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return champ;
 	}
@@ -138,7 +134,6 @@ public class LoLDao {
 				champ = getChampion(rs);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return champ;
 	}
@@ -152,7 +147,6 @@ public class LoLDao {
 				champs.add(champ);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return champs;
 	}
@@ -168,7 +162,6 @@ public class LoLDao {
 			item.setEpicness(rs.getInt("epicness"));
 			item.setCategories(getItemCategories(item.getId()));
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return item;
 	}
@@ -181,7 +174,6 @@ public class LoLDao {
 				item = getItem(rs);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return item;
 	}
@@ -195,7 +187,6 @@ public class LoLDao {
 				items.add(it);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return items;
 	}
@@ -213,9 +204,11 @@ public class LoLDao {
 				cats.add(cat);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return cats;
 	}
+
+    private LoLDao() {
+    }
 
 }

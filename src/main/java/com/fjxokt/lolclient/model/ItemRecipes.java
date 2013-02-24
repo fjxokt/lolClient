@@ -1,5 +1,6 @@
 package com.fjxokt.lolclient.model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ItemRecipes {
@@ -18,7 +19,7 @@ public class ItemRecipes {
 		this.itemId = itemId;
 	}
 	public List<Integer> getRequieredItemsIds() {
-		return requieredItemsIds;
+		return Collections.unmodifiableList(requieredItemsIds);
 	}
 	public void setRequieredItemsIds(List<Integer> requieredItemsIds) {
 		this.requieredItemsIds = requieredItemsIds;

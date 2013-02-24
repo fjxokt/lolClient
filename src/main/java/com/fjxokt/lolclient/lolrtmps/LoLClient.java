@@ -1,11 +1,5 @@
 package com.fjxokt.lolclient.lolrtmps;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
 import com.fjxokt.lolclient.lolrtmps.events.ClientEventType;
 import com.fjxokt.lolclient.lolrtmps.events.ClientListener;
@@ -48,6 +42,12 @@ import com.fjxokt.lolclient.messaging.InvitationListener;
 import com.fjxokt.lolclient.messaging.InvitationManager;
 import com.fjxokt.lolclient.messaging.MatchmakingInvitation;
 import com.fjxokt.lolclient.messaging.MessagingManager;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 
 public class LoLClient extends LoLClientControllerImpl implements ClientListener, InvitationListener {
@@ -163,21 +163,21 @@ public class LoLClient extends LoLClientControllerImpl implements ClientListener
 		if (availableChampions == null) {
 			availableChampions = InventoryService.getAvailableChampions(client);
 		}
-		return availableChampions;
+		return Collections.unmodifiableList(availableChampions);
 	}
 	
 	public List<GameQueueConfig> getAvailableQueues() {
 		if (availableQueues == null) {
 			availableQueues = MatchmakerService.getAvailableQueues(client);
 		}
-		return availableQueues;
+		return Collections.unmodifiableList(availableQueues);
 	}
 	
 	public List<GameMap> getGameMapList() {
 		if (gameMaps == null) {
 			gameMaps = GameMapService.getGameMapList(client);
 		}
-		return gameMaps;
+		return Collections.unmodifiableList(gameMaps);
 	}
 	
 	public SpellBookPageDTO selectDefaultSpellBookPage(SpellBookPageDTO page) {

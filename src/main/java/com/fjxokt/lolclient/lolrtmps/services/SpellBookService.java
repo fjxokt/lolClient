@@ -42,4 +42,7 @@ public class SpellBookService {
                 
                 return new SpellBookDTO(spellTo);
 	}
+
+    private SpellBookService() {
+    }
 }

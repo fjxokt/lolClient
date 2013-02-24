@@ -1,11 +1,16 @@
 package com.fjxokt.lolclient.ui.champsel;
 
+import com.fjxokt.lolclient.ResourceConstants;
+import com.fjxokt.lolclient.lolrtmps.model.Participant;
+import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
+import com.fjxokt.lolclient.lolrtmps.model.dto.PlayerChampionSelectionDTO;
+import com.fjxokt.lolclient.model.Champion;
+import com.fjxokt.lolclient.utils.ResourcesManager;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -15,13 +20,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
-
-import com.fjxokt.lolclient.ResourceConstants;
-import com.fjxokt.lolclient.model.Champion;
-import com.fjxokt.lolclient.lolrtmps.model.Participant;
-import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
-import com.fjxokt.lolclient.lolrtmps.model.dto.PlayerChampionSelectionDTO;
-import com.fjxokt.lolclient.utils.ResourcesManager;
 
 public class TeamPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -38,7 +36,7 @@ public class TeamPanel extends JPanel {
 		private JLabel spell1;
 		private JLabel spell2;
 
-		public ChampSelectCellRenderer() {
+		ChampSelectCellRenderer() {
 			setOpaque(true);
 			mainPan = new JPanel();
 			mainPan.setLayout(new BoxLayout(mainPan, BoxLayout.Y_AXIS));

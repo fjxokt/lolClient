@@ -1,9 +1,8 @@
 package com.fjxokt.lolclient;
 
-import javax.swing.UIManager;
-
 import com.fjxokt.lolclient.audio.Sounds;
 import com.fjxokt.lolclient.ui.LoginWin;
+import javax.swing.UIManager;
 
 public class Main {
 

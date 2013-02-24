@@ -1,18 +1,16 @@
 package com.fjxokt.lolclient.utils;
 
+import com.fjxokt.lolclient.dao.LoLDao;
+import com.fjxokt.lolclient.model.Champion;
+import com.fjxokt.lolclient.model.Item;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-
-import com.fjxokt.lolclient.dao.LoLDao;
-import com.fjxokt.lolclient.model.Champion;
-import com.fjxokt.lolclient.model.Item;
 
 
 public class ResourcesManager {

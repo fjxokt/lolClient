@@ -1,5 +1,13 @@
 package com.fjxokt.lolclient.ui.teamsel;
 
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.model.BotParticipant;
+import com.fjxokt.lolclient.lolrtmps.model.Participant;
+import com.fjxokt.lolclient.lolrtmps.model.PlayerParticipant;
+import com.fjxokt.lolclient.lolrtmps.model.PublicSummoner;
+import com.fjxokt.lolclient.lolrtmps.model.dto.PlayerChampionSelectionDTO;
+import com.fjxokt.lolclient.lolrtmps.services.GameService;
+import com.fjxokt.lolclient.lolrtmps.services.SummonerService;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -10,7 +18,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.AbstractCellEditor;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -20,15 +27,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-
-import com.fjxokt.lolclient.lolrtmps.model.dto.PlayerChampionSelectionDTO;
-import com.fjxokt.lolclient.lolrtmps.model.BotParticipant;
-import com.fjxokt.lolclient.lolrtmps.model.Participant;
-import com.fjxokt.lolclient.lolrtmps.model.PlayerParticipant;
-import com.fjxokt.lolclient.lolrtmps.model.PublicSummoner;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
-import com.fjxokt.lolclient.lolrtmps.services.GameService;
-import com.fjxokt.lolclient.lolrtmps.services.SummonerService;
 
 public class PlayerTable extends JTable implements MouseMotionListener {
 	private static final long serialVersionUID = 1L;
@@ -57,6 +55,7 @@ public class PlayerTable extends JTable implements MouseMotionListener {
 			this.players = players;	
 			fireTableDataChanged();
 		}
+            @Override
 		public boolean isCellEditable(int row, int col) {
 			return true;
 		}
@@ -74,7 +73,7 @@ public class PlayerTable extends JTable implements MouseMotionListener {
 		private final JLabel playerLb = new JLabel("");
 		private Participant player;
 		
-		public PlayerCellRenderer(final JTable table) {
+		PlayerCellRenderer(final JTable table) {
 			playerLb.setFont(getFont().deriveFont(18.0f));
 			pan.add(playerLb, BorderLayout.CENTER);
 			JPanel p = new JPanel(new FlowLayout());

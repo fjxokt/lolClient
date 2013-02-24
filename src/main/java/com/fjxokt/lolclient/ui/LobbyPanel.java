@@ -1,35 +1,5 @@
 package com.fjxokt.lolclient.ui;
 
-import java.awt.CardLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-
-import javax.swing.BoxLayout;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
 import com.fjxokt.lolclient.lolrtmps.events.ClientListener;
@@ -44,6 +14,34 @@ import com.fjxokt.lolclient.lolrtmps.services.LoginService;
 import com.fjxokt.lolclient.lolrtmps.services.MatchmakerService;
 import com.fjxokt.lolclient.ui.chat.ChatWinManager;
 import com.fjxokt.lolclient.utils.Timer;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import javax.swing.BoxLayout;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 public class LobbyPanel extends JPanel implements ActionListener, ClientListener, Timer.TimerUpdater {
 
@@ -87,6 +85,7 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
         queues = new JComboBox(model);
         queues.setRenderer(new DefaultListCellRenderer() {
         	private static final long serialVersionUID = 1L;
+            @Override
 			public Component getListCellRendererComponent(JList list,Object value,
                       int index,boolean isSelected,boolean cellHasFocus)
 			{
@@ -116,6 +115,7 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
         
         table = new PracticeTable();
         table.addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
             	if (e.getClickCount() == 2) {
             		int row = table.rowAtPoint(e.getPoint());
@@ -187,9 +187,7 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
 				try {
 					java.awt.Desktop.getDesktop().browse(new URI(LoginService.getStoreUrl(LoLClient.getInst().getRTMPSClient())));
 				} catch (IOException e) {
-					e.printStackTrace();
 				} catch (URISyntaxException e) {
-					e.printStackTrace();
 				}
 			}
 		});
@@ -264,7 +262,6 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
 					if (infos.getPlayerJoinFailures().size() > 0) {
 						JOptionPane.showMessageDialog(this, "Can't join queue for reasons: " + infos.getPlayerJoinFailures().toString(),
 									"Error", JOptionPane.INFORMATION_MESSAGE);
-						return;
 					}
 				}
 			}
@@ -303,7 +300,9 @@ public class LobbyPanel extends JPanel implements ActionListener, ClientListener
 	}
 	
 	private void joinGame(PracticeGameSearchResult game) {
-		if (game == null) return;
+		if (game == null) {
+                return;
+            }
 		
 		String pwd = null;
 		if (game.isPrivateGame()) {

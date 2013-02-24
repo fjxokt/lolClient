@@ -1,12 +1,5 @@
 package com.fjxokt.lolclient.ui;
 
-import java.awt.CardLayout;
-import java.awt.Dimension;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.lolrtmps.events.ClientEvent;
 import com.fjxokt.lolclient.lolrtmps.events.ClientEventType;
@@ -15,6 +8,11 @@ import com.fjxokt.lolclient.lolrtmps.services.LoginService;
 import com.fjxokt.lolclient.messaging.MessagingManager;
 import com.fjxokt.lolclient.ui.champsel.ChampSelectWin;
 import com.fjxokt.lolclient.ui.teamsel.TeamSelectPanel;
+import java.awt.CardLayout;
+import java.awt.Dimension;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class ClientWin extends JFrame implements ClientListener {
 	

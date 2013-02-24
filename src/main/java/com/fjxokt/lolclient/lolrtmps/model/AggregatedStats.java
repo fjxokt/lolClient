@@ -1,10 +1,10 @@
 package com.fjxokt.lolclient.lolrtmps.model;
 
+import com.gvaneyck.rtmp.TypedObject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
-import com.gvaneyck.rtmp.TypedObject;
 
 public class AggregatedStats extends ClassType {
 
@@ -36,7 +36,7 @@ public class AggregatedStats extends ClassType {
 	}
 
 	public List<AggregatedStat> getLifetimeStatistics() {
-		return lifetimeStatistics;
+		return Collections.unmodifiableList(lifetimeStatistics);
 	}
 
 	public Date getModifyDate() {

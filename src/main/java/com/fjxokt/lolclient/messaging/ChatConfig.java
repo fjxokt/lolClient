@@ -8,5 +8,8 @@ public class ChatConfig {
 	final static String xmpp_muc_global_name = "lvl";
 	// !isPublic && !hasPwd
 	final static String xmpp_muc_conference_name = "conference";
+
+    private ChatConfig() {
+    }
 	
 }

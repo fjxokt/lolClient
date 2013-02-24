@@ -1,13 +1,12 @@
 package com.fjxokt.lolclient.messaging;
 
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.services.MatchmakerService;
+import com.fjxokt.lolclient.utils.SimpleXML;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Message.Type;
-
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
-import com.fjxokt.lolclient.lolrtmps.services.MatchmakerService;
-import com.fjxokt.lolclient.utils.SimpleXML;
 
 public class InvitationManager {
 	
@@ -99,7 +98,6 @@ public class InvitationManager {
 			try {
 				MessagingManager.getInst().sendMessage(m, message.getFrom());
 			} catch (XMPPException e) {
-				e.printStackTrace();
 			}
 			//System.out.println("CALL CLIENT");
 			// test, just accept and start queueing
@@ -163,7 +161,6 @@ public class InvitationManager {
 			MessagingManager.getInst().sendMessage(m1, buddy.getUser());
 			System.out.println("sent accept invitation");
 		} catch (XMPPException e) {
-			e.printStackTrace();
 		}
 	}
 	
@@ -181,7 +178,6 @@ public class InvitationManager {
 			MessagingManager.getInst().sendMessage(m1, buddy.getUser());
 			System.out.println("sent reject invitation");
 		} catch (XMPPException e) {
-			e.printStackTrace();
 		}
 	}
 

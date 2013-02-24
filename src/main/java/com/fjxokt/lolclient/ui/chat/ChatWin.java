@@ -1,12 +1,13 @@
 package com.fjxokt.lolclient.ui.chat;
 
 import com.fjxokt.lolclient.ResourceConstants;
+import com.fjxokt.lolclient.messaging.MessagingManager;
+import com.fjxokt.lolclient.utils.ResourcesManager;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
-
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
@@ -25,12 +25,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
-
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.RosterGroup;
-
-import com.fjxokt.lolclient.messaging.MessagingManager;
-import com.fjxokt.lolclient.utils.ResourcesManager;
 
 public class ChatWin extends JFrame {
 
@@ -52,6 +48,7 @@ public class ChatWin extends JFrame {
 	private class BuddyListRenderer extends DefaultListCellRenderer {
 		private static final long serialVersionUID = 1L;
 		
+            @Override
 		public Component getListCellRendererComponent(JList list, Object value, int index,
 				boolean isSelected, boolean cellHasFocus) {
 			JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
@@ -232,6 +229,7 @@ public class ChatWin extends JFrame {
         contact = new JList();
         contact.setCellRenderer(new BuddyListRenderer());
         contact.addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent evt) {
                 if (evt.getClickCount() > 1) {
                     ChatItem it = (ChatItem)contact.getSelectedValue();

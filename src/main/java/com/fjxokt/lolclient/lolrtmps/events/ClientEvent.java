@@ -1,10 +1,10 @@
 package com.fjxokt.lolclient.lolrtmps.events;
 
-import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 import com.fjxokt.lolclient.lolrtmps.model.ChampionTradeMessage;
 import com.fjxokt.lolclient.lolrtmps.model.EndOfGameStats;
 import com.fjxokt.lolclient.lolrtmps.model.SearchingForMatchNotification;
 import com.fjxokt.lolclient.lolrtmps.model.StoreAccountBalanceNotification;
+import com.fjxokt.lolclient.lolrtmps.model.dto.GameDTO;
 
 public class ClientEvent {
 	
