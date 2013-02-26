@@ -1,4 +1,5 @@
 package com.gvaneyck.rtmp;
+import com.fjxokt.lolclient.lolrtmps.model.SummonerGameModeSpells;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 
 /**
@@ -387,11 +389,10 @@ public class AMF3Encoder
 	private void writeAssociativeArray(List<Byte> ret, Map<String, Object> val) throws EncodingException, NotImplementedException
 	{
 		ret.add((byte)0x01);
-		for (String key : val.keySet())
-		{
-			writeString(ret, key);
-			encode(ret, val.get(key));
-		}
+                for(Entry<String,Object> entry: val.entrySet()){
+                            writeString(ret,entry.getKey());
+                            encode(ret,entry.getValue());
+                }
 		ret.add((byte)0x01);
 	}
 
@@ -410,11 +411,12 @@ public class AMF3Encoder
 			ret.add((byte)0x0B); // Dynamic class
 
 			ret.add((byte)0x01); // No class name
-			for (String key : val.keySet())
-			{
-				writeString(ret, key);
-				encode(ret, val.get(key));
-			}
+                        
+                        for(Entry<String,Object> entry: val.entrySet()){
+                            writeString(ret,entry.getKey());
+                            encode(ret,entry.getValue());
+                        }
+                        
 			ret.add((byte)0x01); // End of dynamic
 		}
 		else if (val.type.equals("flex.messaging.io.ArrayCollection"))
@@ -428,17 +430,17 @@ public class AMF3Encoder
 		{
 			writeInt(ret, (val.size() << 4) | 3); // Inline + member count
 			writeString(ret, val.type);
+                        
+                        List<Object> values = new ArrayList<Object>(val.size());
+                        
+			for(Entry<String,Object> entry: val.entrySet()){
+                            writeString(ret,entry.getKey());
+                            values.add(entry.getValue());
+                        }
 
-			List<String> keyOrder = new ArrayList<String>();
-			for (String key : val.keySet())
-			{
-				writeString(ret, key);
-				keyOrder.add(key);
-			}
-
-			for (String key : keyOrder) {
-                        encode(ret, val.get(key));
-                    }
+			for (Object value : values) {
+                            encode(ret, value);
+                        }
 		}
 	}
 

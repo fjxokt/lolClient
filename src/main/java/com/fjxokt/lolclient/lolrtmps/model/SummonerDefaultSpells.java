@@ -4,6 +4,7 @@ import com.gvaneyck.rtmp.TypedObject;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class SummonerDefaultSpells extends ClassType {
 	
@@ -21,12 +22,12 @@ public class SummonerDefaultSpells extends ClassType {
 		this.summonerDefaultSpellMap = new HashMap<String, SummonerGameModeSpells>();
 		TypedObject object = to.getTO("summonerDefaultSpellMap");
 		if (object != null) {
-			for (String key : object.keySet()) {
-				TypedObject tobj = (TypedObject)object.get(key);
-				if (tobj != null) {
-					summonerDefaultSpellMap.put(key, new SummonerGameModeSpells(tobj));
-				}
-			}
+                        for(Entry<String,Object> entry: object.entrySet()){
+                            TypedObject tobj = (TypedObject) entry.getValue();
+                            if (tobj != null) {
+					summonerDefaultSpellMap.put(entry.getKey(), new SummonerGameModeSpells(tobj));
+			    }
+                        }
 		}
 	}
 

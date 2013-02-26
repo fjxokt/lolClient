@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import javax.swing.DefaultListCellRenderer;
@@ -182,9 +183,9 @@ public class ChatWin extends JFrame {
 			}
 			entries.add(bud);
 		}
-		
-		for (String group : map.keySet()) {
-			List<RosterEntry> lst = map.get(group);
+                
+                for(Entry<String,List<RosterEntry>> entry: map.entrySet()){
+                         List<RosterEntry> lst = entry.getValue();
 			// filter group members
 			Collections.sort(lst, new Comparator<RosterEntry>() {
 				public int compare(RosterEntry o1, RosterEntry o2) {
@@ -200,19 +201,19 @@ public class ChatWin extends JFrame {
 			});
 			// create group object
 			ChatItem it = new ChatItem();
-			it.groupName = group;
+			it.groupName = entry.getKey();
 			it.buddies = new ArrayList<ChatItem>();
 			list.add(it);
 			
 			for (RosterEntry ent : lst) {
 				ChatItem ite = new ChatItem();
-				ite.groupName = group;
+				ite.groupName = entry.getKey();
 				ite.buddy = ent;
 				it.buddies.add(ite);
 				list.add(ite);
 			}
-		}
-		
+                }
+                
 		return list;
 	}
 	
