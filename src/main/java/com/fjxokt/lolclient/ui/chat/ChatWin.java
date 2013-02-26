@@ -61,16 +61,16 @@ public class ChatWin extends JFrame {
 			if (buddy != null) {
 				Icon statusIcon = null;
 				if (manager.isBuddyAvailable(buddy)) {
-					statusIcon = ResourcesManager.getInst().getIcon(ResourceConstants.genericClientImagesPath + "circle_green.jpg", false);
+					statusIcon = ResourcesManager.getInst().getIcon(ResourceConstants.genericClientImagesPath + "circle_green.png", false);
 				}
 				else if (manager.isBuddyAway(buddy)) {
-					statusIcon = ResourcesManager.getInst().getIcon(ResourceConstants.genericClientImagesPath + "circle_yellow.jpg", false);
+					statusIcon = ResourcesManager.getInst().getIcon(ResourceConstants.genericClientImagesPath + "circle_yellow.png", false);
 				}
 				else if (manager.isBuddyBusy(buddy)) {
-					statusIcon = ResourcesManager.getInst().getIcon(ResourceConstants.genericClientImagesPath + "circle_red.jpg", false);
+					statusIcon = ResourcesManager.getInst().getIcon(ResourceConstants.genericClientImagesPath + "circle_red.png", false);
 				}
 				else {
-					statusIcon = ResourcesManager.getInst().getIcon(ResourceConstants.genericClientImagesPath + "circle_gray.jpg", false);
+					statusIcon = ResourcesManager.getInst().getIcon(ResourceConstants.genericClientImagesPath + "circle_gray.png", false);
 				}
 				label.setIcon(statusIcon);
 				label.setText(buddy.getName());

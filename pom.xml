@@ -204,6 +204,13 @@
         </exclusions> 
     </dependency>
     
+    <!-- JTattoo GUI Look and Feel Library -->
+    <dependency>
+      <groupId>com.jtattoo</groupId>
+      <artifactId>JTattoo</artifactId>
+      <version>1.6.7</version>
+    </dependency>
+    
     
     <!-- We are not currently using test classes, but this can be uncommented in the future if we do use them
     <dependency>
