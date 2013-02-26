@@ -198,8 +198,9 @@ public class GameService {
                 PracticeGameConfig gameConf = new PracticeGameConfig(name, map, gameMode, pwd, maxPlayers, allowSpectators, 1);
                 TypedObject gameTo = LoLClientService.getTypedServiceResponseDataBody(controller.getRTMPSClient(), "gameService", "createPracticeGame", new Object[]{ gameConf.getTypedObject() });
 		
+                
                 if(gameTo == null){
-                    throw new PlayerAlreadyInGameException(controller.getRTMPSClient().getErrorMessage(gameTo));
+                    throw new PlayerAlreadyInGameException("Unable to load the practice game!");
                 }
                 
                 // now create the game object
