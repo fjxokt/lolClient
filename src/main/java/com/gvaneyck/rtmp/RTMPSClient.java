@@ -110,9 +110,9 @@ public class RTMPSClient
 	 * 
 	 * @param server The RTMPS server address
 	 * @param port The RTMPS server port
-	 * @param app The app to use in the connect call
-	 * @param swfUrl The swf URL to use in the connect call
-	 * @param pageUrl The page URL to use in the connect call
+	 * @param app The app to use certIn the connect call
+	 * @param swfUrl The swf URL to use certIn the connect call
+	 * @param pageUrl The page URL to use certIn the connect call
 	 */
 	public RTMPSClient(String server, int port, String app, String swfUrl, String pageUrl)
 	{
@@ -124,9 +124,9 @@ public class RTMPSClient
 	 * 
 	 * @param server The RTMPS server address
 	 * @param port The RTMPS server port
-	 * @param app The app to use in the connect call
-	 * @param swfUrl The swf URL to use in the connect call
-	 * @param pageUrl The page URL to use in the connect call
+	 * @param app The app to use certIn the connect call
+	 * @param swfUrl The swf URL to use certIn the connect call
+	 * @param pageUrl The page URL to use certIn the connect call
 	 */
 	public void setConnectionInfo(String server, int port, String app, String swfUrl, String pageUrl)
 	{
@@ -241,9 +241,15 @@ public class RTMPSClient
                         file = new File(System.getProperty("java.home") + "/lib/security/cacerts");
                     }
 			
-			InputStream in = new FileInputStream(file);
-			ks.load(in, passphrase);
-			
+                        InputStream certIn = null;
+                        try{
+                            certIn = new FileInputStream(file);
+                            ks.load(in, passphrase);
+                        } finally{
+                            if (certIn != null) {
+                                certIn.close();
+                            }
+                        }
 			// Set up the socket factory with the KeyStore
 			SSLContext context = SSLContext.getInstance("TLS");
 			TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
@@ -304,9 +310,16 @@ public class RTMPSClient
 				KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
 				File file = new File(System.getProperty("java.home") + "/lib/security/cacerts");
 				
-				InputStream in = new FileInputStream(file);
-				ks.load(in, passphrase);
-				
+                                
+				InputStream certIn = null;
+                                try{
+                                    certIn= new FileInputStream(file);
+                                    ks.load(certIn, passphrase);
+                                } finally{
+                                    if(certIn != null){
+                                        certIn.close();
+                                    }
+                                }
 				// Add certificate
 				X509Certificate[] chain = tm.chain;
 				if (chain == null) {
@@ -318,10 +331,16 @@ public class RTMPSClient
 				ks.setCertificateEntry(alias, cert);
 				
 				// Save certificate
-				OutputStream out = new FileOutputStream("certs/" + server + ".cert");
-				ks.store(out, passphrase);
-				out.close();
-				System.out.println("Installed cert for " + server);
+                                OutputStream certOut = null;
+                		try{
+                                    certOut = new FileOutputStream("certs/" + server + ".cert");
+                                    ks.store(certOut, passphrase);
+                                }finally{
+                                    if(certOut != null){
+                                        certOut.close();
+                                    }
+                                }
+                                System.out.println("Installed cert for " + server);
 			}
 		}
 		catch (Exception e)
@@ -517,7 +536,7 @@ public class RTMPSClient
 	}
 
 	/**
-	 * Sets up a body in a full RemotingMessage with headers, etc.
+	 * Sets up a body certIn a full RemotingMessage with headers, etc.
 	 * 
 	 * @param body The body to wrap
 	 * @param destination The destination
@@ -597,7 +616,7 @@ public class RTMPSClient
 
 		while (connected && !results.containsKey(id) && System.currentTimeMillis() - timestamp < maxWait)
 		{
-			//System.out.println("ID: " + id + " unavailable, sleep 10 ms and try again");
+			//System.certOut.println("ID: " + id + " unavailable, sleep 10 ms and try again");
 			sleep(10);
 		}
 		
@@ -712,9 +731,9 @@ public class RTMPSClient
 		{
 			try
 			{
-				//DataOutputStream out = null;
+				//DataOutputStream certOut = null;
 				//if (debug)
-				//	out = new DataOutputStream(new FileOutputStream("debug.dmp"));
+				//	certOut = new DataOutputStream(new FileOutputStream("debug.dmp"));
 
 				Map<Integer, Packet> packets = new HashMap<Integer, Packet>();
 
@@ -724,8 +743,8 @@ public class RTMPSClient
 					byte basicHeader = (byte)in.read();
 					//if (debug)
 					//{
-					//	out.write(basicHeader & 0xFF);
-					//	out.flush();
+					//	certOut.write(basicHeader & 0xFF);
+					//	certOut.flush();
 					//}
 
 					int channel = basicHeader & 0x2F;
@@ -761,8 +780,8 @@ public class RTMPSClient
 						//if (debug)
 						//{
 						//	for (int i = 0; i < header.length; i++)
-						//		out.write(header[i] & 0xFF);
-						//	out.flush();
+						//		certOut.write(header[i] & 0xFF);
+						//	certOut.flush();
 						//}
 
 						if (headerSize >= 8)
