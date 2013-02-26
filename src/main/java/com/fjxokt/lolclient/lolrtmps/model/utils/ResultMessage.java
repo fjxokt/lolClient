@@ -7,10 +7,10 @@ public class ResultMessage {
 	private String message;
 	private Type type;
 	
-	public static ResultMessage OK = new ResultMessage(Type.OK, "OK");
-	public static ResultMessage ERROR = new ResultMessage(Type.ERROR, "ERROR");
-	public static ResultMessage LOGIN_FAILED = new ResultMessage(Type.LOGIN_FAILED, "Incorrect username or password");
-	public static ResultMessage INCORRECT_PWD = new ResultMessage(Type.INCORRECT_PWD, "Incorrect password");
+	public static final ResultMessage OK = new ResultMessage(Type.OK, "OK");
+	public static final ResultMessage ERROR = new ResultMessage(Type.ERROR, "ERROR");
+	public static final ResultMessage LOGIN_FAILED = new ResultMessage(Type.LOGIN_FAILED, "Incorrect username or password");
+	public static final ResultMessage INCORRECT_PWD = new ResultMessage(Type.INCORRECT_PWD, "Incorrect password");
 
 	public enum Type {
 		OK, ERROR, LOGIN_FAILED, INCORRECT_PWD;
