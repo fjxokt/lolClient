@@ -111,7 +111,7 @@ public class MatchMakerParams extends ClassType {
 		builder.append(", queueIds=");
 		builder.append(Arrays.toString(queueIds));
 		builder.append(", team=");
-		builder.append(team);
+		builder.append(Arrays.toString(team));
 		builder.append(", teamId=");
 		builder.append(teamId);
 		builder.append("]");

@@ -1,6 +1,7 @@
 package com.gvaneyck.rtmp;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -299,7 +300,7 @@ public class AMF3Decoder
 			}
 			catch (UnsupportedEncodingException e)
 			{
-				throw new EncodingException("Error parsing AMF3 string from " + data);
+				throw new EncodingException("Error parsing AMF3 string from " + Arrays.toString(data));
 			}
 
 			stringReferences.add(str);
@@ -738,7 +739,7 @@ public class AMF3Decoder
 		}
 		catch (UnsupportedEncodingException e)
 		{
-			throw new EncodingException("Error parsing AMF0 string from " + data);
+			throw new EncodingException("Error parsing AMF0 string from " + Arrays.toString(data));
 		}
 
 		return str;
