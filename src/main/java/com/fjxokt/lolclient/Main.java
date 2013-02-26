@@ -13,9 +13,9 @@ public class Main {
         // for windows users
 		try {   
                         // setup the look and feel properties
-                        Properties props = new Properties();
-
+                        Properties props = HiFiLookAndFeel.getThemeProperties("Large-Font");                       
                         props.put("logoString", "NoAir Client");
+                        
                         HiFiLookAndFeel.setCurrentTheme(props);
                         
 			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
