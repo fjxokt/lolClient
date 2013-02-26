@@ -88,7 +88,7 @@ public class SummonerTeamService {
                 Object isValid = LoLClientService.getServiceResponseDataBody(client, "summonerTeamService", "isNameValidAndAvailable", new Object[] { teamName});
                 
                 if (isValid == null) {
-                        return null;
+                        return false;
                 }
 
                 return (Boolean)isValid;
@@ -98,7 +98,7 @@ public class SummonerTeamService {
                 Object isValid = LoLClientService.getServiceResponseDataBody(client, "summonerTeamService", "isTagValidAndAvailable", new Object[] { tagName});
                 
                 if (isValid == null) {
-                        return null;
+                        return false;
                 }
 
                 return (Boolean)isValid;
