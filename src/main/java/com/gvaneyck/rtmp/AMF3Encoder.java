@@ -2,6 +2,7 @@ package com.gvaneyck.rtmp;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -229,7 +230,16 @@ public class AMF3Encoder
 		else if (obj instanceof Byte[])
 		{
 			ret.add((byte)0x0C);
-			writeByteArray(ret, (byte[])obj);
+                        
+                        //Casting object to primative
+                        Byte[] bytes = (Byte[]) obj;
+                        byte[] primBytes = new byte[bytes.length];
+                        int iter = 0;
+                        for(byte b : bytes){
+                            primBytes[iter++]  = b;
+                        }                       
+                        
+			writeByteArray(ret, primBytes);
 		}
 		else if (obj instanceof Object[])
 		{
