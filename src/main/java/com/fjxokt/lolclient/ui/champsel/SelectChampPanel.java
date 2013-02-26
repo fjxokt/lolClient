@@ -79,11 +79,12 @@ public class SelectChampPanel extends JPanel {
 				if (client.isPlayer()) {
 					JList list = (JList)e.getSource();
 					ChampionDTO champ = (ChampionDTO)list.getSelectedValue();
-					Champion c = ResourcesManager.getInst().getChampion(champ.getChampionId());
 					if (champ != null) {
+                                                Champion c = ResourcesManager.getInst().getChampion(champ.getChampionId());
 						GameService.selectChampion(LoLClient.getInst().getRTMPSClient(), c.getId());
 						new JSound(ResourceConstants.soundsChampsPath + c.getSelectSoundPath().replaceAll(ResourceConstants.language, "")).play();
 					}
+                                        
 				}
 			}
 		});
