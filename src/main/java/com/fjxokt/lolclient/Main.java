@@ -2,6 +2,8 @@ package com.fjxokt.lolclient;
 
 import com.fjxokt.lolclient.audio.Sounds;
 import com.fjxokt.lolclient.ui.LoginWin;
+import com.jtattoo.plaf.hifi.HiFiLookAndFeel;
+import java.util.Properties;
 import javax.swing.UIManager;
 
 public class Main {
@@ -9,7 +11,13 @@ public class Main {
 	public static void main(String[] args) {
 		
         // for windows users
-		try {
+		try {   
+                        // setup the look and feel properties
+                        Properties props = new Properties();
+
+                        props.put("logoString", "NoAir Client");
+                        HiFiLookAndFeel.setCurrentTheme(props);
+                        
 			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 		} catch (Exception e) {}
 		
