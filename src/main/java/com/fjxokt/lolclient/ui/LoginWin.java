@@ -125,7 +125,7 @@ public class LoginWin extends JFrame implements ActionListener, ClientListener {
 	
 	private void login() {
 		// TODO: fetch correct version number from game data
-		String clientVersion = "3.02.13_02_12_18_33";
+		String clientVersion = "3.7.13_05_17_13_31";
 		// "1.74.13_01_15_19_05"
 		client.initUser((String)region.getSelectedItem(), clientVersion, username.getText(), new String(password.getPassword()));
 		

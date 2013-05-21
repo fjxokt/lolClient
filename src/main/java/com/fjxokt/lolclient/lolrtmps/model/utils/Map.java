@@ -7,7 +7,8 @@ public enum Map {
 	SR(1, GameMode.CLASSIC, "Summoner's Rift", "SummonersRift", 10, "The oldest and most venerated Field of Justice is known as Summoner's Rift..."),
 	PG(7, GameMode.ARAM, "The Proving Grounds", "ProvingGroundsARAM", 10, ""),
 	CS(8, GameMode.ODIN, "The Crystal Scar", "CrystalScar", 10, ""),
-	TT(10, GameMode.CLASSIC, "The Twisted Treeline!", "TwistedTreeline", 6, "");
+	TT(10, GameMode.CLASSIC, "The Twisted Treeline!", "TwistedTreeline", 6, ""),
+	HA(12, GameMode.ARAM, "Howling Abyss", "HowlingAbyss", 10, "");
 
 	private int mapId;
 	private GameMode mode;
@@ -35,8 +36,10 @@ public enum Map {
 			return CS;
 		case 10:
 			return TT;
+		case 12:
+			return HA;
 		default:
-			return null;
+			throw new RuntimeException("Map with id " + id + " is unknown. Fix this!");
 		}
 	}
 

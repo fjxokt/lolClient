@@ -34,12 +34,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.fjxokt.lolclient.lolrtmps.model.dto.MasteryBookPageDTO;
+import com.fjxokt.lolclient.ResourceConstants;
+import com.fjxokt.lolclient.lolrtmps.LoLClient;
 import com.fjxokt.lolclient.lolrtmps.model.Talent;
 import com.fjxokt.lolclient.lolrtmps.model.TalentEntry;
 import com.fjxokt.lolclient.lolrtmps.model.TalentGroup;
 import com.fjxokt.lolclient.lolrtmps.model.TalentRow;
-import com.fjxokt.lolclient.lolrtmps.LoLClient;
+import com.fjxokt.lolclient.lolrtmps.model.dto.MasteryBookPageDTO;
 
 public class MasteriesWin extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -245,17 +246,17 @@ public class MasteriesWin extends JFrame {
         // create images
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("images" + File.separator + "masteries.png"));
+            img = ImageIO.read(new File(ResourceConstants.genericClientImagesPath + "masteries.png"));
+            for (int i=0; i<ids.size(); i++) {
+            	int size = 48;
+            	int x = (i%10) * size;
+            	int y = ((int)(i/10)) * size;
+            	BufferedImage sub = img.getSubimage(x, y, size, size);
+            	ImageIcon icon = new ImageIcon(sub);
+            	icons.put(ids.get(i), icon);
+            }
         } catch (IOException e) {
         	e.printStackTrace();
-        }
-        for (int i=0; i<ids.size(); i++) {
-        	int size = 48;
-        	int x = (i%10) * size;
-        	int y = ((int)(i/10)) * size;
-        	BufferedImage sub = img.getSubimage(x, y, size, size);
-        	ImageIcon icon = new ImageIcon(sub);
-        	icons.put(ids.get(i), icon);
         }
         
         groupsPan = new MasteryPanel();
@@ -283,7 +284,7 @@ public class MasteriesWin extends JFrame {
 		public MasteryPanel() {
 			super(new GridLayout(1, 3, 15, 0));
 	        try {
-	        	backgroundOriginal = ImageIO.read(new File("images" + File.separator + "masteries-background.jpg"));
+	        	backgroundOriginal = ImageIO.read(new File(ResourceConstants.genericClientImagesPath + "masteries-background.jpg"));
 	        	background = backgroundOriginal;
 	        } catch (IOException e) {
 	        	e.printStackTrace();

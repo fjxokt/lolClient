@@ -1,12 +1,10 @@
 package com.fjxokt.lolclient.ui.chat;
 
-import com.fjxokt.lolclient.ResourceConstants;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -29,6 +27,7 @@ import javax.swing.WindowConstants;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.RosterGroup;
 
+import com.fjxokt.lolclient.ResourceConstants;
 import com.fjxokt.lolclient.messaging.MessagingManager;
 import com.fjxokt.lolclient.utils.ResourcesManager;
 
